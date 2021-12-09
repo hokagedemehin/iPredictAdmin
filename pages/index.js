@@ -16,7 +16,8 @@ import {
 import ContentComponent from "../components/home/content.section.component";
 import HeroComponent from "../components/home/hero.component";
 import Layout from "../components/layout/layout";
-import NavHeader from "../components/nav/header.component original";
+import NavHeader from "../components/nav/header.component";
+// import NavHeader from "../components/nav/header.component original";
 
 export default function Home() {
   return (
