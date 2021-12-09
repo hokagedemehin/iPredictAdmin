@@ -1,10 +1,10 @@
 # I Predict Admin
 
-![I-Predict Admin](https://raw.githubusercontent.com/hokagedemehin/tailorsdb/main/public/logo/ipredict.png "Website Image" )
+![I-Predict Admin](https://raw.githubusercontent.com/hokagedemehin/iPredictAdmin/main/public/logo/ipredict.png "Website Image" )
 
 Begin your journey in discovering a flexible way to get and store your clients measurements forever. This simple web application will get and save all your clients measurements and relevant information safely and you can access them anywhere at anytime with any device once saved
 
- ![GitHub File Size](https://img.shields.io/github/languages/code-size/hokageDemehin/iPredictAdmin)  ![GitHub Pull Request](https://img.shields.io/github/issues-pr-closed/hokageDemehin/iPredictAdmin) [![Open Website](https://img.shields.io/website?up_message=online&url=https%3A%2F%2Fipredictadmin.vercel.app)](https://ipredictadmin.vercel.app/)![Github Repo Size](https://img.shields.io/github/repo-size/hokagedemehin/iPredictAdmin)
+ ![GitHub File Size](https://img.shields.io/github/languages/code-size/hokageDemehin/iPredictAdmin)  ![GitHub Pull Request](https://img.shields.io/github/issues-pr-closed/hokageDemehin/iPredictAdmin)  [![Open Website](https://img.shields.io/website?up_message=online&url=https%3A%2F%2Fipredictadmin.vercel.app)](https://ipredictadmin.vercel.app/)![Github Repo Size](https://img.shields.io/github/repo-size/hokagedemehin/iPredictAdmin)
 ## Contributing
 
 Contributions are welcome. Feel free to open a pull request with changes. 
