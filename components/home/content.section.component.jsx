@@ -4,7 +4,7 @@ import {
   GiCardPlay,
   GiCartwheel,
   GiNewspaper,
-} from "react-icons/Gi";
+} from "react-icons/gi";
 import { BsNewspaper } from "react-icons/bs";
 import { MdOutlineQuiz } from "react-icons/md";
 import { Icon } from "@chakra-ui/react";
