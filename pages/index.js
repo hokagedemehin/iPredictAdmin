@@ -16,7 +16,7 @@ import {
 import ContentComponent from "../components/home/content.section.component";
 import HeroComponent from "../components/home/hero.component";
 import Layout from "../components/layout/layout";
-import NavHeader from "../components/nav/header.component";
+import NavHeader from "../components/nav/header.component original";
 
 export default function Home() {
   return (
@@ -25,7 +25,7 @@ export default function Home() {
         <NavHeader />
         <HeroComponent />
       </div>
-      <div className="max-w-sm mx-auto">
+      <div className="">
         <div className="text text-center my-5">
           <Heading>Admin Page</Heading>
         </div>

@@ -16,26 +16,11 @@ import {
   Button,
   Text,
   Menu,
-  MenuButton,
-  MenuList,
   MenuItem,
-  MenuItemOption,
-  MenuGroup,
-  MenuOptionGroup,
-  MenuIcon,
-  MenuCommand,
-  MenuDivider,
   VStack,
   StackDivider,
 } from "@chakra-ui/react";
-import {
-  AddIcon,
-  BellIcon,
-  EditIcon,
-  ExternalLinkIcon,
-  HamburgerIcon,
-  RepeatIcon,
-} from "@chakra-ui/icons";
+import { BellIcon, HamburgerIcon } from "@chakra-ui/icons";
 import { FaTwitter } from "react-icons/fa";
 import { useRouter } from "next/router";
 
@@ -47,7 +32,6 @@ import {
 } from "react-icons/gi";
 import { BsNewspaper } from "react-icons/bs";
 import { MdOutlineQuiz } from "react-icons/md";
-import { AiOutlineHome } from "react-icons/ai";
 
 const NavHeader = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -65,7 +49,7 @@ const NavHeader = () => {
           onClick={onOpen}
           as="button"
         /> */}
-        {/* <Box
+        <Box
           cursor="pointer"
           _hover={{
             background: "gray.200",
@@ -77,56 +61,7 @@ const NavHeader = () => {
           as="button"
         >
           <HamburgerIcon boxSize="7" />
-        </Box> */}
-        <Menu>
-          <MenuButton
-            as={IconButton}
-            aria-label="Options"
-            icon={<HamburgerIcon />}
-            variant="outline"
-          />
-          <MenuList>
-            <MenuItem icon={<AiOutlineHome />} onClick={() => router.push("/")}>
-              Home
-            </MenuItem>
-            <MenuItem
-              icon={<GiSoccerBall />}
-              onClick={() => router.push("/predictandwin")}
-            >
-              Predict & Win
-            </MenuItem>
-            <MenuItem
-              icon={<GiNewspaper />}
-              onClick={() => router.push("/news")}
-            >
-              News & Transfers
-            </MenuItem>
-            <MenuItem
-              icon={<GiCardPlay />}
-              onClick={() => router.push("/teamcard")}
-            >
-              Team Cards
-            </MenuItem>
-            <MenuItem
-              icon={<MdOutlineQuiz />}
-              onClick={() => router.push("/trivisgame")}
-            >
-              Trivis Game
-            </MenuItem>
-            <MenuItem
-              icon={<GiCartwheel />}
-              onClick={() => router.push("/spinmatch")}
-            >
-              Spin Match Virtual
-            </MenuItem>
-            <MenuItem
-              icon={<BsNewspaper />}
-              onClick={() => router.push("/magazine")}
-            >
-              News Magazine
-            </MenuItem>
-          </MenuList>
-        </Menu>
+        </Box>
         <Spacer />
 
         <Box

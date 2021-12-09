@@ -28,7 +28,11 @@ const Layout = ({ children, name, desc }) => {
         /> */}
       </Head>
       {/* <NavHeader /> */}
-      <main className="min-h-screen">{children}</main>
+      <div className="bg-gray-200">
+        <main className="min-h-screen max-w-sm mx-auto bg-white">
+          {children}
+        </main>
+      </div>
       {/* <FooterNav /> */}
       {/* <BackToTop size="small" /> */}
     </div>
