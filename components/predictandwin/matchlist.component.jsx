@@ -1,6 +1,6 @@
 import React from "react";
-import { Box, IconButton, Image, Text, Icon } from "@chakra-ui/react";
-import { CheckCircleIcon, SmallCloseIcon } from "react-icons/md";
+import { Box, IconButton, Image, Text } from "@chakra-ui/react";
+// import { CheckCircleIcon, SmallCloseIcon } from "react-icons/md";
 import { BiCheck } from "react-icons/bi";
 import { MdClose } from "react-icons/md";
 
@@ -8,7 +8,7 @@ const MatchListComponent = () => {
   // Logo Home Team vs Away Team Logo
   return (
     <div className="flex space-x-4 justify-center items-center mx-2 mt-5">
-      <div className="flex justify-center items-center space-x-1 border-2">
+      <div className="flex justify-center items-center space-x-1 w-fit">
         <Image
           boxSize="20px"
           src="/predictandwin/manu.png"
@@ -24,7 +24,7 @@ const MatchListComponent = () => {
           VS
         </Text>
       </div>
-      <div className="flex justify-center items-center space-x-1">
+      <div className="flex justify-center items-center space-x-1 w-fit">
         <Image
           boxSize="20px"
           src="/predictandwin/mancity.png"
