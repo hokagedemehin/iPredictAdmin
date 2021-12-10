@@ -4,19 +4,23 @@ import { Box, IconButton, Image, Text } from "@chakra-ui/react";
 import { BiCheck } from "react-icons/bi";
 import { MdClose } from "react-icons/md";
 
-const MatchListComponent = () => {
+const MatchListComponent = ({ matches }) => {
   // Logo Home Team vs Away Team Logo
+  console.log(matches);
+  const match = !matches ? {} : matches;
   return (
-    <div className="flex space-x-4 justify-center items-center mx-2 mt-5">
+    <div className="flex space-x-4 justify-center items-center mx-2 my-5">
       <div className="flex justify-center items-center space-x-1 w-fit">
         <Image
           boxSize="20px"
-          src="/predictandwin/manu.png"
-          alt="Machester United"
+          // src="/predictandwin/manu.png"
+          src={match?.teams?.home?.logo}
+          alt={match?.teams?.home?.name}
           borderRadius="full"
         />
         <Box>
-          <Text fontSize="sm">Manchester United</Text>
+          {/* <Text fontSize="sm">Manchester United</Text> */}
+          <Text fontSize="sm">{match?.teams?.home?.name}</Text>
         </Box>
       </div>
       <div>
@@ -27,12 +31,14 @@ const MatchListComponent = () => {
       <div className="flex justify-center items-center space-x-1 w-fit">
         <Image
           boxSize="20px"
-          src="/predictandwin/mancity.png"
-          alt="Machester United"
+          // src="/predictandwin/mancity.png"
+          src={match?.teams?.away?.logo}
+          alt={match?.teams?.away?.name}
           borderRadius="full"
         />
         <Box>
-          <Text fontSize="sm">Manchester City</Text>
+          {/* <Text fontSize="sm">Manchester City</Text> */}
+          <Text fontSize="sm">{match?.teams?.away?.name}</Text>
         </Box>
       </div>
       <div className="flex space-x-2">

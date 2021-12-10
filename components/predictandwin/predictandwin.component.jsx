@@ -1,30 +1,71 @@
 import { Button, InputGroup, InputLeftAddon, Select } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import MatchListComponent from "./matchlist.component";
 import MatchesSelectedComponent from "./matchselected.component";
 import { GiSoccerField } from "react-icons/gi";
+import listofmatches from "../../utils/matches/listofmatches";
 
 const PredictAndWinComponent = () => {
-  const [value, onChange] = useState(new Date());
-  const handleMatches = async () => {
-    await listofmatches();
+  const [formValue, setFormValue] = useState({});
+  const [finalData, setFinalData] = useState(null);
+  console.log("finalData: ", finalData);
+  // useEffect(() => {
+  //   if (!user) {
+  //     router.push("/");
+  //   }
+  // }, [user]);
+  const handleChange = (e) => {
+    e.preventDefault();
+    const name = e.target.name;
+    const value = e.target.value;
+    setFormValue({ ...formValue, [name]: value });
   };
+
+  // const res = null;
+  // if (!res) {
+  //   console.log("no data");
+  // } else {
+  //   console.log("there is data", res);
+  // }
+
+  const handleMatches = async () => {
+    const res = await listofmatches(formValue);
+    console.log(res);
+    setFinalData(res);
+    // console.log(
+    //   "🚀 ~ file: predictandwin.component.jsx ~ line 10 ~ PredictAndWinComponent ~ formValue",
+    //   formValue
+    // );
+  };
+
   return (
     <div>
       <div className="flex flex-col space-y-4 mx-2">
         <div className="flex w-1/2">
-          <Select placeholder="Country">
-            <option value="England">England</option>
-            <option value="Spain">Spain</option>
-            <option value="France">France</option>
-            <option value="Italy">Italy</option>
-            <option value="Germany">Germany</option>
+          <Select
+            placeholder="Country"
+            id="country"
+            name="country"
+            onChange={(e) => handleChange(e)}
+            // className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-300 focus:border-indigo-300 sm:text-sm"
+          >
+            {/* <option value="">Country</option> */}
+            <option value={39}>England</option>
+            <option value={140}>Spain</option>
+            <option value={61}>France</option>
+            <option value={135}>Italy</option>
+            <option value={78}>Germany</option>
           </Select>
         </div>
         <div className="flex">
           <InputGroup>
             <InputLeftAddon children="Start Date" />
-            <input type="date" name="startdate" id="startdate" />
+            <input
+              type="date"
+              name="startdate"
+              id="startdate"
+              onChange={(e) => handleChange(e)}
+            />
           </InputGroup>
         </div>
 
@@ -32,7 +73,12 @@ const PredictAndWinComponent = () => {
           {/* <input type="date" name="startdate" id="startdate" /> */}
           <InputGroup>
             <InputLeftAddon children="End Date" />
-            <input type="date" name="enddate" id="enddate" />
+            <input
+              type="date"
+              name="enddate"
+              id="enddate"
+              onChange={(e) => handleChange(e)}
+            />
           </InputGroup>
         </div>
         <div className="flex">
@@ -50,7 +96,14 @@ const PredictAndWinComponent = () => {
       </div>
       <div className="flex flex-col mt-5">
         <MatchesSelectedComponent />
-        <MatchListComponent />
+        {!finalData ? (
+          <p>No data</p>
+        ) : (
+          finalData?.response?.map((matches, index) => (
+            <MatchListComponent key={index} matches={matches} />
+          ))
+        )}
+        {/* <MatchListComponent key={index} finalData={finalData} /> */}
       </div>
     </div>
   );
