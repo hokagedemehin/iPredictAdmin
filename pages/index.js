@@ -1,18 +1,5 @@
 // import Head from 'next/head'
-import {
-  Box,
-  Flex,
-  Text,
-  Spacer,
-  Input,
-  Icon,
-  Heading,
-  Button,
-  Square,
-  Circle,
-  Center,
-  Container,
-} from "@chakra-ui/react";
+import { Heading } from "@chakra-ui/react";
 import ContentComponent from "../components/home/content.section.component";
 import HeroComponent from "../components/home/hero.component";
 import Layout from "../components/layout/layout";

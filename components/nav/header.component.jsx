@@ -1,42 +1,16 @@
-import React, { useRef } from "react";
+import React from "react";
 import {
   Flex,
   Box,
-  Input,
   Spacer,
   IconButton,
-  Drawer,
-  DrawerBody,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
-  useDisclosure,
-  Button,
-  Text,
   Menu,
   MenuButton,
   MenuList,
   MenuItem,
-  MenuItemOption,
-  MenuGroup,
-  MenuOptionGroup,
-  MenuIcon,
-  MenuCommand,
-  MenuDivider,
-  VStack,
-  StackDivider,
 } from "@chakra-ui/react";
-import {
-  AddIcon,
-  BellIcon,
-  EditIcon,
-  ExternalLinkIcon,
-  HamburgerIcon,
-  RepeatIcon,
-} from "@chakra-ui/icons";
-import { FaTwitter } from "react-icons/fa";
+import { BellIcon, HamburgerIcon } from "@chakra-ui/icons";
+// import { FaTwitter } from "react-icons/fa";
 import { useRouter } from "next/router";
 
 import {
@@ -50,8 +24,6 @@ import { MdOutlineQuiz } from "react-icons/md";
 import { AiOutlineHome } from "react-icons/ai";
 
 const NavHeader = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const btnRef = useRef();
   const router = useRouter();
 
   return (

@@ -2,9 +2,7 @@ import React, { useRef } from "react";
 import {
   Flex,
   Box,
-  Input,
   Spacer,
-  IconButton,
   Drawer,
   DrawerBody,
   DrawerFooter,
@@ -14,9 +12,6 @@ import {
   DrawerCloseButton,
   useDisclosure,
   Button,
-  Text,
-  Menu,
-  MenuItem,
   VStack,
   StackDivider,
 } from "@chakra-ui/react";

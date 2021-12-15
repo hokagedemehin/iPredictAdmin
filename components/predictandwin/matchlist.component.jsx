@@ -1,9 +1,9 @@
 import React from "react";
-import { Box, Button, IconButton, Image, Text } from "@chakra-ui/react";
+import { Box, IconButton, Image, Text } from "@chakra-ui/react";
 // import { CheckCircleIcon, SmallCloseIcon } from "react-icons/md";
 import { BiCheck } from "react-icons/bi";
 import { MdClose } from "react-icons/md";
-import addMatchToFirestore from "../../utils/matches/addMatchToFIrestore";
+// import addMatchToFirestore from "../../utils/matches/addMatchToFIrestore";
 
 const MatchListComponent = ({ matches, setMatchSelect, matchSelect }) => {
   // console.log("🚀 ~ file: matchlist.component.jsx ~ line 8 ~ MatchListComponent ~ matches", matches)

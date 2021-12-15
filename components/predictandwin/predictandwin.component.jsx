@@ -1,10 +1,10 @@
 import { Button, InputGroup, InputLeftAddon, Select } from "@chakra-ui/react";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import MatchListComponent from "./matchlist.component";
 import MatchesSelectedComponent from "./matchselected.component";
 import { GiSoccerField } from "react-icons/gi";
 import listofmatches from "../../utils/matches/listofmatches";
-import { FcAcceptDatabase } from "react-icons/fc";
+// import { FcAcceptDatabase } from "react-icons/fc";
 import NoMatchListComponent from "./nomatchlist.component";
 
 const PredictAndWinComponent = () => {

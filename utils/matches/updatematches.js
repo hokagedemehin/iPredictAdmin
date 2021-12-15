@@ -25,7 +25,7 @@ const UpdateMatches = async (fixtureId) => {
       "🚀 ~ file: updatematches.js ~ line 27 ~ UpdateMatches ~ error",
       error
     );
-    toast.error("💥There was an error accessing this link 😪😥💥");
+    // toast.error("💥There was an error accessing this link 😪😥💥");
   }
 };
 

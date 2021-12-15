@@ -1,5 +1,5 @@
 import React from "react";
-import { Flex, Box, Image, Square, Spacer, Text } from "@chakra-ui/react";
+import { Image, Square } from "@chakra-ui/react";
 const HeroComponent = () => {
   return (
     <div className="">

@@ -4,7 +4,7 @@ import React from "react";
 import { BiSend } from "react-icons/bi";
 import { MdOutlineClear } from "react-icons/md";
 import { GrUpdate } from "react-icons/gr";
-import addMatchToFirestore from "../../utils/matches/addMatchToFIrestore";
+import addMatchToFirestore from "../../utils/matches/addMatchToFirestore";
 import { ToastContainer } from "react-toastify";
 import UpdateMatches from "../../utils/matches/updatematches";
 
