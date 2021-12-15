@@ -4,10 +4,13 @@ import MatchListComponent from "./matchlist.component";
 import MatchesSelectedComponent from "./matchselected.component";
 import { GiSoccerField } from "react-icons/gi";
 import listofmatches from "../../utils/matches/listofmatches";
+import { FcAcceptDatabase } from "react-icons/fc";
+import NoMatchListComponent from "./nomatchlist.component";
 
 const PredictAndWinComponent = () => {
   const [formValue, setFormValue] = useState({});
   const [finalData, setFinalData] = useState(null);
+  const [matchSelect, setMatchSelect] = useState([]);
   console.log("finalData: ", finalData);
   // useEffect(() => {
   //   if (!user) {
@@ -40,7 +43,7 @@ const PredictAndWinComponent = () => {
 
   return (
     <div>
-      <div className="flex flex-col space-y-4 mx-2">
+      <div className="flex flex-col space-y-4 mx-3">
         <div className="flex w-1/2">
           <Select
             placeholder="Country"
@@ -94,15 +97,29 @@ const PredictAndWinComponent = () => {
           </Button>
         </div>
       </div>
-      <div className="flex flex-col mt-5">
-        <MatchesSelectedComponent />
+      <div className="flex flex-col mt-5 mx-3">
+        {matchSelect.length !== 0 ? (
+          <MatchesSelectedComponent
+            matchSelect={matchSelect}
+            setMatchSelect={setMatchSelect}
+          />
+        ) : (
+          ""
+        )}
+
         {!finalData ? (
-          <p>No data</p>
+          <NoMatchListComponent />
         ) : (
           finalData?.response?.map((matches, index) => (
-            <MatchListComponent key={index} matches={matches} />
+            <MatchListComponent
+              key={index}
+              matches={matches}
+              setMatchSelect={setMatchSelect}
+              matchSelect={matchSelect}
+            />
           ))
         )}
+
         {/* <MatchListComponent key={index} finalData={finalData} /> */}
       </div>
     </div>

@@ -1,15 +1,47 @@
 import React from "react";
-import { Box, IconButton, Image, Text } from "@chakra-ui/react";
+import { Box, Button, IconButton, Image, Text } from "@chakra-ui/react";
 // import { CheckCircleIcon, SmallCloseIcon } from "react-icons/md";
 import { BiCheck } from "react-icons/bi";
 import { MdClose } from "react-icons/md";
+import addMatchToFirestore from "../../utils/matches/addMatchToFIrestore";
 
-const MatchListComponent = ({ matches }) => {
+const MatchListComponent = ({ matches, setMatchSelect, matchSelect }) => {
+  // console.log("🚀 ~ file: matchlist.component.jsx ~ line 8 ~ MatchListComponent ~ matches", matches)
   // Logo Home Team vs Away Team Logo
-  console.log(matches);
+  // console.log(matches);
   const match = !matches ? {} : matches;
+
+  const addSelection = async () => {
+    // await addMatchToFirestore(match);
+    setMatchSelect([
+      ...matchSelect,
+      {
+        fixtureId: match?.fixture?.id,
+        homeGoal: match?.goals?.home,
+        awayGoal: match?.goals?.away,
+        leagueId: match?.league?.id,
+        country: match?.league?.country,
+        leagueName: match?.league?.name,
+        homeName: match?.teams?.home?.name,
+        homeLogo: match?.teams?.home?.logo,
+        awayLogo: match?.teams?.away?.logo,
+        awayName: match?.teams?.away?.name,
+        homeWinner: match?.teams?.home?.winner,
+        awayWinner: match?.teams?.away?.winner,
+      },
+    ]);
+  };
+
+  const removeSelection = async () => {
+    // await removeMatchFromFirestore(match);
+    const newMatchSelect = matchSelect.filter(
+      (mat) => mat.fixtureId != match?.fixture?.id
+    );
+    setMatchSelect(newMatchSelect);
+  };
+
   return (
-    <div className="flex space-x-4 justify-center items-center mx-2 my-5">
+    <div className="flex space-x-4 justify-between items-center mx-2 my-5">
       <div className="flex justify-center items-center space-x-1 w-fit">
         <Image
           boxSize="20px"
@@ -20,7 +52,7 @@ const MatchListComponent = ({ matches }) => {
         />
         <Box>
           {/* <Text fontSize="sm">Manchester United</Text> */}
-          <Text fontSize="sm">{match?.teams?.home?.name}</Text>
+          <Text fontSize="xs">{match?.teams?.home?.name}</Text>
         </Box>
       </div>
       <div>
@@ -50,7 +82,7 @@ const MatchListComponent = ({ matches }) => {
           isRound
           size="xs"
           icon={<BiCheck />}
-          onClick={() => alert("added")}
+          onClick={addSelection}
         />
         <IconButton
           // variant="outline"
@@ -60,7 +92,7 @@ const MatchListComponent = ({ matches }) => {
           isRound
           size="xs"
           icon={<MdClose />}
-          onClick={() => alert("removed")}
+          onClick={removeSelection}
         />
       </div>
     </div>
