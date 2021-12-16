@@ -6,12 +6,16 @@ import { GiSoccerField } from "react-icons/gi";
 import listofmatches from "../../utils/matches/listofmatches";
 // import { FcAcceptDatabase } from "react-icons/fc";
 import NoMatchListComponent from "./nomatchlist.component";
+import NoMatchComponent from "./nomatch.component";
 
 const PredictAndWinComponent = () => {
   const [formValue, setFormValue] = useState({});
   const [finalData, setFinalData] = useState(null);
   const [matchSelect, setMatchSelect] = useState([]);
+  const [isLoading, setisLoading] = useState(false);
+
   console.log("finalData: ", finalData);
+  console.log("matchSelected: ", matchSelect);
   // useEffect(() => {
   //   if (!user) {
   //     router.push("/");
@@ -32,8 +36,8 @@ const PredictAndWinComponent = () => {
   // }
 
   const handleMatches = async () => {
-    const res = await listofmatches(formValue);
-    console.log(res);
+    const res = await listofmatches(formValue, setisLoading);
+    // console.log(res);
     setFinalData(res);
     // console.log(
     //   "🚀 ~ file: predictandwin.component.jsx ~ line 10 ~ PredictAndWinComponent ~ formValue",
@@ -92,6 +96,9 @@ const PredictAndWinComponent = () => {
             isFullWidth
             fontSize="xl"
             onClick={handleMatches}
+            isLoading={isLoading}
+            loadingText="Loading"
+            spinnerPlacement="end"
           >
             Get Matches
           </Button>
@@ -109,6 +116,8 @@ const PredictAndWinComponent = () => {
 
         {!finalData ? (
           <NoMatchListComponent />
+        ) : finalData?.results === 0 ? (
+          <NoMatchComponent />
         ) : (
           finalData?.response?.map((matches, index) => (
             <MatchListComponent

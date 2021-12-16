@@ -5,7 +5,7 @@ import NavHeader from "../../components/nav/header.component";
 
 const MagazinePage = () => {
   return (
-    <Layout>
+    <Layout name="magazine" desc="I-predict Magazine">
       <NavHeader />
       <div className="max-w-sm mx-auto">
         <div className="text text-center my-5">

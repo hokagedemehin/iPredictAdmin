@@ -6,7 +6,7 @@ import PredictAndWinComponent from "../../components/predictandwin/predictandwin
 
 const PredictAndWinPage = () => {
   return (
-    <Layout>
+    <Layout name="matches" desc="I-Predict and Win">
       <NavHeader />
       <div className="max-w-sm mx-auto">
         <div className="text text-center my-5">

@@ -4,7 +4,8 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const listofmatches = async (formValue) => {
+const listofmatches = async (formValue, setisLoading) => {
+  setisLoading(true);
   // const toast = useToast();
   const { country, startdate, enddate } = formValue;
 
@@ -19,6 +20,7 @@ const listofmatches = async (formValue) => {
   };
   try {
     const { data } = await axios.request(options);
+
     return data;
   } catch (error) {
     console.log(
@@ -26,6 +28,8 @@ const listofmatches = async (formValue) => {
       error
     );
     toast.error("💥There was an error accessing this link 😪😥💥");
+  } finally {
+    setisLoading(false);
   }
 };
 

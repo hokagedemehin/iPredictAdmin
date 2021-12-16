@@ -6,7 +6,7 @@ import NavHeader from "../../components/nav/header.component";
 
 const TeamCardsPage = () => {
   return (
-    <Layout>
+    <Layout name="team card" desc="I-Predict Team Card">
       <NavHeader />
       <div className="max-w-sm mx-auto">
         <div className="text text-center my-5">

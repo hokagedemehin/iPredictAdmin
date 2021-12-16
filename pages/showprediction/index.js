@@ -3,13 +3,13 @@ import React from "react";
 import Layout from "../../components/layout/layout";
 import NavHeader from "../../components/nav/header.component";
 
-const NewsAndTransfersPage = () => {
+const ShowPredictionComponent = () => {
   return (
-    <Layout name="news" desc="I-Predict news and transfers">
+    <Layout name="predictions" desc="See all Users Predictions">
       <NavHeader />
       <div className="max-w-sm mx-auto">
         <div className="text text-center my-5">
-          <Heading>News & Transfers</Heading>
+          <Heading>Users Predictions</Heading>
         </div>
         {/* <ContentComponent /> */}
       </div>
@@ -17,4 +17,4 @@ const NewsAndTransfersPage = () => {
   );
 };
 
-export default NewsAndTransfersPage;
+export default ShowPredictionComponent;

@@ -5,7 +5,7 @@ import NavHeader from "../../components/nav/header.component";
 
 const TrivisGamesPage = () => {
   return (
-    <Layout>
+    <Layout name="trivis" desc="I-Predict Trivis Game">
       <NavHeader />
       <div className="max-w-sm mx-auto">
         <div className="text text-center my-5">

@@ -8,21 +8,22 @@ import {
   getDocs,
   doc,
   updateDoc,
-  serverTimestamp,
+  // serverTimestamp,
   query,
   where,
 } from "firebase/firestore";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const addMatchToFirestore = async (matchSelect) => {
+const addMatchToFirestore = async (matchSelect, setIsConfirmed) => {
+  setIsConfirmed(true);
   console.log("match selcted: ", matchSelect);
   const nowDate = new Date();
   const docID = Date.now().toString();
-  console.log(nowDate);
+  // console.log(nowDate);
   // const matchDate = selectedMatches
   const matchDate = moment(nowDate).format("MMM Do, YY, h:mm:ss a");
-  console.log(matchDate);
+  // console.log(matchDate);
 
   // Get all documents with previous confirmed status and turn them to false
   const allRef = collection(db, "MatchesSelected");
@@ -50,7 +51,7 @@ const addMatchToFirestore = async (matchSelect) => {
   );
   try {
     await setDoc(parentRef, {
-      createdAt: serverTimestamp(),
+      createdAt: nowDate,
       confirmed: true,
     });
     matchSelect.forEach(
@@ -88,6 +89,8 @@ const addMatchToFirestore = async (matchSelect) => {
     // console.log("data added successfully");
   } catch (err) {
     console.error("error - addMatchToFirestore", err);
+  } finally {
+    setIsConfirmed(false);
   }
 };
 

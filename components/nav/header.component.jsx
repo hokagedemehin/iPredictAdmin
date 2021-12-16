@@ -19,7 +19,7 @@ import {
   GiCartwheel,
   GiNewspaper,
 } from "react-icons/gi";
-import { BsNewspaper } from "react-icons/bs";
+import { BsNewspaper, BsFileSpreadsheetFill } from "react-icons/bs";
 import { MdOutlineQuiz } from "react-icons/md";
 import { AiOutlineHome } from "react-icons/ai";
 
@@ -45,6 +45,12 @@ const NavHeader = () => {
               onClick={() => router.push("/predictandwin")}
             >
               Predict & Win
+            </MenuItem>
+            <MenuItem
+              icon={<BsFileSpreadsheetFill />}
+              onClick={() => router.push("/showprediction")}
+            >
+              Match Predictions
             </MenuItem>
             <MenuItem
               icon={<GiNewspaper />}

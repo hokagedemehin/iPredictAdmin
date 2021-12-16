@@ -5,7 +5,7 @@ import NavHeader from "../../components/nav/header.component";
 
 const SpinMatchVirtualPage = () => {
   return (
-    <Layout>
+    <Layout name="spin" desc="I-Predict spin Match">
       <NavHeader />
       <div className="max-w-sm mx-auto">
         <div className="text text-center my-5">

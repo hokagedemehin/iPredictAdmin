@@ -1,32 +1,68 @@
 import { Button, Image, Text } from "@chakra-ui/react";
 // import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import { BiSend } from "react-icons/bi";
 import { MdOutlineClear } from "react-icons/md";
 import { GrUpdate } from "react-icons/gr";
 import addMatchToFirestore from "../../utils/matches/addMatchToFirestore";
+// import { toast } from "react-toastify";
+// import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import UpdateMatches from "../../utils/matches/updatematches";
+import UpdateScoreToFirestore from "../../utils/matches/updateScoreToFirestore";
+// import { useToast } from "@chakra-ui/react";
 
 const MatchesSelectedComponent = ({ matchSelect, setMatchSelect }) => {
   console.log(
     "🚀 ~ file: matchselected.component.jsx ~ line 7 ~ MatchesSelectedComponent ~ matchSelect",
     matchSelect
   );
+  // const [isLoading, setisLoading] = useState(false);
+  const [isConfirmed, setIsConfirmed] = useState(false);
+  const [isUpdating, setIsUpdating] = useState(false);
+
+  // const toast = useToast();
+
   const addSelection = async () => {
-    await addMatchToFirestore(matchSelect);
+    await addMatchToFirestore(matchSelect, setIsConfirmed);
   };
   const clearSelection = () => {
     setMatchSelect([]);
   };
-  const updateSelection = () => {
-    matchSelect.forEach((matt) => {
-      const data = UpdateMatches(matt.fixtureId);
-      matt.homeGoal = data?.response?.golas?.home;
-      matt.awayGoal = data?.response?.golas?.away;
+  const updateSelection = async () => {
+    matchSelect.forEach(async (matt) => {
+      setIsUpdating(true);
+      try {
+        const data = await UpdateMatches(matt.fixtureId);
+        // console.log("update data: ", data);
+        // console.log("home goals: ", data?.response[0]?.goals?.home);
+        // console.log("home away: ", data?.response[0]?.goals?.away);
+
+        matt.homeGoal = data?.response[0]?.goals?.home;
+        matt.awayGoal = data?.response[0]?.goals?.away;
+
+        await UpdateScoreToFirestore(matt);
+      } catch (error) {
+        console.error(error);
+        // toast({
+        //   title: "An error occurred while updating",
+        //   status: "error",
+        //   position: "top-right",
+        //   isClosable: true,
+        // });
+      } finally {
+        // toast({
+        //   title: "All Matches have been updated",
+        //   status: "success",
+        //   position: "top-right",
+        //   isClosable: true,
+        // });
+        setIsUpdating(false);
+      }
 
       // TODO do a query to select only the confirmed collection, then update the subcollection with the right scores
     });
+    // console.log("update matchSelect: ", matchSelect);
   };
   // console.log(object)
   return (
@@ -73,6 +109,9 @@ const MatchesSelectedComponent = ({ matchSelect, setMatchSelect }) => {
           variant="solid"
           size="sm"
           onClick={addSelection}
+          isLoading={isConfirmed}
+          loadingText="Saving"
+          spinnerPlacement="end"
         >
           Confirm
         </Button>
@@ -82,6 +121,9 @@ const MatchesSelectedComponent = ({ matchSelect, setMatchSelect }) => {
           variant="outline"
           size="sm"
           onClick={updateSelection}
+          isLoading={isUpdating}
+          loadingText="Updating"
+          spinnerPlacement="end"
         >
           Update
         </Button>

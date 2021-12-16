@@ -12,7 +12,7 @@ const NoMatchListComponent = () => {
         fallbackSrc="https://via.placeholder.com/200"
       />
       <Text fontSize="lg" fontWeight="bold">
-        No Match Day is selected yet
+        No Match Date is selected yet
       </Text>
     </div>
   );
