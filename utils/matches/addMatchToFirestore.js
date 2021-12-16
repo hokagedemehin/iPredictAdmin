@@ -1,5 +1,5 @@
 import { db } from "../firebase/firebase";
-import moment from "moment";
+// import moment from "moment";
 
 import {
   collection,
@@ -22,7 +22,7 @@ const addMatchToFirestore = async (matchSelect, setIsConfirmed) => {
   const docID = Date.now().toString();
   // console.log(nowDate);
   // const matchDate = selectedMatches
-  const matchDate = moment(nowDate).format("MMM Do, YY, h:mm:ss a");
+  // const matchDate = moment(nowDate).format("MMM Do, YY, h:mm:ss a");
   // console.log(matchDate);
 
   // Get all documents with previous confirmed status and turn them to false
@@ -43,12 +43,7 @@ const addMatchToFirestore = async (matchSelect, setIsConfirmed) => {
     // docID
   );
 
-  const predictRef = collection(
-    db,
-    "MatchesSelected",
-    docID,
-    `Match - ${matchDate}`
-  );
+  const predictRef = collection(db, "MatchesSelected", docID, `Matches`);
   try {
     await setDoc(parentRef, {
       createdAt: nowDate,
@@ -69,6 +64,7 @@ const addMatchToFirestore = async (matchSelect, setIsConfirmed) => {
           awayName: match?.awayName,
           homeWinner: match?.homeWinner,
           awayWinner: match?.awayWinner,
+          createdAt: nowDate,
         })
     );
     // await setDoc(predictRef, {
