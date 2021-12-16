@@ -47,7 +47,7 @@ const PredictAndWinComponent = () => {
 
   return (
     <div>
-      <div className="flex flex-col space-y-4 mx-3">
+      <div className="flex flex-col justify-center items-center space-y-4 mx-3">
         <div className="flex w-1/2">
           <Select
             placeholder="Country"
