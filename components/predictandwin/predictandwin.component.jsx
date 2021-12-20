@@ -1,5 +1,5 @@
 import { Button, InputGroup, InputLeftAddon, Select } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import MatchListComponent from "./matchlist.component";
 import MatchesSelectedComponent from "./matchselected.component";
 import { GiSoccerField } from "react-icons/gi";
@@ -7,12 +7,20 @@ import listofmatches from "../../utils/matches/listofmatches";
 // import { FcAcceptDatabase } from "react-icons/fc";
 import NoMatchListComponent from "./nomatchlist.component";
 import NoMatchComponent from "./nomatch.component";
-
+import selectedMacthesForPrediction from "../../utils/matches/selectedMacthesForPrediction";
 const PredictAndWinComponent = () => {
   const [formValue, setFormValue] = useState({});
   const [finalData, setFinalData] = useState(null);
   const [matchSelect, setMatchSelect] = useState([]);
   const [isLoading, setisLoading] = useState(false);
+
+  // * This is the point where I will check if match select is empty, if it is empty
+  //  * Once it is empty, upon page reload or navigating away and coming back, we should read from the firestore and get the selected mathches
+  useEffect(() => {
+    if (matchSelect.length === 0) {
+      selectedMacthesForPrediction(setMatchSelect);
+    }
+  }, []);
 
   console.log("finalData: ", finalData);
   console.log("matchSelected: ", matchSelect);
@@ -88,7 +96,7 @@ const PredictAndWinComponent = () => {
             />
           </InputGroup>
         </div>
-        <div className="flex">
+        <div className="flex w-full">
           <Button
             leftIcon={<GiSoccerField />}
             colorScheme="teal"

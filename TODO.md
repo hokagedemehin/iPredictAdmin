@@ -12,4 +12,4 @@
 - [x] create a clear all button
 - [x] create another page to display all predictions and a check sign if the predictions are correct and a close if it is wrong
 - [x] arrange the database in descending order
-- [x] add isLoading logic to all my buttons
+- [x] add isLoading logic to all my buttonsconfirmed matches should remain in selected matches
