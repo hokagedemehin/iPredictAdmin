@@ -2,6 +2,7 @@ import { Heading } from "@chakra-ui/react";
 import React from "react";
 import Layout from "../../components/layout/layout";
 import NavHeader from "../../components/nav/header.component";
+import AllMatchesSelected from "../../components/showpredictions/matches.component";
 
 const ShowPredictionComponent = () => {
   return (
@@ -11,7 +12,7 @@ const ShowPredictionComponent = () => {
         <div className="text text-center my-5">
           <Heading>Users Predictions</Heading>
         </div>
-        {/* <ContentComponent /> */}
+        <AllMatchesSelected />
       </div>
     </Layout>
   );

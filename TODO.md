@@ -13,3 +13,7 @@
 - [x] create another page to display all predictions and a check sign if the predictions are correct and a close if it is wrong
 - [x] arrange the database in descending order
 - [x] add isLoading logic to all my buttonsconfirmed matches should remain in selected matches
+- [x] work out how all the predictions will be displayed based on the match that was selected
+- [x] each card should show fist name, last name, email, prediction time, matches and the respective predicted score and an icon to show if the prediction was right or wrong
+- [x] login page to guard the whole site
+- [x] only certain emails can see the site

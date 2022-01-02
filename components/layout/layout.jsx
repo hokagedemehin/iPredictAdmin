@@ -8,7 +8,7 @@ const Layout = ({ children, name, desc }) => {
   return (
     <div>
       <Head>
-        <title>I-Predict - {name}</title>
+        <title>I-Predict-Admin - {name}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta name="description" content={desc} />
         <link rel="icon" href="/logo/ipredict.png" />

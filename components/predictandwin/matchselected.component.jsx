@@ -13,10 +13,10 @@ import UpdateScoreToFirestore from "../../utils/matches/updateScoreToFirestore";
 // import { useToast } from "@chakra-ui/react";
 
 const MatchesSelectedComponent = ({ matchSelect, setMatchSelect }) => {
-  console.log(
-    "🚀 ~ file: matchselected.component.jsx ~ line 7 ~ MatchesSelectedComponent ~ matchSelect",
-    matchSelect
-  );
+  // console.log(
+  //   "🚀 ~ file: matchselected.component.jsx ~ line 7 ~ MatchesSelectedComponent ~ matchSelect",
+  //   matchSelect
+  // );
   // const [isLoading, setisLoading] = useState(false);
   const [isConfirmed, setIsConfirmed] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
@@ -40,10 +40,13 @@ const MatchesSelectedComponent = ({ matchSelect, setMatchSelect }) => {
 
         matt.homeGoal = data?.response[0]?.goals?.home;
         matt.awayGoal = data?.response[0]?.goals?.away;
+        matt.status = data?.response[0]?.fixture?.status?.short;
 
-        await UpdateScoreToFirestore(matt);
+        if (matt.status == "FT") {
+          await UpdateScoreToFirestore(matt);
+        }
       } catch (error) {
-        console.error(error);
+        console.error("match select error", error);
         // toast({
         //   title: "An error occurred while updating",
         //   status: "error",
@@ -51,17 +54,12 @@ const MatchesSelectedComponent = ({ matchSelect, setMatchSelect }) => {
         //   isClosable: true,
         // });
       } finally {
-        // toast({
-        //   title: "All Matches have been updated",
-        //   status: "success",
-        //   position: "top-right",
-        //   isClosable: true,
-        // });
         setIsUpdating(false);
       }
 
       // TODO do a query to select only the confirmed collection, then update the subcollection with the right scores
     });
+
     // console.log("update matchSelect: ", matchSelect);
   };
   // console.log(object)
@@ -71,7 +69,7 @@ const MatchesSelectedComponent = ({ matchSelect, setMatchSelect }) => {
         Selected Matches
       </Text>
 
-      <div className="flex flex-wrap justify-center items-center gap-4">
+      <div className="flex flex-wrap justify-center items-center gap-2">
         {matchSelect.map((matt, index) => (
           <div
             key={index}
@@ -101,8 +99,9 @@ const MatchesSelectedComponent = ({ matchSelect, setMatchSelect }) => {
             </div>
           </div>
         ))}
+        <ToastContainer />
       </div>
-      <div className="flex justify-center items-center my-3 space-x-5">
+      <div className="flex justify-center items-center my-3 space-x-2">
         <Button
           rightIcon={<BiSend />}
           colorScheme="teal"

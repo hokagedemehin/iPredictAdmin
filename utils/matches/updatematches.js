@@ -31,7 +31,7 @@ const UpdateMatches = async (fixtureId) => {
 
   try {
     const { data } = await axios.request(options);
-    console.log("Update API: ", data);
+    // console.log("Update API: ", data);
     return data;
   } catch (error) {
     console.log(

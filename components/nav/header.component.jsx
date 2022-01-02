@@ -22,9 +22,22 @@ import {
 import { BsNewspaper, BsFileSpreadsheetFill } from "react-icons/bs";
 import { MdOutlineQuiz } from "react-icons/md";
 import { AiOutlineHome } from "react-icons/ai";
-
+import { GoSignOut, GoSignIn } from "react-icons/go";
+import { signOut } from "firebase/auth";
+import { auth } from "../../utils/firebase/firebase";
+import { useUser } from "../../utils/context/userContext";
 const NavHeader = () => {
   const router = useRouter();
+
+  const { user } = useUser();
+
+  const handleLogout = async () => {
+    // e.preventDefault();
+    await signOut(auth);
+    router.push("/login");
+
+    // console.log("router: ", router.pathname);
+  };
 
   return (
     <>
@@ -82,6 +95,24 @@ const NavHeader = () => {
             >
               News Magazine
             </MenuItem>
+
+            {user ? (
+              <MenuItem
+                icon={<GoSignOut />}
+                onClick={() => {
+                  handleLogout();
+                }}
+              >
+                Sign Out
+              </MenuItem>
+            ) : (
+              <MenuItem
+                icon={<GoSignIn />}
+                onClick={() => router.push("/login")}
+              >
+                Sign In
+              </MenuItem>
+            )}
           </MenuList>
         </Menu>
         <Spacer />

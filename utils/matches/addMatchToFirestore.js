@@ -17,7 +17,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 const addMatchToFirestore = async (matchSelect, setIsConfirmed) => {
   setIsConfirmed(true);
-  console.log("match selcted: ", matchSelect);
+  // console.log("match selcted: ", matchSelect);
   const nowDate = new Date();
   const docID = Date.now().toString();
   // console.log(nowDate);
@@ -65,22 +65,19 @@ const addMatchToFirestore = async (matchSelect, setIsConfirmed) => {
           homeWinner: match?.homeWinner,
           awayWinner: match?.awayWinner,
           createdAt: nowDate,
+          status: match?.status,
         })
     );
-    // await setDoc(predictRef, {
-    //   fixtureId: match?.fixture?.id,
-    //   homeGoal: match?.goals?.home,
-    //   awayGoal: match?.goals?.away,
-    //   leagueId: match?.league?.id,
-    //   country: match?.league?.country,
-    //   leagueName: match?.league?.name,
-    //   homeName: match?.teams?.home?.name,
-    //   homeLogo: match?.teams?.home?.logo,
-    //   awayLogo: match?.teams?.away?.logo,
-    //   awayName: match?.teams?.away?.name,
-    //   homeWinner: match?.teams?.home?.winner,
-    //   awayWinner: match?.teams?.away?.winner,
-    // });
+
+    const MatchDocRef = doc(db, "PredictedMatches", docID);
+    await setDoc(
+      MatchDocRef,
+      {
+        createdAt: nowDate,
+        ID: docID,
+      },
+      { merge: true }
+    );
     toast.success("✅ Added successfully");
     // console.log("data added successfully");
   } catch (err) {

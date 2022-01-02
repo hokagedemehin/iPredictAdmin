@@ -1,12 +1,26 @@
 // import Head from 'next/head'
 import { Heading } from "@chakra-ui/react";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 import ContentComponent from "../components/home/content.section.component";
 import HeroComponent from "../components/home/hero.component";
 import Layout from "../components/layout/layout";
 import NavHeader from "../components/nav/header.component";
+import { useUser } from "../utils/context/userContext";
 // import NavHeader from "../components/nav/header.component original";
 
 export default function Home() {
+  const router = useRouter();
+  const { userDoc } = useUser();
+
+  useEffect(() => {
+    if (!userDoc || userDoc.role !== "admin") {
+      // router.back();
+      router.push("/login");
+      // console.log("no admin");
+    }
+  }, [userDoc]);
+
   return (
     <Layout name="home" desc="Predict and win always">
       <div className="bg-yellow-300 pb-4">

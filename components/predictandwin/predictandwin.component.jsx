@@ -22,8 +22,8 @@ const PredictAndWinComponent = () => {
     }
   }, []);
 
-  console.log("finalData: ", finalData);
-  console.log("matchSelected: ", matchSelect);
+  // console.log("finalData: ", finalData);
+  // console.log("matchSelected: ", matchSelect);
   // useEffect(() => {
   //   if (!user) {
   //     router.push("/");
