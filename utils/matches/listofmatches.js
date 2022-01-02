@@ -23,7 +23,7 @@ const listofmatches = async (formValue, setisLoading) => {
 
     return data;
   } catch (error) {
-    console.log(
+    console.error(
       "🚀 ~ file: listofmatches.js ~ line 18 ~ listofmatches ~ error",
       error
     );

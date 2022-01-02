@@ -81,7 +81,7 @@ const UpdateScoreToFirestore = async (match) => {
 
       // console.log("docref: ", docRef);
       for (const [key, value] of Object.entries(docRef)) {
-        console.log("Key: ", key, "value: ", value);
+        // console.log("Key: ", key, "value: ", value);
         value.forEach(async (eachDoc) => {
           const matchRef = collection(db, key, collectionID, eachDoc);
           const specificMatch = query(
@@ -93,14 +93,14 @@ const UpdateScoreToFirestore = async (match) => {
             // console.log(updateMatch.id);
             // console.log("selected key: ", key);
             // console.log("selected value: ", eachDoc);
-            console.log(
-              "selected Key: ",
-              key,
-              "selected Value: ",
-              eachDoc,
-              "match ID: ",
-              updateMatch.id
-            );
+            // console.log(
+            //   "selected Key: ",
+            //   key,
+            //   "selected Value: ",
+            //   eachDoc,
+            //   "match ID: ",
+            //   updateMatch.id
+            // );
             const matchSubCollectionRef = doc(
               db,
               key,
@@ -108,7 +108,7 @@ const UpdateScoreToFirestore = async (match) => {
               eachDoc,
               updateMatch.id
             );
-            console.log("matchSUb: ", matchSubCollectionRef);
+            // console.log("matchSUb: ", matchSubCollectionRef);
             try {
               await updateDoc(
                 matchSubCollectionRef,

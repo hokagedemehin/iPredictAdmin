@@ -34,7 +34,7 @@ const UpdateMatches = async (fixtureId) => {
     // console.log("Update API: ", data);
     return data;
   } catch (error) {
-    console.log(
+    console.error(
       "🚀 ~ file: updatematches.js ~ line 27 ~ UpdateMatches ~ error",
       error
     );
