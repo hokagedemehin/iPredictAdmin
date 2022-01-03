@@ -81,7 +81,7 @@ const NavHeader = () => {
               icon={<MdOutlineQuiz />}
               onClick={() => router.push("/trivisgame")}
             >
-              Trivis Game
+              Trivia Game
             </MenuItem>
             <MenuItem
               icon={<GiCartwheel />}

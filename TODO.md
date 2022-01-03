@@ -17,3 +17,14 @@
 - [x] each card should show fist name, last name, email, prediction time, matches and the respective predicted score and an icon to show if the prediction was right or wrong
 - [x] login page to guard the whole site
 - [x] only certain emails can see the site
+- [ ] each match prediction cost 5 coins, so for a complete 4 match prediction you need 20 coins
+- [ ] check email for coin value
+
+
+### Trivia TODO
+#### checklists
+- [ ] Each question will have four options and a correct response with a unique ID
+- [ ] create home trivia page with options to add a question, view question and view responses
+- [ ] Add question page will have a form to fill in the questiona, four possible answer and correct answer, also store the unique ID
+- [ ] view question page will have each question as a card that has the question truncated to two lines and when you click it, you see the complete question with all the four possible options and the correct answer
+- [ ] view response page, a detail card of each attempt with name, email, date and time of attempt, no of questions, no of correct answers (green) and no of wrong answers (red)
