@@ -79,7 +79,7 @@ const NavHeader = () => {
             </MenuItem>
             <MenuItem
               icon={<MdOutlineQuiz />}
-              onClick={() => router.push("/trivisgame")}
+              onClick={() => router.push("/triviagame")}
             >
               Trivia Game
             </MenuItem>
