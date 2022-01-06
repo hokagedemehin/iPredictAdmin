@@ -10,7 +10,7 @@ const TrivisGamesPage = () => {
       <NavHeader />
       <div className="max-w-sm mx-auto">
         <div className="text text-center my-5">
-          <Heading>Trivis Game</Heading>
+          <Heading>Trivas Game</Heading>
         </div>
         <MainPageContent />
       </div>
