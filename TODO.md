@@ -24,6 +24,7 @@
 ### Trivia TODO
 #### checklists
 - [ ] Each question will have four options and a correct response with a unique ID
+- [ ] check if a question already exist
 - [ ] create home trivia page with options to add a question, view question and view responses
 - [ ] Add question page will have a form to fill in the questiona, four possible answer and correct answer, also store the unique ID
 - [ ] view question page will have each question as a card that has the question truncated to two lines and when you click it, you see the complete question with all the four possible options and the correct answer
