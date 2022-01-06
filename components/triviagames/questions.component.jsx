@@ -10,6 +10,7 @@ import React, { useState } from "react";
 import { useFormik } from "formik";
 import { AiOutlineSend } from "react-icons/ai";
 import SubmitQuestions from "../../utils/trivia/submitQuestions";
+import { ToastContainer } from "react-toastify";
 
 const validate = (values) => {
   const errors = {};
@@ -35,7 +36,7 @@ const OneQuestion = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const submitQuestion = async (values, resetForm) => {
-    console.log(values);
+    // console.log(values);
     await SubmitQuestions(values, setIsLoading);
     resetForm();
   };
@@ -156,6 +157,7 @@ const OneQuestion = () => {
           </Button>
         </div>
       </form>
+      <ToastContainer />
     </div>
   );
 };
