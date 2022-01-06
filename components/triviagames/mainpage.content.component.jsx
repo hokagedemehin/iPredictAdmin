@@ -22,7 +22,7 @@ const MainPageContent = () => {
         </div>
         <div
           className="p-3 shadow-md rounded-lg cursor-pointer text-center w-full"
-          onClick={(e) => handleClick(e, "/triviagame/viewquestions")}
+          onClick={(e) => handleClick(e, "/triviagame/questions")}
         >
           <Text fontSize="xl" className="font-bold">
             View Questions
@@ -30,7 +30,7 @@ const MainPageContent = () => {
         </div>
         <div
           className="p-3 shadow-md rounded-lg cursor-pointer text-center w-full"
-          onClick={(e) => handleClick(e, "/triviagame/viewattempts")}
+          onClick={(e) => handleClick(e, "/triviagame/attempts")}
         >
           <Text fontSize="xl" className="font-bold">
             View Attempts
