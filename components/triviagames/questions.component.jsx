@@ -9,6 +9,7 @@ import {
 import React, { useState } from "react";
 import { useFormik } from "formik";
 import { AiOutlineSend } from "react-icons/ai";
+import SubmitQuestions from "../../utils/trivia/submitQuestions";
 
 const validate = (values) => {
   const errors = {};
@@ -33,9 +34,9 @@ const validate = (values) => {
 const OneQuestion = () => {
   const [isLoading, setIsLoading] = useState(false);
 
-  const submitQuestion = (values, resetForm) => {
+  const submitQuestion = async (values, resetForm) => {
     console.log(values);
-    // setIsLoading(true);
+    await SubmitQuestions(values, setIsLoading);
     resetForm();
   };
 
