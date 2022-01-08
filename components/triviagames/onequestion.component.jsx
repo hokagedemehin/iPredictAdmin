@@ -1,4 +1,4 @@
-import { Button } from "@chakra-ui/react";
+import { Button, Skeleton } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import GetOneQuestionFromFirebase from "../../utils/trivia/getOneQuestion";
@@ -15,6 +15,11 @@ const OneQuestionComponent = () => {
     await GetOneQuestionFromFirebase(setQuestion, questionID);
   };
 
+  const handleClick = (e, href) => {
+    e.preventDefault();
+    router.push(href);
+  };
+
   useEffect(() => {
     if (questionID) {
       getSpecificQuestion();
@@ -23,7 +28,7 @@ const OneQuestionComponent = () => {
 
   return (
     <div className="mt-4 mx-4 p-4 shadow-md rounded-xl">
-      {question.length !== 0 && (
+      {question.length !== 0 ? (
         <div className="space-y-2">
           {/* QUestion */}
           <div className="flex">
@@ -50,7 +55,7 @@ const OneQuestionComponent = () => {
             </div>
           </div>
 
-          {/* Edit button */}
+          {/* Edit and back button */}
           <div className="flex justify-center items-center space-x-2">
             <Button
               isFullWidth
@@ -68,11 +73,69 @@ const OneQuestionComponent = () => {
               variant="solid"
               rightIcon={<AiOutlineEdit />}
               fontSize="xl"
+              onClick={(e) =>
+                handleClick(e, `/triviagame/questions/edit/${questionID}`)
+              }
             >
               Edit
             </Button>
           </div>
         </div>
+      ) : (
+        <Skeleton>
+          <div className="space-y-2">
+            {/* QUestion */}
+            <div className="flex">
+              <p className="text-xl">{question?.question}</p>
+            </div>
+            {/* OPtions */}
+            <div className="flex flex-col space-y-1">
+              <div className="flex space-x-2">
+                <p>A.</p>
+                <p>{question?.optionA}</p>
+              </div>
+              <div className="flex space-x-2">
+                <p>B.</p>
+                <p>{question?.optionB}</p>
+              </div>
+              <div className="flex space-x-2">
+                <p>C.</p>
+                <p>{question?.optionC}</p>
+              </div>
+              {/* ANswer */}
+              <div className="flex space-x-2 font">
+                <p>Answer :</p>
+                <p>{question?.rightAnswer}</p>
+              </div>
+            </div>
+
+            {/* Edit and back button */}
+            <div className="flex justify-center items-center space-x-2">
+              <Button
+                isFullWidth
+                colorScheme="teal"
+                variant="outline"
+                leftIcon={<BiArrowBack />}
+                fontSize="xl"
+                onClick={() => router.push("/triviagame/questions")}
+              >
+                Back
+              </Button>
+              <Button
+                isFullWidth
+                colorScheme="linkedin"
+                variant="solid"
+                rightIcon={<AiOutlineEdit />}
+                fontSize="xl"
+                onClick={(e) =>
+                  handleClick(e, `/triviagame/questions/edit/${questionID}`)
+                }
+              >
+                Edit
+              </Button>
+            </div>
+          </div>
+        </Skeleton>
       )}
     </div>
   );
