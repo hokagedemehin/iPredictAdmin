@@ -46,6 +46,7 @@ const SubmitQuestions = async (values, setIsLoading) => {
         rightAnswer: values?.rightAnswer.trim(),
         ID: docID,
         createdAt: nowDate,
+        updateAt: null,
         userIDs: [],
       });
       toast.success("Added to Database Successfully");
