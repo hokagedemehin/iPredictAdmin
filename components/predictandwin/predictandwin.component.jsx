@@ -8,20 +8,28 @@ import listofmatches from "../../utils/matches/listofmatches";
 import NoMatchListComponent from "./nomatchlist.component";
 import NoMatchComponent from "./nomatch.component";
 import selectedMacthesForPrediction from "../../utils/matches/selectedMacthesForPrediction";
+import { useQuery } from "react-query";
+import MatchesSelectedSkeletonComponent from "./matchselectedloading.component";
 const PredictAndWinComponent = () => {
   const [formValue, setFormValue] = useState({});
   const [finalData, setFinalData] = useState(null);
   const [matchSelect, setMatchSelect] = useState([]);
-  const [isLoading, setisLoading] = useState(false);
+  const [isLoadings, setisLoadings] = useState(false);
 
   // * This is the point where I will check if match select is empty, if it is empty
   //  * Once it is empty, upon page reload or navigating away and coming back, we should read from the firestore and get the selected mathches
-  useEffect(() => {
-    if (matchSelect.length === 0) {
-      selectedMacthesForPrediction(setMatchSelect);
-    }
-  }, []);
+  let newArr = [];
 
+  const { isLoading, data, isSuccess } = useQuery(
+    "selectedMatches",
+    async () => await selectedMacthesForPrediction()
+  );
+  useEffect(() => {
+    if (isSuccess) {
+      data.forEach((doc) => newArr.push(doc.data()));
+      setMatchSelect(newArr);
+    }
+  }, [isSuccess]);
   // console.log("finalData: ", finalData);
   // console.log("matchSelected: ", matchSelect);
   // useEffect(() => {
@@ -44,7 +52,7 @@ const PredictAndWinComponent = () => {
   // }
 
   const handleMatches = async () => {
-    const res = await listofmatches(formValue, setisLoading);
+    const res = await listofmatches(formValue, setisLoadings);
     // console.log(res);
     setFinalData(res);
     // console.log(
@@ -104,7 +112,7 @@ const PredictAndWinComponent = () => {
             isFullWidth
             fontSize="xl"
             onClick={handleMatches}
-            isLoading={isLoading}
+            isLoading={isLoadings}
             loadingText="Loading"
             spinnerPlacement="end"
           >
@@ -113,13 +121,14 @@ const PredictAndWinComponent = () => {
         </div>
       </div>
       <div className="flex flex-col mt-5 mx-3">
-        {matchSelect.length !== 0 ? (
+        {isLoading && <MatchesSelectedSkeletonComponent />}
+        {isSuccess && (
           <MatchesSelectedComponent
             matchSelect={matchSelect}
             setMatchSelect={setMatchSelect}
+            isLoading={isLoading}
+            isSuccess={isSuccess}
           />
-        ) : (
-          ""
         )}
 
         {!finalData ? (

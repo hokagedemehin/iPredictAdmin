@@ -1,5 +1,6 @@
 import { Skeleton, Text } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
+import { useQuery } from "react-query";
 import GetQuestionsFromFirebase from "../../utils/trivia/getQuestions";
 import QuestionSearch from "./searchquestion.component";
 import ViewOneQuestionComponent from "./viewonequestion.component";
@@ -8,38 +9,66 @@ const ViewQuestionsContent = () => {
   const [questions, setQuestions] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   // console.log("questions: ", questions);
-  const getQues = async () => {
-    GetQuestionsFromFirebase(setQuestions);
-  };
+  // const getQues = async () => {
+  //   GetQuestionsFromFirebase();
+  // };
 
-  let data = [];
+  // if (true) {
+  const { isLoading, data, isSuccess, dataUpdatedAt } = useQuery(
+    "viewquestions",
+    async () => await GetQuestionsFromFirebase()
+  );
+
+  // if (isSuccess) {
+  //   data.forEach((doc) => newArr.push(doc.data()));
+  //   if (newArr.length !== 0) {
+  //     setQuestions(newArr);
+  //   }
+  // }
+
+  // console.log("isLoading: ", isLoading);
+  // console.log("isError: ", isError);
+  // console.log("data: ", data);
+  // console.log("isSuccess: ", isSuccess);
+  // console.log("isStale: ", isStale);
+  // console.log("isFetched: ", isFetched);
+  // }
+
+  useEffect(() => {
+    if (isSuccess) {
+      const newArr = [];
+
+      data.forEach((doc) => newArr.push(doc.data()));
+      // if (newArr.length !== 0) {
+      setQuestions(newArr);
+      // }
+    }
+  }, [isSuccess, dataUpdatedAt]);
+
+  let data1 = [];
 
   if (questions.length !== 0) {
-    data = questions.filter((val) => {
+    data1 = questions.filter((val) => {
       if (searchTerm == "" || searchTerm.length === 0) {
         return val;
       } else if (
         val.question &&
-        val.question.toLowerCase().includes(searchTerm.toLowerCase())
+        val.question.toLowerCase().includes(searchTerm.toLowerCase().trim())
       ) {
         return val;
       }
     });
   }
 
-  useEffect(() => {
-    getQues();
-  }, []);
-
-  // console.log(data.length !== 0);
+  // console.log(data1.length !== 0);
 
   return (
     <div className="mx-4 my-2">
       {/* Search bar here */}
       <QuestionSearch setSearchTerm={setSearchTerm} />
       <div className="mt-8 space-y-4">
-        {data.length !== 0
-          ? data.map((ques, index) => (
+        {data1.length !== 0 && !isLoading
+          ? data1.map((ques, index) => (
               <ViewOneQuestionComponent key={index} ques={ques} />
             ))
           : [1, 2, 3].map((ques, index) => (
