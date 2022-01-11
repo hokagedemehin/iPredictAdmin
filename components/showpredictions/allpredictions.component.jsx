@@ -5,6 +5,7 @@ import { BiCheck } from "react-icons/bi";
 import GetUsersPredictions from "../../utils/matches/getuserspredictions";
 import GetUsersInfo from "../../utils/matches/getusersinfo";
 import moment from "moment";
+import { useQueries } from "react-query";
 // import EachPrediction from "./eachprediction.component";
 
 const AllUsersPredictions = ({ pred, email, Id }) => {
@@ -16,16 +17,37 @@ const AllUsersPredictions = ({ pred, email, Id }) => {
   const dateConvert = new Date(Number(pred));
   const predDate = moment(dateConvert).format("MMMM Do YYYY, h:mm:ss a");
   // console.log(predDate);
-  const getPreds = async () => {
-    await GetUsersPredictions(Id, pred, email, setUsersPredictions);
-    await GetUsersInfo(email, setUserInfo);
-  };
-  // console.log("user info: ", userInfo);
-  // console.log("user pred: ", usersPredictions);
+  // const getPreds = async () => {
+  //   // await GetUsersPredictions(Id, pred, email, setUsersPredictions);
+  //   // await GetUsersInfo(email, setUserInfo);
+  // };
+
+  // new Array
+
+  // useQueries Hooks
+  const results = useQueries([
+    {
+      queryKey: ["getuserspredictions", Id, pred, email],
+      queryFn: async () => await GetUsersPredictions(Id, pred, email),
+    },
+    {
+      queryKey: ["getusersinfo", email],
+      queryFn: async () => await GetUsersInfo(email),
+    },
+  ]);
+  // useEffect if successfull
+  console.log("results: ", results[0]);
 
   useEffect(() => {
-    getPreds();
-  }, []);
+    if (results[0].isSuccess && results[1].isSuccess) {
+      const newArr = [];
+      const newArr1 = [];
+      results[0].data.forEach((doc) => newArr.push(doc.data()));
+      results[1].data.forEach((doc) => newArr1.push(doc.data()));
+      setUsersPredictions(newArr);
+      setUserInfo(newArr1);
+    }
+  }, [results]);
 
   return (
     <div className="">
@@ -37,9 +59,9 @@ const AllUsersPredictions = ({ pred, email, Id }) => {
           <p className="text-xs text-gray-400">{email}</p>
           <p className="text-xs text-gray-400">{predDate}</p>
         </div>
-        {/* <Text>{email}</Text>
-        <Text >{predDate}</Text> */}
-        {usersPredictions &&
+
+        {results[0].isSuccess &&
+          results[1].isSuccess &&
           usersPredictions.map((match, index) => (
             <div
               key={index}
@@ -67,17 +89,6 @@ const AllUsersPredictions = ({ pred, email, Id }) => {
                 <Text>{match?.awayGoal}</Text>
               </div>
               <div className="flex space-x-2">
-                {/* <IconButton
-                // variant="outline"
-                colorScheme="green"
-                aria-label="Select Match"
-                fontSize="20px"
-                isRound
-                size="xs"
-                icon={<BiCheck />}
-              
-              /> */}
-                {/* icon logic to display */}
                 {match?.status == "FT" ? (
                   match?.actualAwayGoal == match?.awayGoal &&
                   match?.actualHomeGoal == match?.homeGoal ? (

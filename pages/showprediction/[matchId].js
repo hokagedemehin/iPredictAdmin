@@ -1,6 +1,7 @@
-import { Heading } from "@chakra-ui/react";
+import { Heading, Skeleton } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { useQuery } from "react-query";
 import Layout from "../../components/layout/layout";
 import NavHeader from "../../components/nav/header.component";
 import AllUsersPredictions from "../../components/showpredictions/allpredictions.component";
@@ -10,21 +11,29 @@ const AllUsersPredictionComponent = () => {
   const router = useRouter();
   const Id = router.query.matchId;
 
-  const [predictions, setPredictions] = useState([]);
+  // const [predictions, setPredictions] = useState([]);
 
-  const getpredict = async () => {
-    await GetAllPredictions(setPredictions, Id);
-  };
-  useEffect(() => {
-    if (Id) {
-      getpredict();
-    }
-  }, [Id]);
+  // const getpredict = async () => {
+  //   await GetAllPredictions(setPredictions, Id);
+  // };
+  // useEffect(() => {
+  //   if (Id) {
+  //     getpredict();
+  //   }
+  // }, [Id]);
 
-  // Object.entries(predictions?.predictInfo).forEach(([key, value]) =>
-  //   console.log(key, value)
-  // );
-  const data = predictions.predictInfo || {};
+  const { isLoading, data, isSuccess } = useQuery(
+    ["predicts", Id],
+    async () => await GetAllPredictions(Id),
+    { enabled: !!Id }
+  );
+
+  // console.log("isLoading: ", isLoading);
+  // console.log("isError: ", isError);
+  // console.log("data: ", data);
+  // console.log("isSuccess: ", isSuccess);
+
+  const data1 = data?.predictInfo || {};
 
   // console.log("prediction doc: ", predictions);
   return (
@@ -35,9 +44,20 @@ const AllUsersPredictionComponent = () => {
           <Heading>All Predictions</Heading>
         </div>
 
+        {isLoading && (
+          <div className="flex flex-col space-y-3 mx-4 justify-center items-center">
+            {[0, 1, 2].map((val, index) => (
+              <Skeleton className="w-1/2 h-40" key={index}>
+                {val}
+              </Skeleton>
+            ))}
+          </div>
+        )}
+
         <div className="flex flex-col space-y-3 mx-2 justify-center items-center">
-          {data &&
-            Object.entries(data).map(([key, value]) =>
+          {data1 &&
+            isSuccess &&
+            Object.entries(data1).map(([key, value]) =>
               value.map((pred, index) => (
                 <AllUsersPredictions
                   key={index}
