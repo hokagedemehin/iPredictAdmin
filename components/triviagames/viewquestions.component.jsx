@@ -2,6 +2,7 @@ import { Skeleton, Text } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import GetQuestionsFromFirebase from "../../utils/trivia/getQuestions";
+import NoSearchResult from "./nosearchresult.component";
 import QuestionSearch from "./searchquestion.component";
 import ViewOneQuestionComponent from "./viewonequestion.component";
 
@@ -67,19 +68,23 @@ const ViewQuestionsContent = () => {
       {/* Search bar here */}
       <QuestionSearch setSearchTerm={setSearchTerm} />
       <div className="mt-8 space-y-4">
-        {data1.length !== 0 && !isLoading
-          ? data1.map((ques, index) => (
-              <ViewOneQuestionComponent key={index} ques={ques} />
-            ))
-          : [1, 2, 3].map((ques, index) => (
-              <Skeleton key={index}>
-                <div className="flex p-3 shadow-md rounded-lg cursor-pointer ">
-                  <Text isTruncated fontSize="lg">
-                    {ques}
-                  </Text>
-                </div>
-              </Skeleton>
-            ))}
+        {isLoading ? (
+          [1, 2, 3].map((ques, index) => (
+            <Skeleton key={index}>
+              <div className="flex p-3 shadow-md rounded-lg cursor-pointer ">
+                <Text isTruncated fontSize="lg">
+                  {ques}
+                </Text>
+              </div>
+            </Skeleton>
+          ))
+        ) : data1.length !== 0 ? (
+          data1.map((ques, index) => (
+            <ViewOneQuestionComponent key={index} ques={ques} />
+          ))
+        ) : (
+          <NoSearchResult />
+        )}
       </div>
     </div>
   );

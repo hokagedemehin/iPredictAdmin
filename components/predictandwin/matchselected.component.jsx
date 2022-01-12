@@ -10,6 +10,7 @@ import addMatchToFirestore from "../../utils/matches/addMatchToFirestore";
 import { ToastContainer } from "react-toastify";
 import UpdateMatches from "../../utils/matches/updatematches";
 import UpdateScoreToFirestore from "../../utils/matches/updateScoreToFirestore";
+// import { useMutation } from "react-query";
 // import { useToast } from "@chakra-ui/react";
 
 const MatchesSelectedComponent = ({ matchSelect, setMatchSelect }) => {
@@ -26,6 +27,10 @@ const MatchesSelectedComponent = ({ matchSelect, setMatchSelect }) => {
   const addSelection = async () => {
     await addMatchToFirestore(matchSelect, setIsConfirmed);
   };
+
+  // const addSelectionMutate = useMutation(
+  //   async () => await addMatchToFirestore(matchSelect)
+  // );
   const clearSelection = () => {
     setMatchSelect([]);
   };
@@ -108,7 +113,9 @@ const MatchesSelectedComponent = ({ matchSelect, setMatchSelect }) => {
           variant="solid"
           size="sm"
           onClick={addSelection}
+          // onClick={addSelectionMutate.mutate()}
           isLoading={isConfirmed}
+          // isLoading={addSelectionMutate.isLoading}
           loadingText="Saving"
           spinnerPlacement="end"
         >

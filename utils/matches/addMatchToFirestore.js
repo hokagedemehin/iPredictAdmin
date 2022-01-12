@@ -66,6 +66,7 @@ const addMatchToFirestore = async (matchSelect, setIsConfirmed) => {
           awayWinner: match?.awayWinner,
           createdAt: nowDate,
           status: match?.status,
+          matchDate: match?.matchDate,
         })
     );
 
