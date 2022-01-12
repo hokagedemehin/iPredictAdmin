@@ -29,6 +29,7 @@ const MatchListComponent = ({ matches, setMatchSelect, matchSelect }) => {
         homeWinner: match?.teams?.home?.winner,
         awayWinner: match?.teams?.away?.winner,
         status: match?.fixture?.status?.short,
+        matchDate: match?.fixture?.date,
       },
     ]);
   };
