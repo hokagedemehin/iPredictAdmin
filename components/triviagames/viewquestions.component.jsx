@@ -5,18 +5,12 @@ import GetQuestionsFromFirebase from '../../utils/trivia/getQuestions';
 import NoSearchResult from './nosearchresult.component';
 import QuestionSearch from './searchquestion.component';
 import ViewOneQuestionComponent from './viewonequestion.component';
-// import { useRouter } from "next/router";
 
 const ViewQuestionsContent = () => {
   // const router = useRouter();
   const [questions, setQuestions] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
-
-  // console.log("router: ", router);
-  // if (router?.components) {
-  //   console.log("router: ", Object?.keys(router?.components).length);
-  //   console.log("router: ", router?.components["/triviagames"]);
-  // }
+  // console.log("questions: ", questions);
   // const getQues = async () => {
   //   GetQuestionsFromFirebase();
   // };
@@ -61,18 +55,14 @@ const ViewQuestionsContent = () => {
         return val;
       } else if (
         val.question &&
-        val.question.toLowerCase().includes(searchTerm.toLowerCase())
+        val.question.toLowerCase().includes(searchTerm.toLowerCase().trim())
       ) {
         return val;
       }
     });
   }
 
-  // useEffect(() => {
-  //   getQues();
-  // }, []);
-
-  // console.log(data.length !== 0);
+  // console.log(data1.length !== 0);
 
   return (
     <div className='mx-4 my-2'>

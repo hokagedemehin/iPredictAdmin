@@ -6,7 +6,7 @@ import {
   Text,
   Textarea,
 } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 // import { useFormik } from "formik";
 import { Formik } from "formik";
 import { AiOutlineSend } from "react-icons/ai";
@@ -17,6 +17,7 @@ import { useRouter } from "next/router";
 // import SubmitQuestions from "../../utils/trivia/submitQuestions";
 import GetOneQuestionFromFirebase from "../../utils/trivia/getOneQuestion";
 import UpdateQuestion from "../../utils/trivia/updateQuestion";
+import { useQuery } from "react-query";
 // import GetOneQuestionFromFirebase from "../../utils/trivia/getOneQuestion";
 
 // const validate = (values) => {
@@ -43,7 +44,7 @@ const EditOneQuestion = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const { editID } = router.query;
-  const [question, setQuestion] = useState([]);
+  // const [question, setQuestion] = useState([]);
 
   const submitQuestion = async (values) => {
     // console.log(values);
@@ -52,15 +53,21 @@ const EditOneQuestion = () => {
     router.push(`/triviagame/questions/${editID}`);
   };
 
-  const getSpecificQuestion = async () => {
-    await GetOneQuestionFromFirebase(setQuestion, editID);
-  };
+  // const getSpecificQuestion = async () => {
+  //   await GetOneQuestionFromFirebase(setQuestion, editID);
+  // };
 
-  useEffect(() => {
-    if (editID) {
-      getSpecificQuestion();
-    }
-  }, [editID]);
+  const { data, isSuccess } = useQuery(
+    ["onequestion", editID],
+    async () => await GetOneQuestionFromFirebase(editID),
+    { enabled: !!editID }
+  );
+
+  // useEffect(() => {
+  //   if (isSuccess) {
+  //     setQuestion(data)
+  //   }
+  // }, [isSuccess]);
 
   // const formik = useFormik({
   //   initialValues: {
@@ -80,11 +87,11 @@ const EditOneQuestion = () => {
     <div className="mx-3">
       <Formik
         initialValues={{
-          question: `${question.length !== 0 ? question?.question : ""}`,
-          optionA: `${question.length !== 0 ? question?.optionA : ""}`,
-          optionB: `${question.length !== 0 ? question?.optionB : ""}`,
-          optionC: `${question.length !== 0 ? question?.optionC : ""}`,
-          rightAnswer: `${question.length !== 0 ? question?.rightAnswer : ""}`,
+          question: `${isSuccess ? data?.question : ""}`,
+          optionA: `${isSuccess ? data?.optionA : ""}`,
+          optionB: `${isSuccess ? data?.optionB : ""}`,
+          optionC: `${isSuccess ? data?.optionC : ""}`,
+          rightAnswer: `${isSuccess ? data?.rightAnswer : ""}`,
         }}
         enableReinitialize={true}
         onSubmit={(values) => {

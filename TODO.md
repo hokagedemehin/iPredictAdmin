@@ -22,8 +22,8 @@
 
 ## Trivia TODO
 
-### checklists
-
+### Trivia TODO
+#### checklists
 - [x] Each question will have three options and a correct response with a unique ID
 - [x] check if a question already exist
 - [x] create home trivia page with options to add a question, view question and view responses
@@ -34,4 +34,4 @@
 - [ ] each question should have a checkbox that is clicked by default. Once it is unclicked it will be set to false for visible
 - [ ] create a component to show if there a no questions at all
 - [ ] Any question that is false will not show up on the user side
-- [ ] view response page, a detail card of each attempt with name, email, date and time of attempt, no of questions, no of correct answer (green) and no of wrong answers (red)
+- [ ] view response page, a detail card of each attempt with name, email, date and time of attempt, no of questions, no of correct answers (green) and no of wrong answers (red)

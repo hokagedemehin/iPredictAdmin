@@ -42,12 +42,13 @@ const NavHeader = () => {
   return (
     <>
       <Flex px="4" py="2">
-        <Menu>
+        <Menu id="navbar" isLazy>
           <MenuButton
             as={IconButton}
             aria-label="Options"
             icon={<HamburgerIcon />}
             variant="outline"
+            id="options"
           />
           <MenuList>
             <MenuItem icon={<AiOutlineHome />} onClick={() => router.push("/")}>
