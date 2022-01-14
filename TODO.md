@@ -1,4 +1,4 @@
-### Todo Checklist to complete
+# Todo Checklist to complete
 
 - [x] Get the date and country selection from the predict and win page
 - [x] change the value of the options in the selction pane to the IDs
@@ -20,12 +20,18 @@
 - [ ] each match prediction cost 5 coins, so for a complete 4 match prediction you need 20 coins
 - [ ] check email for coin value
 
+## Trivia TODO
 
-### Trivia TODO
-#### checklists
-- [ ] Each question will have four options and a correct response with a unique ID
-- [ ] check if a question already exist
-- [ ] create home trivia page with options to add a question, view question and view responses
-- [ ] Add question page will have a form to fill in the questiona, four possible answer and correct answer, also store the unique ID
-- [ ] view question page will have each question as a card that has the question truncated to two lines and when you click it, you see the complete question with all the four possible options and the correct answer
-- [ ] view response page, a detail card of each attempt with name, email, date and time of attempt, no of questions, no of correct answers (green) and no of wrong answers (red)
+### checklists
+
+- [x] Each question will have three options and a correct response with a unique ID
+- [x] check if a question already exist
+- [x] create home trivia page with options to add a question, view question and view responses
+- [x] Add question page will have a form to fill in the questions, three possible answer and correct answer, also store the unique ID
+- [x] view question page will have each question as a card that has the question truncated to two lines and when you click it, you see the complete question with all the three possible options and the correct answer
+- [x] each question detail page will have a button to edit the question so as to update the content and submit it to firebase
+- [x] skeleton loader for pages that are asynchronous
+- [ ] each question should have a checkbox that is clicked by default. Once it is unclicked it will be set to false for visible
+- [ ] create a component to show if there a no questions at all
+- [ ] Any question that is false will not show up on the user side
+- [ ] view response page, a detail card of each attempt with name, email, date and time of attempt, no of questions, no of correct answer (green) and no of wrong answers (red)

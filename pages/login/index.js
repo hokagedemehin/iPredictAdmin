@@ -8,6 +8,10 @@ import { useUser } from "../../utils/context/userContext";
 const LoginPage = () => {
   const router = useRouter();
   const { userDoc } = useUser();
+  useEffect(() => {
+    // Prefetch the dashboard page
+    router.prefetch("/");
+  }, []);
   // console.log(user);
   useEffect(() => {
     if (userDoc && userDoc.role === "admin") {
