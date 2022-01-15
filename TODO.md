@@ -1,4 +1,4 @@
-### Todo Checklist to complete
+# Todo Checklist to complete
 
 - [x] Get the date and country selection from the predict and win page
 - [x] change the value of the options in the selction pane to the IDs
@@ -20,6 +20,7 @@
 - [ ] each match prediction cost 5 coins, so for a complete 4 match prediction you need 20 coins
 - [ ] check email for coin value
 
+## Trivia TODO
 
 ### Trivia TODO
 #### checklists
