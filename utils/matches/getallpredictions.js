@@ -1,8 +1,9 @@
-import { doc, getDoc } from "firebase/firestore";
-import { db } from "../firebase/firebase";
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '../firebase/firebase';
 
 const GetAllPredictions = async (Id) => {
-  const matchRef = doc(db, "PredictedMatches", Id);
+  // get the selected prediction amongs all the predictions in the parent collection
+  const matchRef = doc(db, 'PredictedMatches', Id);
   // const q = query(matchRef, orderBy("createdAt", "asc"));
   const docSnapshot = await getDoc(matchRef);
 

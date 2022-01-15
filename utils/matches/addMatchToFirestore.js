@@ -1,4 +1,4 @@
-import { db } from "../firebase/firebase";
+import { db } from '../firebase/firebase';
 // import moment from "moment";
 
 import {
@@ -11,9 +11,9 @@ import {
   // serverTimestamp,
   query,
   where,
-} from "firebase/firestore";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+} from 'firebase/firestore';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const addMatchToFirestore = async (matchSelect, setIsConfirmed) => {
   setIsConfirmed(true);
@@ -26,29 +26,34 @@ const addMatchToFirestore = async (matchSelect, setIsConfirmed) => {
   // console.log(matchDate);
 
   // Get all documents with previous confirmed status and turn them to false
-  const allRef = collection(db, "MatchesSelected");
-  const q = query(allRef, where("confirmed", "==", true));
+  const allRef = collection(db, 'MatchesSelected');
+  const q = query(allRef, where('confirmed', '==', true));
   const querySnapshot = await getDocs(q);
   querySnapshot.forEach((oneDoc) =>
-    updateDoc(doc(db, "MatchesSelected", oneDoc.id), {
+    updateDoc(doc(db, 'MatchesSelected', oneDoc.id), {
       confirmed: false,
     })
   );
 
+  // create a new document for new prediction
   const parentRef = doc(
     db,
-    "MatchesSelected",
+    'MatchesSelected',
     docID
     // `Match - ${matchDate}`,
     // docID
   );
 
-  const predictRef = collection(db, "MatchesSelected", docID, `Matches`);
+  // create a new subcollection for the prediction
+
+  const predictRef = collection(db, 'MatchesSelected', docID, `Matches`);
   try {
+    // create new fields for the new prediction in the parent collection level
     await setDoc(parentRef, {
       createdAt: nowDate,
       confirmed: true,
     });
+    // create new document in the subcollection level of all the matches that are added to firebase
     matchSelect.forEach(
       async (match) =>
         await addDoc(predictRef, {
@@ -70,7 +75,8 @@ const addMatchToFirestore = async (matchSelect, setIsConfirmed) => {
         })
     );
 
-    const MatchDocRef = doc(db, "PredictedMatches", docID);
+    // also add the ID of the new document and the date to the subcollection documents
+    const MatchDocRef = doc(db, 'PredictedMatches', docID);
     await setDoc(
       MatchDocRef,
       {
@@ -79,10 +85,10 @@ const addMatchToFirestore = async (matchSelect, setIsConfirmed) => {
       },
       { merge: true }
     );
-    toast.success("✅ Added successfully");
+    toast.success('✅ Added successfully');
     // console.log("data added successfully");
   } catch (err) {
-    console.error("error - addMatchToFirestore", err);
+    console.error('error - addMatchToFirestore', err);
   } finally {
     setIsConfirmed(false);
   }

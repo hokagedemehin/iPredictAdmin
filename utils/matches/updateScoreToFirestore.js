@@ -1,4 +1,4 @@
-import { db } from "../firebase/firebase";
+import { db } from '../firebase/firebase';
 // import moment from "moment";
 import {
   collection,
@@ -9,7 +9,7 @@ import {
   doc,
   getDoc,
   // setDoc,
-} from "firebase/firestore";
+} from 'firebase/firestore';
 // import { toast } from "react-toastify";
 // import "react-toastify/dist/ReactToastify.css";
 
@@ -20,13 +20,16 @@ const UpdateScoreToFirestore = async (match) => {
    */
   // console.log("update match: ", match);
   try {
-    const allRef = collection(db, "MatchesSelected");
-    const collectionQuery = query(allRef, where("confirmed", "==", true));
+    // get the current match selected subcollection
+    const allRef = collection(db, 'MatchesSelected');
+    const collectionQuery = query(allRef, where('confirmed', '==', true));
 
     const collectionSnapshot = await getDocs(collectionQuery);
     // console.log(collectionSnapshot);
     // let docInfo = "";
-    let collectionID = "";
+
+    // get the ID of that match so as to filer out the right subcollection later
+    let collectionID = '';
     collectionSnapshot.forEach((oneDoc) => {
       // docInfo = oneDoc.data().predictInfo;
       collectionID = oneDoc.id;
@@ -40,21 +43,23 @@ const UpdateScoreToFirestore = async (match) => {
     // console.log(matchDate);
     const predictRef = collection(
       db,
-      "MatchesSelected",
+      'MatchesSelected',
       collectionID,
       `Matches`
     );
 
     const subCollectionQuery = query(
       predictRef,
-      where("homeName", "==", match.homeName)
+      where('homeName', '==', match.homeName)
     );
     const subCollectionSnapshot = await getDocs(subCollectionQuery);
     // let subCollectionRef = ""
+
+    // get the matches in the matchselected collection and update the scores so that it will reflect in the match selected
     subCollectionSnapshot.forEach(async (oneDoc) => {
       const subCollectionRef = doc(
         db,
-        "MatchesSelected",
+        'MatchesSelected',
         collectionID,
         `Matches`,
         oneDoc.id
@@ -71,7 +76,7 @@ const UpdateScoreToFirestore = async (match) => {
 
     // * get all emails and check if that email has made a prediction with this match
 
-    const predictedMatchRef = doc(db, "PredictedMatches", collectionID);
+    const predictedMatchRef = doc(db, 'PredictedMatches', collectionID);
 
     const predictMatchDoc = await getDoc(predictedMatchRef);
     // console.log("predict match: ", predictMatchDoc.data());
@@ -83,10 +88,15 @@ const UpdateScoreToFirestore = async (match) => {
       for (const [key, value] of Object.entries(docRef)) {
         // console.log("Key: ", key, "value: ", value);
         value.forEach(async (eachDoc) => {
-          const matchRef = collection(db, key, collectionID, eachDoc);
+          const matchRef = collection(
+            db,
+            `${key}-matches`,
+            collectionID,
+            eachDoc
+          );
           const specificMatch = query(
             matchRef,
-            where("homeName", "==", match.homeName)
+            where('homeName', '==', match.homeName)
           );
           const matchSnapshot = await getDocs(specificMatch);
           matchSnapshot.forEach(async (updateMatch) => {
@@ -103,7 +113,7 @@ const UpdateScoreToFirestore = async (match) => {
             // );
             const matchSubCollectionRef = doc(
               db,
-              key,
+              `${key}-matches`,
               collectionID,
               eachDoc,
               updateMatch.id
@@ -120,7 +130,7 @@ const UpdateScoreToFirestore = async (match) => {
                 // { merge: true }
               );
             } catch (error) {
-              console.error("update err: ", error);
+              console.error('update err: ', error);
             }
           });
         });
@@ -128,7 +138,7 @@ const UpdateScoreToFirestore = async (match) => {
     }
     // toast.success("⚽ Updated successfully");
   } catch (error) {
-    console.error("update firestore", error);
+    console.error('update firestore', error);
   }
 };
 
