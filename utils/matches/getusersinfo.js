@@ -1,10 +1,11 @@
-import { collection, query, where, getDocs } from "firebase/firestore";
-import { db } from "../firebase/firebase";
+import { collection, query, where, getDocs } from 'firebase/firestore';
+import { db } from '../firebase/firebase';
 
 const GetUsersInfo = async (email) => {
-  const userRef = collection(db, "users");
+  // get the user info to be able to filter out the specific prediction
+  const userRef = collection(db, 'users');
 
-  const q = query(userRef, where("email", "==", email));
+  const q = query(userRef, where('email', '==', email));
 
   const querySnapshot = await getDocs(q);
   // querySnapshot.forEach((doc) => {
