@@ -2,20 +2,19 @@ import { Heading } from '@chakra-ui/react';
 import React from 'react';
 import Layout from '../../components/layout/layout';
 import NavHeader from '../../components/nav/header.component';
-import TeamCardEmptyComponent from '../../components/emptypages/teamcard.empty';
 
-const TeamCardsPage = () => {
+const TriviaAttemptsPage = () => {
   return (
-    <Layout name='team card' desc='I-Predict Team Card'>
+    <Layout name='trivia-attempts' desc='I-Predict Trivia Attempts'>
       <NavHeader />
-      <div className='max-w-sm mx-auto'>
+      <div className=''>
         <div className='text text-center my-5'>
-          <Heading>Team Cards</Heading>
+          <Heading>Trivia Attempts</Heading>
         </div>
-        <TeamCardEmptyComponent />
+        {/* <TriviaAttemptsPageComponent /> */}
       </div>
     </Layout>
   );
 };
 
-export default TeamCardsPage;
+export default TriviaAttemptsPage;
