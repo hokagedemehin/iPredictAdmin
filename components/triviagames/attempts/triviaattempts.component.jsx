@@ -1,15 +1,17 @@
 import MaterialTable from 'material-table';
 import moment from 'moment';
+import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import GetAllTriviaAttempts from '../../../utils/trivia/attempts/getAllAttempts';
 
 const TriviaAttemptsPageComponent = () => {
   // const [rowInfo, setRowInfo] = useState([]);
+  const router = useRouter();
   const [allData, setAllData] = useState([]);
   const handleClick = (e, data) => {
     e.preventDefault();
-    console.log('data :>> ', data);
+    router.push(`/triviaattempts/${data.email}/${data.attemptID}`);
   };
 
   // console.log('allData', allData);
@@ -18,7 +20,7 @@ const TriviaAttemptsPageComponent = () => {
   // const bb = moment(aa).format('MMMM Do YYYY, h:mm:ss a');
   // console.log('aa :>> ', bb);
 
-  const { data, isSuccess } = useQuery(
+  const { data, isSuccess, dataUpdatedAt } = useQuery(
     'triviaattempts',
     async () => await GetAllTriviaAttempts()
   );
@@ -32,15 +34,13 @@ const TriviaAttemptsPageComponent = () => {
         firestoreData['date'] = moment(doc.data().createdAt.toDate()).format(
           'MMM Do YY'
         );
-        // const bb = [...aa];
-        // console.log('bb', aa);
+
         return newArr.push(firestoreData);
       });
 
       setAllData(newArr);
-      // }
     }
-  }, [isSuccess]);
+  }, [isSuccess, dataUpdatedAt]);
 
   // console.log('data', data);
 
