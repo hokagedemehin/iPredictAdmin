@@ -1,15 +1,15 @@
-import { Button, InputGroup, InputLeftAddon, Select } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
-import MatchListComponent from "./matchlist.component";
-import MatchesSelectedComponent from "./matchselected.component";
-import { GiSoccerField } from "react-icons/gi";
-import listofmatches from "../../utils/matches/listofmatches";
+import { Button, InputGroup, InputLeftAddon, Select } from '@chakra-ui/react';
+import React, { useEffect, useState } from 'react';
+import MatchListComponent from './matchlist.component';
+import MatchesSelectedComponent from './matchselected.component';
+import { GiSoccerField } from 'react-icons/gi';
+import listofmatches from '../../utils/matches/listofmatches';
 // import { FcAcceptDatabase } from "react-icons/fc";
-import NoMatchListComponent from "./nomatchlist.component";
-import NoMatchComponent from "./nomatch.component";
-import selectedMacthesForPrediction from "../../utils/matches/selectedMacthesForPrediction";
-import { useQuery } from "react-query";
-import MatchesSelectedSkeletonComponent from "./matchselectedloading.component";
+import NoMatchListComponent from './nomatchlist.component';
+import NoMatchComponent from './nomatch.component';
+import selectedMacthesForPrediction from '../../utils/matches/selectedMacthesForPrediction';
+import { useQuery } from 'react-query';
+import MatchesSelectedSkeletonComponent from './matchselectedloading.component';
 const PredictAndWinComponent = () => {
   const [formValue, setFormValue] = useState({});
   const [finalData, setFinalData] = useState(null);
@@ -21,7 +21,7 @@ const PredictAndWinComponent = () => {
   let newArr = [];
 
   const { isLoading, data, isSuccess } = useQuery(
-    "selectedMatches",
+    'selectedMatches',
     async () => await selectedMacthesForPrediction()
   );
   useEffect(() => {
@@ -63,12 +63,12 @@ const PredictAndWinComponent = () => {
 
   return (
     <div>
-      <div className="flex flex-col justify-center items-center space-y-4 mx-3">
-        <div className="flex w-1/2">
+      <div className='flex flex-wrap justify-center items-center gap-4 mx-3'>
+        <div className='flex'>
           <Select
-            placeholder="Country"
-            id="country"
-            name="country"
+            placeholder='Country'
+            id='country'
+            name='country'
             onChange={(e) => handleChange(e)}
             // className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-300 focus:border-indigo-300 sm:text-sm"
           >
@@ -80,71 +80,75 @@ const PredictAndWinComponent = () => {
             <option value={78}>Germany</option>
           </Select>
         </div>
-        <div className="flex">
+        <div className='flex'>
           <InputGroup>
-            <InputLeftAddon children="Start Date" />
+            <InputLeftAddon children='Start Date' />
             <input
-              type="date"
-              name="startdate"
-              id="startdate"
+              type='date'
+              name='startdate'
+              id='startdate'
               onChange={(e) => handleChange(e)}
             />
           </InputGroup>
         </div>
 
-        <div className="flex">
+        <div className='flex'>
           {/* <input type="date" name="startdate" id="startdate" /> */}
           <InputGroup>
-            <InputLeftAddon children="End Date" />
+            <InputLeftAddon children='End Date' />
             <input
-              type="date"
-              name="enddate"
-              id="enddate"
+              type='date'
+              name='enddate'
+              id='enddate'
               onChange={(e) => handleChange(e)}
             />
           </InputGroup>
         </div>
-        <div className="flex w-full">
+        <div className='flex w-full'>
           <Button
             leftIcon={<GiSoccerField />}
-            colorScheme="teal"
-            variant="solid"
+            colorScheme='teal'
+            variant='solid'
             isFullWidth
-            fontSize="xl"
+            fontSize='xl'
             onClick={handleMatches}
             isLoading={isLoadings}
-            loadingText="Loading"
-            spinnerPlacement="end"
+            loadingText='Loading'
+            spinnerPlacement='end'
           >
             Get Matches
           </Button>
         </div>
       </div>
-      <div className="flex flex-col mt-5 mx-3">
-        {isLoading && <MatchesSelectedSkeletonComponent />}
-        {isSuccess && (
-          <MatchesSelectedComponent
-            matchSelect={matchSelect}
-            setMatchSelect={setMatchSelect}
-            isLoading={isLoading}
-            isSuccess={isSuccess}
-          />
-        )}
-
-        {!finalData ? (
-          <NoMatchListComponent />
-        ) : finalData?.results === 0 ? (
-          <NoMatchComponent />
-        ) : (
-          finalData?.response?.map((matches, index) => (
-            <MatchListComponent
-              key={index}
-              matches={matches}
-              setMatchSelect={setMatchSelect}
+      <div className='flex flex-col mt-5 mx-3'>
+        <div className='flex justify-center items-center'>
+          {isLoading && <MatchesSelectedSkeletonComponent />}
+          {isSuccess && (
+            <MatchesSelectedComponent
               matchSelect={matchSelect}
+              setMatchSelect={setMatchSelect}
+              isLoading={isLoading}
+              isSuccess={isSuccess}
             />
-          ))
-        )}
+          )}
+        </div>
+
+        <div className='flex flex-wrap gap-3 justify-center items-center mt-5'>
+          {!finalData ? (
+            <NoMatchListComponent />
+          ) : finalData?.results === 0 ? (
+            <NoMatchComponent />
+          ) : (
+            finalData?.response?.map((matches, index) => (
+              <MatchListComponent
+                key={index}
+                matches={matches}
+                setMatchSelect={setMatchSelect}
+                matchSelect={matchSelect}
+              />
+            ))
+          )}
+        </div>
 
         {/* <MatchListComponent key={index} finalData={finalData} /> */}
       </div>

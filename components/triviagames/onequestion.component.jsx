@@ -36,7 +36,7 @@ const OneQuestionComponent = () => {
   return (
     <div className='mt-4 mx-4 p-4 shadow-md rounded-xl'>
       {isSuccess && (
-        <div className='space-y-2'>
+        <div className='space-y-4'>
           {/* QUestion */}
           <div className='flex'>
             <p className='text-xl'>{data?.question}</p>
@@ -63,7 +63,7 @@ const OneQuestionComponent = () => {
           </div>
 
           {/* Edit and back button */}
-          <div className='flex justify-center items-center space-x-2'>
+          <div className='flex justify-center items-center space-x-2 sm:space-x-4'>
             <Button
               isFullWidth
               colorScheme='teal'

@@ -8,7 +8,7 @@ const TeamCardsPage = () => {
   return (
     <Layout name='team card' desc='I-Predict Team Card'>
       <NavHeader />
-      <div className='max-w-sm mx-auto'>
+      <div className=''>
         <div className='text text-center my-5'>
           <Heading>Team Cards</Heading>
         </div>

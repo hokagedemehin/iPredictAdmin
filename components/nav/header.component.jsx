@@ -83,7 +83,7 @@ const NavHeader = () => {
                 icon={<BsFileSpreadsheetFill />}
                 onClick={(e) => handleClick(e, '/showprediction')}
               >
-                My Predictions
+                All Predictions
               </MenuItem>
               <MenuItem
                 data-name='News & Transfers'
@@ -159,7 +159,7 @@ const NavHeader = () => {
                       icon={<BsFileSpreadsheetFill />}
                       onClick={(e) => handleClick(e, '/showprediction')}
                     >
-                      My Predictions
+                      All Predictions
                     </MenuItem>
                   </MenuList>
                 </>
