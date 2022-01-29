@@ -34,7 +34,7 @@ const AllUsersPredictionComponent = () => {
   // console.log("isSuccess: ", isSuccess);
 
   const data1 = data?.predictInfo || {};
-
+  // console.log('data1', data1);
   // console.log("prediction doc: ", predictions);
   return (
     <Layout name='predictions' desc='See all Users Predictions'>
@@ -57,16 +57,19 @@ const AllUsersPredictionComponent = () => {
         <div className='flex flex-wrap gap-4 mx-2 justify-center items-center'>
           {data1 &&
             isSuccess &&
-            Object.entries(data1).map(([key, value]) =>
-              value.map((pred, index) => (
+            Object.entries(data1).map(([key, value]) => {
+              value.sort(function (a, b) {
+                return b - a;
+              });
+              return value.map((pred, index) => (
                 <AllUsersPredictions
                   key={index}
                   pred={pred}
                   email={key}
                   Id={Id}
                 />
-              ))
-            )}
+              ));
+            })}
         </div>
       </div>
     </Layout>

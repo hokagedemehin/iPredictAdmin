@@ -9,14 +9,16 @@ import { useQueries } from 'react-query';
 // import EachPrediction from "./eachprediction.component";
 
 const AllUsersPredictions = ({ pred, email, Id }) => {
-  // console.log("pred: ", pred);
+  // console.log('pred: ', pred);
   // console.log("email: ", email);
   const [usersPredictions, setUsersPredictions] = useState([]);
   const [userInfo, setUserInfo] = useState([]);
 
+  // console.log('usersPredictions', usersPredictions);
   const dateConvert = new Date(Number(pred));
   const predDate = moment(dateConvert).format('MMMM Do YYYY, h:mm:ss a');
   // console.log(predDate);
+  // moment(dateConvert).format("January 24th 2022 at 14:25pm")
   // const getPreds = async () => {
   //   // await GetUsersPredictions(Id, pred, email, setUsersPredictions);
   //   // await GetUsersInfo(email, setUserInfo);
@@ -47,7 +49,7 @@ const AllUsersPredictions = ({ pred, email, Id }) => {
       setUsersPredictions(newArr);
       setUserInfo(newArr1);
     }
-  }, [results]);
+  }, []);
 
   return (
     <div className=''>

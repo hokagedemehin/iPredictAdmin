@@ -70,7 +70,7 @@ const ViewQuestionsContent = () => {
       <QuestionSearch setSearchTerm={setSearchTerm} />
       <div className='mt-8 space-y-4'>
         {isLoading ? (
-          [1, 2, 3].map((ques, index) => (
+          [1, 2, 3, 4, 5].map((ques, index) => (
             <Skeleton key={index}>
               <div className='flex p-3 shadow-md rounded-lg cursor-pointer '>
                 <Text isTruncated fontSize='lg'>
