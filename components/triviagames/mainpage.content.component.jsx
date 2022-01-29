@@ -28,14 +28,14 @@ const MainPageContent = () => {
             View Questions
           </Text>
         </div>
-        <div
+        {/* <div
           className='px-10 py-4 shadow-md rounded-lg cursor-pointer text-center '
-          onClick={(e) => handleClick(e, '/triviagame/attempts')}
+          onClick={(e) => handleClick(e, '/triviaattempts')}
         >
           <Text fontSize='xl' className='font-bold'>
             View Attempts
           </Text>
-        </div>
+        </div> */}
       </div>
     </div>
   );
