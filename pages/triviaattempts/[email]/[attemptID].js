@@ -13,7 +13,7 @@ import AttemptedQuestionsPageComponent from '../../../components/triviagames/att
 
 const TriviaGamesPage = () => {
   const router = useRouter();
-  const { user } = useUser();
+  const { userDoc } = useUser();
   const { attemptID, email } = router.query;
   // const email = user?.email;
   const [question, setQuestion] = useState([]);
@@ -25,10 +25,13 @@ const TriviaGamesPage = () => {
   );
   // console.log(router.query);
   useEffect(() => {
-    if (!user) {
+    if (!userDoc || userDoc.role !== 'admin') {
+      // router.back();
       router.push('/login');
+      // console.log("no admin");
     }
-  }, [user]);
+  }, [userDoc]);
+
   useEffect(() => {
     if (isSuccess) {
       const newArr = [];

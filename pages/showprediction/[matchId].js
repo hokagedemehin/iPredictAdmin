@@ -1,14 +1,26 @@
 import { Heading, Skeleton } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useQuery } from 'react-query';
 import Layout from '../../components/layout/layout';
 import NavHeader from '../../components/nav/header.component';
 import AllUsersPredictions from '../../components/showpredictions/allpredictions.component';
+import { useUser } from '../../utils/context/userContext';
 import GetAllPredictions from '../../utils/matches/getallpredictions';
 
 const AllUsersPredictionComponent = () => {
   const router = useRouter();
+  const { userDoc } = useUser();
+  // console.log(user);
+  useEffect(() => {
+    if (!userDoc || userDoc.role !== 'admin') {
+      // router.back();
+      router.push('/login');
+      // console.log("no admin");
+    }
+  }, [userDoc]);
+
+  // const router = useRouter();
   const Id = router.query.matchId;
 
   // const [predictions, setPredictions] = useState([]);
