@@ -13,10 +13,11 @@ const UserWalletPage = () => {
   const { user, userDoc } = useUser();
   // console.log(user);
   useEffect(() => {
-    if (!user) {
+    if (!userDoc || userDoc.role !== 'admin') {
       router.push('/login');
     }
-  }, [user]);
+  }, [userDoc]);
+
   return (
     <Layout name='wallet' desc='I-Predict User Wallet'>
       <NavHeader />
