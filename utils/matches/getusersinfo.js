@@ -3,7 +3,7 @@ import { db } from '../firebase/firebase';
 
 const GetUsersInfo = async (email) => {
   // get the user info to be able to filter out the specific prediction
-  const userRef = collection(db, 'users');
+  const userRef = collection(db, 'Users');
 
   const q = query(userRef, where('email', '==', email));
 
