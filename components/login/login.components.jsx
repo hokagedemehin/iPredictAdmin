@@ -1,15 +1,17 @@
 /* eslint-disable react/no-unescaped-entities */
-import React, { useState } from "react";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { useRouter } from "next/router";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { auth } from "../../utils/firebase/firebase";
-import { Button } from "@chakra-ui/react";
+import React, { useState } from 'react';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { useRouter } from 'next/router';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { auth } from '../../utils/firebase/firebase';
+import { Button, Input, InputGroup, InputRightElement } from '@chakra-ui/react';
 
 const LoginComponent = () => {
   const [formValue, setFormValue] = useState({});
   const [isLoading, setIsLoading] = useState(false);
+  const [show, setShow] = useState(false);
+
   // const { user } = useUser();
   const router = useRouter();
 
@@ -28,7 +30,7 @@ const LoginComponent = () => {
 
       await signInWithEmailAndPassword(auth, email, password);
     } catch (error) {
-      toast.error("💥Incorrect Email or Password! 😪😥💥");
+      toast.error('💥Incorrect Email or Password! 😪😥💥');
     } finally {
       setIsLoading(false);
     }
@@ -38,46 +40,60 @@ const LoginComponent = () => {
     e.preventDefault();
     router.push(href);
   };
+  const handleShow = () => setShow(!show);
 
   return (
     <div>
       <div>
-        <div className="bg-white py-6 sm:py-8 lg:py-12">
-          <div className="max-w-screen-2xl px-4 md:px-8 mx-auto">
-            <h2 className="text-gray-800 text-2xl lg:text-3xl font-bold text-center mb-4 md:mb-8">
+        <div className='bg-white py-6 sm:py-8 lg:py-12'>
+          <div className='max-w-screen-2xl px-4 md:px-8 mx-auto'>
+            <h2 className='text-gray-800 text-2xl lg:text-3xl font-bold text-center mb-4 md:mb-8'>
               Login
             </h2>
 
-            <form className="max-w-lg border rounded-lg mx-auto">
-              <div className="flex flex-col gap-4 p-4 md:p-8">
+            <form className='max-w-lg border rounded-lg mx-auto'>
+              <div className='flex flex-col gap-4 p-4 md:p-8'>
                 <div>
                   <label
-                    htmlFor="email"
-                    className="inline-block text-gray-800 text-sm sm:text-base mb-2"
+                    htmlFor='email'
+                    className='inline-block text-gray-800 text-sm sm:text-base mb-2'
                   >
                     Email
                   </label>
                   <input
-                    type="email"
-                    name="email"
+                    type='email'
+                    name='email'
                     onChange={(e) => handleChange(e)}
-                    className="w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2"
+                    className='w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2'
                   />
                 </div>
 
                 <div>
                   <label
-                    htmlFor="password"
-                    className="inline-block text-gray-800 text-sm sm:text-base mb-2"
+                    htmlFor='password'
+                    className='inline-block text-gray-800 text-sm sm:text-base mb-2'
                   >
                     Password
                   </label>
-                  <input
+                  {/* <input
                     type="password"
                     name="password"
                     onChange={(e) => handleChange(e)}
                     className="w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2"
-                  />
+                  /> */}
+                  <InputGroup>
+                    <Input
+                      type={show ? 'text' : 'password'}
+                      placeholder='Enter password'
+
+                      // className='w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2'
+                    />
+                    <InputRightElement>
+                      <Button size='sm' variant='ghost' onClick={handleShow}>
+                        {show ? 'Hide' : 'Show'}
+                      </Button>
+                    </InputRightElement>
+                  </InputGroup>
                 </div>
 
                 {/* <button
@@ -86,17 +102,17 @@ const LoginComponent = () => {
                 >
                   Log in
                 </button> */}
-                <div className="flex my-5">
+                <div className='flex my-5'>
                   <Button
                     // leftIcon={<BiMailSend />}
-                    colorScheme="blue"
-                    variant="solid"
+                    colorScheme='blue'
+                    variant='solid'
                     isFullWidth
-                    fontSize="xl"
+                    fontSize='xl'
                     // onClick={handleSubmission}
                     isLoading={isLoading}
-                    loadingText="Sending"
-                    spinnerPlacement="end"
+                    loadingText='Sending'
+                    spinnerPlacement='end'
                     onClick={(e) => loginUser(e)}
                   >
                     Log in
@@ -104,13 +120,13 @@ const LoginComponent = () => {
                 </div>
               </div>
 
-              <div className="flex flex-col space-y-2 justify-center items-center bg-gray-100 p-4">
-                <p className="text-gray-500 text-sm text-center">
-                  Forgot Password?{" "}
+              <div className='flex flex-col space-y-2 justify-center items-center bg-gray-100 p-4'>
+                <p className='text-gray-500 text-sm text-center'>
+                  Forgot Password?{' '}
                   <a
-                    href="!#"
-                    onClick={(e) => handleClick(e, "/reset")}
-                    className="text-indigo-500 hover:text-indigo-600 active:text-indigo-700 transition duration-100"
+                    href='!#'
+                    onClick={(e) => handleClick(e, '/reset')}
+                    className='text-indigo-500 hover:text-indigo-600 active:text-indigo-700 transition duration-100'
                   >
                     Reset
                   </a>
