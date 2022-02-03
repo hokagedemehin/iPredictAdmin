@@ -25,7 +25,11 @@ const PredictAndWinComponent = () => {
     async () => await selectedMacthesForPrediction()
   );
   useEffect(() => {
-    if (isSuccess) {
+    if (
+      isSuccess &&
+      typeof (data !== null) &&
+      Object?.keys(data).length !== 0
+    ) {
       data.forEach((doc) => newArr.push(doc.data()));
       setMatchSelect(newArr);
     }
