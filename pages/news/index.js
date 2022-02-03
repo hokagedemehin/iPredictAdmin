@@ -2,9 +2,10 @@ import { Heading } from '@chakra-ui/react';
 import React, { useEffect } from 'react';
 import Layout from '../../components/layout/layout';
 import NavHeader from '../../components/nav/header.component';
-import NewsTransferEmptyComponent from '../../components/emptypages/newsandtransfer.empty';
+// import NewsTransferEmptyComponent from '../../components/emptypages/newsandtransfer.empty';
 import { useRouter } from 'next/router';
 import { useUser } from '../../utils/context/userContext';
+import NewsHomeComponents from '../../components/news/newsHomeComponents';
 
 const NewsAndTransfersPage = () => {
   const router = useRouter();
@@ -25,7 +26,8 @@ const NewsAndTransfersPage = () => {
         <div className='text text-center my-5'>
           <Heading>News & Transfers</Heading>
         </div>
-        <NewsTransferEmptyComponent />
+        {/* <NewsTransferEmptyComponent /> */}
+        <NewsHomeComponents />
       </div>
     </Layout>
   );
