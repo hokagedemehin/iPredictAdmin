@@ -5,7 +5,7 @@ import NavHeader from '../../components/nav/header.component';
 // import NewsTransferEmptyComponent from '../../components/emptypages/newsandtransfer.empty';
 import { useRouter } from 'next/router';
 import { useUser } from '../../utils/context/userContext';
-import NewsHomeComponents from '../../components/news/NewsHomeComponents';
+import NewsHomeComponents from '../../components/news/newsHomeComponents';
 
 const NewsAndTransfersPage = () => {
   const router = useRouter();
