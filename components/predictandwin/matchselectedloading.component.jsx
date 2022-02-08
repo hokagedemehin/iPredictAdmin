@@ -7,14 +7,14 @@ const MatchesSelectedSkeletonComponent = () => {
         Selected Matches
       </Text>
 
-      <div className="flex flex-wrap justify-center items-center gap-2">
+      <div className="flex flex-wrap items-center justify-center gap-2">
         {[0, 1, 2, 3].map((matt, index) => (
           <Skeleton
             key={index}
-            className="flex space-x-3 ring-1 w-fit p-1 rounded-md justify-center items-center"
+            className="flex w-fit items-center justify-center space-x-3 rounded-md p-1 ring-1"
             // style={{ width: "fit-content" }}
           >
-            <div className="flex justify-center items-center space-x-1">
+            <div className="flex items-center justify-center space-x-1">
               <Image
                 boxSize="20px"
                 src={matt.homeLogo}
@@ -26,7 +26,7 @@ const MatchesSelectedSkeletonComponent = () => {
             <Text fontSize="xs" fontWeight="bold">
               VS
             </Text>
-            <div className="flex justify-center items-center space-x-1">
+            <div className="flex items-center justify-center space-x-1">
               <Image
                 boxSize="20px"
                 src={matt.awayLogo}

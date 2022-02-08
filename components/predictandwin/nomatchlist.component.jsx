@@ -3,7 +3,7 @@ import React from "react";
 
 const NoMatchListComponent = () => {
   return (
-    <div className="flex flex-col items-center justify-center space-y-5 mx-2 mb-4 mt-2">
+    <div className="mx-2 mb-4 mt-2 flex flex-col items-center justify-center space-y-5">
       <Image
         src="/predictandwin/nomatches.png"
         borderRadius="md"

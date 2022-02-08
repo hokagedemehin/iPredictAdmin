@@ -1,32 +1,32 @@
-import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react';
-import React from 'react';
+import { Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
+import React from "react";
 
-import AllHistories from './histories.component';
-import AllUsers from './users.component';
+import AllHistories from "./histories.component";
+import AllUsers from "./users.component";
 
 const WalletHomePage = () => {
   return (
-    <div className=''>
-      <div className='flex flex-col space-y-10 mb-5'>
-        <div className='buy w-full bg-purple-700 ring-1 ring-gray-200 shadow-lg rounded-xl py-5 px-2 '>
-          <Tabs isFitted variant='unstyled' colorScheme='teal'>
-            <TabList mb='1rem'>
+    <div className="">
+      <div className="mb-5 flex flex-col space-y-10">
+        <div className="buy w-full rounded-xl bg-purple-700 py-5 px-2 shadow-lg ring-1 ring-gray-200 ">
+          <Tabs isFitted variant="unstyled" colorScheme="teal">
+            <TabList mb="1rem">
               <Tab
-                _selected={{ color: 'white', bg: 'purple.700' }}
-                className='text-white rounded-full font-bold'
+                _selected={{ color: "white", bg: "purple.700" }}
+                className="rounded-full font-bold text-white"
               >
                 All Users
               </Tab>
               <Tab
-                _selected={{ color: 'white', bg: 'purple.700' }}
-                className='text-white rounded-full font-bold'
+                _selected={{ color: "white", bg: "purple.700" }}
+                className="rounded-full font-bold text-white"
               >
                 History
               </Tab>
             </TabList>
             <TabPanels>
               <TabPanel>
-                <div className='flex flex-wrap gap-4 justify-center items-center'>
+                <div className="flex flex-wrap items-center justify-center gap-4">
                   <AllUsers />
                 </div>
               </TabPanel>

@@ -1,11 +1,11 @@
-import { Icon, Image, Text, Skeleton } from '@chakra-ui/react';
-import React, { useEffect, useState } from 'react';
-import { MdClose } from 'react-icons/md';
-import { BiCheck } from 'react-icons/bi';
-import GetUsersPredictions from '../../utils/matches/getuserspredictions';
-import GetUsersInfo from '../../utils/matches/getusersinfo';
-import moment from 'moment';
-import { useQuery } from 'react-query';
+import { Icon, Image, Text, Skeleton } from "@chakra-ui/react";
+import React, { useEffect, useState } from "react";
+import { MdClose } from "react-icons/md";
+import { BiCheck } from "react-icons/bi";
+import GetUsersPredictions from "../../utils/matches/getuserspredictions";
+import GetUsersInfo from "../../utils/matches/getusersinfo";
+import moment from "moment";
+import { useQuery } from "react-query";
 // import EachPrediction from "./eachprediction.component";
 
 const AllUsersPredictions = ({ pred, email, Id }) => {
@@ -16,7 +16,7 @@ const AllUsersPredictions = ({ pred, email, Id }) => {
   // console.log('userInfo', userInfo);
   // console.log('usersPredictions', usersPredictions);
   const dateConvert = new Date(Number(pred));
-  const predDate = moment(dateConvert).format('MMMM Do YYYY, h:mm:ss a');
+  const predDate = moment(dateConvert).format("MMMM Do YYYY, h:mm:ss a");
 
   const {
     isLoading: predLoading,
@@ -24,7 +24,7 @@ const AllUsersPredictions = ({ pred, email, Id }) => {
     isSuccess: predSuccess,
     dataUpdatedAt: predsDate,
   } = useQuery(
-    ['getuserspredictions', Id, pred, email],
+    ["getuserspredictions", Id, pred, email],
     async () => await GetUsersPredictions(Id, pred, email),
     { enabled: !![Id, pred, email] }
   );
@@ -49,7 +49,7 @@ const AllUsersPredictions = ({ pred, email, Id }) => {
     isSuccess: userSuccess,
     dataUpdatedAt: userDate,
   } = useQuery(
-    ['getuserspredictions', email],
+    ["getuserspredictions", email],
     async () => await GetUsersInfo(email),
     { enabled: !![email] }
   );
@@ -69,26 +69,26 @@ const AllUsersPredictions = ({ pred, email, Id }) => {
   }, [userSuccess, userDate]);
 
   return (
-    <div className=''>
-      <div className='shadow-md ring-1 ring-gray-300 p-4 rounded-md w-fit '>
+    <div className="">
+      <div className="w-fit rounded-md p-4 shadow-md ring-1 ring-gray-300 ">
         {userLoading ? (
           <Skeleton>User details are loading</Skeleton>
         ) : (
-          <div className='flex font-bold'>
+          <div className="flex font-bold">
             {userInfo[0]?.firstName} {userInfo[0]?.lastName}
           </div>
         )}
         {userLoading ? (
-          <Skeleton className='mt-1'>User details are loading</Skeleton>
+          <Skeleton className="mt-1">User details are loading</Skeleton>
         ) : (
-          <div className='flex-flex-col'>
-            <p className='text-xs text-gray-400'>{email}</p>
-            <p className='text-xs text-gray-400'>{predDate}</p>
+          <div className="flex-flex-col">
+            <p className="text-xs text-gray-400">{email}</p>
+            <p className="text-xs text-gray-400">{predDate}</p>
           </div>
         )}
 
         {predLoading && (
-          <Skeleton className='h-24'>Matches are loading</Skeleton>
+          <Skeleton className="h-24">Matches are loading</Skeleton>
         )}
 
         {predSuccess &&
@@ -96,39 +96,39 @@ const AllUsersPredictions = ({ pred, email, Id }) => {
           usersPredictions.map((match, index) => (
             <div
               key={index}
-              className='flex space-x-3 w-fit p-1 justify-center items-center'
+              className="flex w-fit items-center justify-center space-x-3 p-1"
             >
-              <div className='flex justify-center items-center space-x-1'>
+              <div className="flex items-center justify-center space-x-1">
                 <Image
-                  boxSize='20px'
+                  boxSize="20px"
                   src={match.homeLogo}
                   alt={match.homeName}
-                  borderRadius='full'
+                  borderRadius="full"
                 />
                 <Text>{match?.homeGoal}</Text>
               </div>
-              <Text fontSize='xs' fontWeight='bold'>
+              <Text fontSize="xs" fontWeight="bold">
                 VS
               </Text>
-              <div className='flex justify-center items-center space-x-1'>
+              <div className="flex items-center justify-center space-x-1">
                 <Image
-                  boxSize='20px'
+                  boxSize="20px"
                   src={match.awayLogo}
                   alt={match.awayName}
-                  borderRadius='full'
+                  borderRadius="full"
                 />
                 <Text>{match?.awayGoal}</Text>
               </div>
-              <div className='flex space-x-2'>
-                {match?.status == 'FT' ? (
+              <div className="flex space-x-2">
+                {match?.status == "FT" ? (
                   match?.actualAwayGoal == match?.awayGoal &&
                   match?.actualHomeGoal == match?.homeGoal ? (
-                    <Icon as={BiCheck} color='green' />
+                    <Icon as={BiCheck} color="green" />
                   ) : (
-                    <Icon as={MdClose} color='red' />
+                    <Icon as={MdClose} color="red" />
                   )
                 ) : (
-                  ''
+                  ""
                 )}
               </div>
             </div>

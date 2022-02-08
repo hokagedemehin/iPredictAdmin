@@ -1,6 +1,6 @@
-import { Text } from '@chakra-ui/react';
-import { useRouter } from 'next/router';
-import React from 'react';
+import { Text } from "@chakra-ui/react";
+import { useRouter } from "next/router";
+import React from "react";
 
 const MainPageContent = () => {
   const router = useRouter();
@@ -11,20 +11,20 @@ const MainPageContent = () => {
   };
   return (
     <div>
-      <div className='flex flex-wrap justify-center items-center gap-4 mx-4'>
+      <div className="mx-4 flex flex-wrap items-center justify-center gap-4">
         <div
-          className='px-10 py-4 shadow-md rounded-lg cursor-pointer text-center '
-          onClick={(e) => handleClick(e, '/triviagame/addquestion')}
+          className="cursor-pointer rounded-lg px-10 py-4 text-center shadow-md "
+          onClick={(e) => handleClick(e, "/triviagame/addquestion")}
         >
-          <Text fontSize='xl' className='font-bold'>
+          <Text fontSize="xl" className="font-bold">
             Add Question
           </Text>
         </div>
         <div
-          className='px-10 py-4 shadow-md rounded-lg cursor-pointer text-center '
-          onClick={(e) => handleClick(e, '/triviagame/questions')}
+          className="cursor-pointer rounded-lg px-10 py-4 text-center shadow-md "
+          onClick={(e) => handleClick(e, "/triviagame/questions")}
         >
-          <Text fontSize='xl' className='font-bold'>
+          <Text fontSize="xl" className="font-bold">
             View Questions
           </Text>
         </div>

@@ -2,7 +2,7 @@ import { Image, Text } from "@chakra-ui/react";
 
 const NoMatchComponent = () => {
   return (
-    <div className="flex flex-col items-center justify-center space-y-5 mx-2 mb-6 mt-2">
+    <div className="mx-2 mb-6 mt-2 flex flex-col items-center justify-center space-y-5">
       <Image
         src="/predictandwin/nomatch.png"
         borderRadius="md"

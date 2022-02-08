@@ -1,8 +1,8 @@
-import { Button } from '@chakra-ui/react';
-import React from 'react';
+import { Button } from "@chakra-ui/react";
+import React from "react";
 // import { useQuery } from 'react-query';
 // import AddNewsToFirestore from '../../utils/news/addnewstofirestore';
-import RapidNewsApi from '../../utils/news/rapidnewsapi';
+import RapidNewsApi from "../../utils/news/rapidnewsapi";
 // import moment from 'moment';
 
 const NewsHomeComponents = () => {
@@ -26,7 +26,7 @@ const NewsHomeComponents = () => {
     // if (news) {
     //   await AddNewsToFirestore(news, setLoading);
     // }
-    console.log('news button clicked');
+    console.log("news button clicked");
     await RapidNewsApi();
   };
 
@@ -44,15 +44,15 @@ const NewsHomeComponents = () => {
   };
 
   return (
-    <div className='flex flex-col'>
+    <div className="flex flex-col">
       <Button
         // isLoading={loading}
-        loadingText='Sending'
+        loadingText="Sending"
         onClick={() => handleNews()}
       >
         Send News to firestore
       </Button>
-      <div className='flex'>
+      <div className="flex">
         <div dangerouslySetInnerHTML={danger} />
       </div>
       <p>soft</p>

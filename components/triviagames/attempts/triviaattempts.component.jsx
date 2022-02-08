@@ -1,9 +1,9 @@
-import MaterialTable from 'material-table';
-import moment from 'moment';
-import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
-import { useQuery } from 'react-query';
-import GetAllTriviaAttempts from '../../../utils/trivia/attempts/getAllAttempts';
+import MaterialTable from "material-table";
+import moment from "moment";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
+import { useQuery } from "react-query";
+import GetAllTriviaAttempts from "../../../utils/trivia/attempts/getAllAttempts";
 
 const TriviaAttemptsPageComponent = () => {
   // const [rowInfo, setRowInfo] = useState([]);
@@ -21,7 +21,7 @@ const TriviaAttemptsPageComponent = () => {
   // console.log('aa :>> ', bb);
 
   const { data, isSuccess, dataUpdatedAt } = useQuery(
-    'triviaattempts',
+    "triviaattempts",
     async () => await GetAllTriviaAttempts()
   );
 
@@ -31,8 +31,8 @@ const TriviaAttemptsPageComponent = () => {
 
       data.forEach((doc) => {
         const firestoreData = doc.data();
-        firestoreData['date'] = moment(doc.data().createdAt.toDate()).format(
-          'MMM Do YY'
+        firestoreData["date"] = moment(doc.data().createdAt.toDate()).format(
+          "MMM Do YY"
         );
 
         return newArr.push(firestoreData);
@@ -96,38 +96,38 @@ const TriviaAttemptsPageComponent = () => {
   // ];
 
   return (
-    <div className='flex'>
-      <div className='mb-10 mx-auto w-full '>
+    <div className="flex">
+      <div className="mx-auto mb-10 w-full ">
         <MaterialTable
-          title='Trivia Attempts'
+          title="Trivia Attempts"
           columns={[
-            { title: 'Attempt Id', field: 'attemptID', hidden: true },
-            { title: 'Date', field: 'date' },
-            { title: 'Full Name', field: 'fullName' },
-            { title: 'Email', field: 'email' },
+            { title: "Attempt Id", field: "attemptID", hidden: true },
+            { title: "Date", field: "date" },
+            { title: "Full Name", field: "fullName" },
+            { title: "Email", field: "email" },
             {
-              title: 'Type',
-              field: 'type',
+              title: "Type",
+              field: "type",
               lookup: {
-                easyway: 'Easyway',
-                confam: 'Confam',
-                originality: 'Originality',
-                excellent: 'Excellent',
-                chairman: 'Chairman',
-                presido: 'Presido',
+                easyway: "Easyway",
+                confam: "Confam",
+                originality: "Originality",
+                excellent: "Excellent",
+                chairman: "Chairman",
+                presido: "Presido",
               },
             },
             {
-              title: 'Correct Answers',
-              field: 'correctAnswers',
-              type: 'numeric',
+              title: "Correct Answers",
+              field: "correctAnswers",
+              type: "numeric",
             },
-            { title: 'Wrong Answers', field: 'wrongAnswers', type: 'numeric' },
+            { title: "Wrong Answers", field: "wrongAnswers", type: "numeric" },
             {
-              title: 'Winner',
-              field: 'winner',
+              title: "Winner",
+              field: "winner",
               // type: 'boolean',
-              lookup: { yes: 'Yes', no: 'No' },
+              lookup: { yes: "Yes", no: "No" },
             },
           ]}
           data={allData}
@@ -143,10 +143,10 @@ const TriviaAttemptsPageComponent = () => {
             sorting: true,
             // filtering: true,
             headerStyle: {
-              backgroundColor: '#01579b',
-              color: '#FFF',
+              backgroundColor: "#01579b",
+              color: "#FFF",
               zIndex: 0,
-              textAlign: 'center',
+              textAlign: "center",
             },
             // rowStyle: {
             //   textAlign: 'center',

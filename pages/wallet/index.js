@@ -1,11 +1,11 @@
-import { Heading } from '@chakra-ui/react';
-import { useRouter } from 'next/router';
-import React, { useEffect } from 'react';
+import { Heading } from "@chakra-ui/react";
+import { useRouter } from "next/router";
+import React, { useEffect } from "react";
 // import NoWalletEmptyComponent from '../../components/emptypages/nowallet.empty';
-import Layout from '../../components/layout/layout';
-import NavHeader from '../../components/nav/header.component';
-import WalletHomePage from '../../components/wallet/wallethome.component';
-import { useUser } from '../../utils/context/userContext';
+import Layout from "../../components/layout/layout";
+import NavHeader from "../../components/nav/header.component";
+import WalletHomePage from "../../components/wallet/wallethome.component";
+import { useUser } from "../../utils/context/userContext";
 // import NavHeader from "../../components/nav/header.component original";
 
 const UserWalletPage = () => {
@@ -13,16 +13,16 @@ const UserWalletPage = () => {
   const { user, userDoc } = useUser();
   // console.log(user);
   useEffect(() => {
-    if (!userDoc || userDoc.role !== 'admin') {
-      router.push('/login');
+    if (!userDoc || userDoc.role !== "admin") {
+      router.push("/login");
     }
   }, [userDoc]);
 
   return (
-    <Layout name='wallet' desc='I-Predict User Wallet'>
+    <Layout name="wallet" desc="I-Predict User Wallet">
       <NavHeader />
-      <div className='mx-2'>
-        <div className='text text-center my-5'>
+      <div className="mx-2">
+        <div className="text my-5 text-center">
           <Heading>Transactions</Heading>
         </div>
         <WalletHomePage userDoc={userDoc} user={user} />

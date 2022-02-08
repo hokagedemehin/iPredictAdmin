@@ -8,7 +8,7 @@ const EachMatchSelected = ({ match }) => {
   return (
     <div>
       <div
-        className="shadow-md rounded-md p-2 w-fit cursor-pointer "
+        className="w-fit cursor-pointer rounded-md p-2 shadow-md "
         onClick={() => router.push(`/showprediction/${match?.ID}`)}
       >
         <p>Match for {dat}</p>

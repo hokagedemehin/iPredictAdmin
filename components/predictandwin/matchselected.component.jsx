@@ -1,15 +1,15 @@
-import { Button, Image, Text } from '@chakra-ui/react';
+import { Button, Image, Text } from "@chakra-ui/react";
 // import Image from "next/image";
-import React, { useState } from 'react';
-import { BiSend } from 'react-icons/bi';
-import { MdOutlineClear } from 'react-icons/md';
-import { GrUpdate } from 'react-icons/gr';
-import addMatchToFirestore from '../../utils/matches/addMatchToFirestore';
+import React, { useState } from "react";
+import { BiSend } from "react-icons/bi";
+import { MdOutlineClear } from "react-icons/md";
+import { GrUpdate } from "react-icons/gr";
+import addMatchToFirestore from "../../utils/matches/addMatchToFirestore";
 // import { toast } from "react-toastify";
 // import "react-toastify/dist/ReactToastify.css";
-import { ToastContainer } from 'react-toastify';
-import UpdateMatches from '../../utils/matches/updatematches';
-import UpdateScoreToFirestore from '../../utils/matches/updateScoreToFirestore';
+import { ToastContainer } from "react-toastify";
+import UpdateMatches from "../../utils/matches/updatematches";
+import UpdateScoreToFirestore from "../../utils/matches/updateScoreToFirestore";
 // import { useMutation } from "react-query";
 // import { useToast } from "@chakra-ui/react";
 
@@ -47,11 +47,11 @@ const MatchesSelectedComponent = ({ matchSelect, setMatchSelect }) => {
         matt.awayGoal = data?.response[0]?.goals?.away;
         matt.status = data?.response[0]?.fixture?.status?.short;
 
-        if (matt.status == 'FT') {
+        if (matt.status == "FT") {
           await UpdateScoreToFirestore(matt);
         }
       } catch (error) {
-        console.error('match select error', error);
+        console.error("match select error", error);
         // toast({
         //   title: "An error occurred while updating",
         //   status: "error",
@@ -69,40 +69,40 @@ const MatchesSelectedComponent = ({ matchSelect, setMatchSelect }) => {
   };
   // console.log(object)
   return (
-    <div className='mx-2'>
-      <Text fontSize='md' fontWeight='black' py='2' textAlign='center'>
+    <div className="mx-2">
+      <Text fontSize="md" fontWeight="black" py="2" textAlign="center">
         Selected Matches
       </Text>
 
-      <div className='flex flex-wrap justify-center items-center gap-2'>
+      <div className="flex flex-wrap items-center justify-center gap-2">
         {matchSelect.map((matt, index) => (
           <div
             key={index}
-            className='flex space-x-3 ring-1 w-fit p-1 sm:p-3 rounded-md justify-center items-center'
+            className="flex w-fit items-center justify-center space-x-3 rounded-md p-1 ring-1 sm:p-3"
             // style={{ width: "fit-content" }}
           >
-            <div className='flex justify-center items-center space-x-1'>
+            <div className="flex items-center justify-center space-x-1">
               <Image
-                boxSize={['20px', '30px', '40px']}
+                boxSize={["20px", "30px", "40px"]}
                 src={matt.homeLogo}
                 alt={matt.homeName}
-                borderRadius='full'
+                borderRadius="full"
               />
-              <Text fontSize={['md', 'lg', 'xl']}>
+              <Text fontSize={["md", "lg", "xl"]}>
                 {!matt?.homeGoal ? 0 : matt?.homeGoal}
               </Text>
             </div>
-            <Text fontSize={['xs', 'md', 'lg']} fontWeight='bold'>
+            <Text fontSize={["xs", "md", "lg"]} fontWeight="bold">
               VS
             </Text>
-            <div className='flex justify-center items-center space-x-1'>
+            <div className="flex items-center justify-center space-x-1">
               <Image
-                boxSize={['20px', '30px', '40px']}
+                boxSize={["20px", "30px", "40px"]}
                 src={matt.awayLogo}
                 alt={matt.awayName}
-                borderRadius='full'
+                borderRadius="full"
               />
-              <Text fontSize={['md', 'lg', 'xl']}>
+              <Text fontSize={["md", "lg", "xl"]}>
                 {!matt?.awayGoal ? 0 : matt?.awayGoal}
               </Text>
             </div>
@@ -110,38 +110,38 @@ const MatchesSelectedComponent = ({ matchSelect, setMatchSelect }) => {
         ))}
         <ToastContainer />
       </div>
-      <div className='flex justify-center items-center my-3 space-x-2'>
+      <div className="my-3 flex items-center justify-center space-x-2">
         <Button
           rightIcon={<BiSend />}
-          colorScheme='teal'
-          variant='solid'
-          size='sm'
+          colorScheme="teal"
+          variant="solid"
+          size="sm"
           onClick={addSelection}
           // onClick={addSelectionMutate.mutate()}
           isLoading={isConfirmed}
           // isLoading={addSelectionMutate.isLoading}
-          loadingText='Saving'
-          spinnerPlacement='end'
+          loadingText="Saving"
+          spinnerPlacement="end"
         >
           Confirm
         </Button>
         <Button
           rightIcon={<GrUpdate />}
-          colorScheme='blue'
-          variant='outline'
-          size='sm'
+          colorScheme="blue"
+          variant="outline"
+          size="sm"
           onClick={updateSelection}
           isLoading={isUpdating}
-          loadingText='Updating'
-          spinnerPlacement='end'
+          loadingText="Updating"
+          spinnerPlacement="end"
         >
           Update
         </Button>
         <Button
           rightIcon={<MdOutlineClear />}
-          colorScheme='red'
-          variant='outline'
-          size='sm'
+          colorScheme="red"
+          variant="outline"
+          size="sm"
           onClick={clearSelection}
         >
           Clear All

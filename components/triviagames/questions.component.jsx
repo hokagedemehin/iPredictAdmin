@@ -59,7 +59,7 @@ const OneQuestion = () => {
     <div className="mx-3">
       <form className="space-y-5" onSubmit={formik.handleSubmit}>
         <div>
-          <Text className="font-bold py-2">Question:</Text>
+          <Text className="py-2 font-bold">Question:</Text>
           <Textarea
             placeholder="Type your question here"
             onChange={formik.handleChange}
@@ -126,7 +126,7 @@ const OneQuestion = () => {
           ) : null}
         </div>
         <div>
-          <Text className="font-bold py-2">Answer:</Text>
+          <Text className="py-2 font-bold">Answer:</Text>
           <Input
             placeholder="Right Answer"
             type="text"
