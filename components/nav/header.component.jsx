@@ -259,50 +259,62 @@ const NavHeader = () => {
         </div>
         <Spacer />
         {user ? (
-          <Menu>
-            <MenuButton
-              cursor='pointer'
-              _hover={{
-                background: 'gray.200',
-              }}
-              p='2'
-              rounded='full'
-              as='button'
-            >
-              <Image
-                className='h-8 w-8 rounded-full'
-                src='https://avatars.dicebear.com/api/micah/:child.svg?mouth[]=laughing&mouth[]=smile&glassesProbability=100'
-                alt="user's profile"
-                fallbackSrc='https://via.placeholder.com/30?text=user'
-                borderRadius='md'
-                // boxSize='200px'
-              />
-            </MenuButton>
-            <MenuList>
-              <MenuItem
-                data-name='wallet'
+          <div className='flex justify-between items-center space-x-2 sm:space-x-5'>
+            {/* wallet */}
+            <div className='flex'>
+              <IconButton
+                colorScheme='facebook'
+                variant='outline'
+                isRound={true}
+                aria-label='wallet page'
                 icon={<GiWallet />}
                 onClick={(e) => handleClick(e, '/wallet')}
-              >
-                wallet
-              </MenuItem>
-              <MenuItem
-                data-name='profile'
-                icon={<FaUser />}
-                onClick={(e) => handleClick(e, '/profile')}
-              >
-                Profile
-              </MenuItem>
-              <MenuItem
-                icon={<GoSignOut />}
-                onClick={() => {
-                  handleLogout();
+                fontSize='lg'
+                data-cy-name='wallet'
+              />
+            </div>
+            {/* profile */}
+            <Menu>
+              <MenuButton
+                cursor='pointer'
+                data-cy-name='profileBtn'
+                _hover={{
+                  background: 'gray.200',
                 }}
+                p='2'
+                rounded='full'
+                as='button'
               >
-                Sign Out
-              </MenuItem>
-            </MenuList>
-          </Menu>
+                <Image
+                  className='h-8 w-8 rounded-full'
+                  data-cy-name='profile image'
+                  src='https://avatars.dicebear.com/api/micah/:child.svg?mouth[]=laughing&mouth[]=smile&glassesProbability=100'
+                  alt="user's profile"
+                  fallbackSrc='https://via.placeholder.com/30?text=user'
+                  borderRadius='md'
+                  // boxSize='200px'
+                />
+              </MenuButton>
+              <MenuList>
+                <MenuItem
+                  data-cy-name='profilePage'
+                  icon={<FaUser />}
+                  onClick={(e) => handleClick(e, '/profile')}
+                >
+                  Profile
+                </MenuItem>
+                <MenuItem
+                  data-cy-name='logOut'
+                  icon={<GoSignOut />}
+                  onClick={() => {
+                    handleLogout();
+                  }}
+                >
+                  Sign Out
+                </MenuItem>
+              </MenuList>
+            </Menu>
+          </div>
         ) : (
           <Button
             rightIcon={<RiLoginCircleLine />}

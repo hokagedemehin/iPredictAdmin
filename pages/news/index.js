@@ -6,6 +6,8 @@ import NavHeader from '../../components/nav/header.component';
 import { useRouter } from 'next/router';
 import { useUser } from '../../utils/context/userContext';
 import NewsHomeComponents from '../../components/news/newsHomeComponents';
+// import GetApiCount from '../../utils/context/getApiCount';
+// import { useQuery } from 'react-query';
 
 const NewsAndTransfersPage = () => {
   const router = useRouter();
@@ -19,12 +21,22 @@ const NewsAndTransfersPage = () => {
     }
   }, [userDoc]);
 
+  // const docName = 'news';
+
+  // const { data, isSuccess } = useQuery(
+  //   ['getAPI', docName],
+  //   async () => await GetApiCount(docName),
+  //   { enabled: !!docName }
+  // );
+
+  // console.log('data', data);
+
   return (
     <Layout name='news' desc='I-Predict news and transfers'>
       <NavHeader />
       <div className=''>
         <div className='text text-center my-5'>
-          <Heading>News & Transfers</Heading>
+          <Heading>News & Transfers </Heading>
         </div>
         {/* <NewsTransferEmptyComponent /> */}
         <NewsHomeComponents />

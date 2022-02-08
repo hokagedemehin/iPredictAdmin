@@ -1,109 +1,40 @@
-import { Button, Icon, Skeleton, Text } from '@chakra-ui/react';
-import React, { useEffect, useState } from 'react';
-import { BsCoin } from 'react-icons/bs';
-import { GiMoneyStack } from 'react-icons/gi';
-import { useQuery } from 'react-query';
-import GetUserInfo from '../../utils/auth/getUserInfo';
+import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react';
+import React from 'react';
 
-// import CoinsComponent from './coins.component';
-import CoinsComponentPayStack from './coins.paystack.component';
+import AllHistories from './histories.component';
+import AllUsers from './users.component';
 
-const WalletHomePage = ({ userDoc, user }) => {
-  const walletData = [
-    { id: 1, coins: 10, amount: 50 },
-    { id: 2, coins: 25, amount: 100 },
-    { id: 3, coins: 60, amount: 200 },
-    { id: 4, coins: 150, amount: 500 },
-    { id: 5, coins: 350, amount: 1000 },
-    { id: 6, coins: 1800, amount: 5000 },
-  ];
-
-  const [userInfo, setUserInfo] = useState([]);
-
-  const { isLoading, data, isSuccess, dataUpdatedAt } = useQuery(
-    ['userInfo', user],
-    async () => await GetUserInfo(user),
-    { enabled: !!user }
-  );
-  useEffect(() => {
-    if (
-      isSuccess &&
-      typeof (data !== null) &&
-      Object?.keys(data).length !== 0
-    ) {
-      // const newArr = [];
-
-      // data?.forEach((doc) => newArr.push(doc.data()));
-      // if (newArr.length !== 0) {
-      setUserInfo(data.data());
-      // }
-    }
-  }, [isSuccess, dataUpdatedAt]);
-
+const WalletHomePage = () => {
   return (
     <div className=''>
       <div className='flex flex-col space-y-10 mb-5'>
-        <div className='summary w-full bg-purple-700 ring-1 ring-gray-200 shadow-lg rounded-xl py-5 '>
-          <div className='flex flex-col sm:flex-row space-y-5 sm:space-y-0 '>
-            <div className='coins w-full flex justify-center items-center space-x-3'>
-              <div className='flex flex-col text-white justify-center items-center text-lg sm:text-2xl'>
-                <div>
-                  <Text className=''>Coins</Text>
+        <div className='buy w-full bg-purple-700 ring-1 ring-gray-200 shadow-lg rounded-xl py-5 px-2 '>
+          <Tabs isFitted variant='unstyled' colorScheme='teal'>
+            <TabList mb='1rem'>
+              <Tab
+                _selected={{ color: 'white', bg: 'purple.700' }}
+                className='text-white rounded-full font-bold'
+              >
+                All Users
+              </Tab>
+              <Tab
+                _selected={{ color: 'white', bg: 'purple.700' }}
+                className='text-white rounded-full font-bold'
+              >
+                History
+              </Tab>
+            </TabList>
+            <TabPanels>
+              <TabPanel>
+                <div className='flex flex-wrap gap-4 justify-center items-center'>
+                  <AllUsers />
                 </div>
-                <div className='flex items-center gap-1 font-bold'>
-                  <Icon as={BsCoin} className='bg-yellow-500 rounded-full' />
-                  {isLoading ? (
-                    <Skeleton>coins</Skeleton>
-                  ) : isSuccess && userInfo.length !== 0 ? (
-                    userInfo?.coins
-                  ) : (
-                    0
-                  )}
-                </div>
-              </div>
-              {/* <div>
-                <Button>Buy Coins</Button>
-              </div> */}
-            </div>
-            <div className='cash w-full flex items-center justify-center space-x-3'>
-              <div className='flex flex-col justify-center items-center text-white text-lg sm:text-2xl'>
-                <div>
-                  <Text>Cash</Text>
-                </div>
-                <div className='flex items-center gap-1 font-bold'>
-                  <Icon as={GiMoneyStack} className='' />
-
-                  {isLoading ? (
-                    <Skeleton>money</Skeleton>
-                  ) : isSuccess && userInfo.length !== 0 ? (
-                    userInfo?.money
-                  ) : (
-                    0
-                  )}
-                </div>
-              </div>
-              <div>
-                <Button
-                  isDisabled={userInfo?.money < 1000}
-                  className='transform transition duration-200 ease-in hover:scale-105'
-                >
-                  Withdraw
-                </Button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className='buy w-full bg-purple-700 ring-1 ring-gray-200 shadow-lg rounded-xl py-5'>
-          <div className='flex flex-wrap gap-4 justify-center items-center'>
-            {walletData.map((data, index) => (
-              <CoinsComponentPayStack
-                key={index}
-                data={data}
-                userDoc={userDoc}
-                user={user}
-              />
-            ))}
-          </div>
+              </TabPanel>
+              <TabPanel>
+                <AllHistories />
+              </TabPanel>
+            </TabPanels>
+          </Tabs>
         </div>
       </div>
     </div>

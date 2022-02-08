@@ -1,4 +1,5 @@
 import axios from 'axios';
+import SetApiCount from '../context/setApiCount';
 
 const categories = [
   { football: '2021020913320920836' },
@@ -18,11 +19,16 @@ const RapidNewsApi = async () => {
       'x-rapidapi-key': '92eb5bac5bmshac4b56879acd72ap1261d0jsn53033be39bf2',
     },
   };
-
-  const response = await axios.request(options);
-  const data = await response.data;
-  console.log('rapid data:', data);
-  return data;
+  try {
+    // const { data } = await axios.request(options);
+    const response = await axios.request(options);
+    const data = await response.data;
+    // console.log("Update API: ", data);
+    await SetApiCount('news');
+    return data;
+  } catch (error) {
+    console.error('🚀 news error', error);
+  }
 };
 
 export default RapidNewsApi;

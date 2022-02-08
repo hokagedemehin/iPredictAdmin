@@ -1,4 +1,5 @@
-import axios from "axios";
+import axios from 'axios';
+import SetApiCount from '../context/setApiCount';
 
 const UpdateMatches = async (fixtureId) => {
   // FIXME:
@@ -14,12 +15,12 @@ const UpdateMatches = async (fixtureId) => {
    */
 
   const options = {
-    method: "GET",
+    method: 'GET',
     url: process.env.NEXT_PUBLIC_RAPID_API_FIXTURE_URL,
     params: { id: fixtureId },
     headers: {
-      "x-rapidapi-host": process.env.NEXT_PUBLIC_RAPID_API_HOST,
-      "x-rapidapi-key": process.env.NEXT_PUBLIC_RAPID_API_KEY,
+      'x-rapidapi-host': process.env.NEXT_PUBLIC_RAPID_API_HOST,
+      'x-rapidapi-key': process.env.NEXT_PUBLIC_RAPID_API_KEY,
     },
   };
 
@@ -32,10 +33,11 @@ const UpdateMatches = async (fixtureId) => {
   try {
     const { data } = await axios.request(options);
     // console.log("Update API: ", data);
+    await SetApiCount('matches');
     return data;
   } catch (error) {
     console.error(
-      "🚀 ~ file: updatematches.js ~ line 27 ~ UpdateMatches ~ error",
+      '🚀 ~ file: updatematches.js ~ line 27 ~ UpdateMatches ~ error',
       error
     );
     // toast.error("💥There was an error accessing this link 😪😥💥");
