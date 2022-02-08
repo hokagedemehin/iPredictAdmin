@@ -101,7 +101,7 @@ const TriviaAttemptsPageComponent = () => {
         <MaterialTable
           title='Trivia Attempts'
           columns={[
-            { title: 'Attempt Id', field: 'attemptID' },
+            { title: 'Attempt Id', field: 'attemptID', hidden: true },
             { title: 'Date', field: 'date' },
             { title: 'Full Name', field: 'fullName' },
             { title: 'Email', field: 'email' },
