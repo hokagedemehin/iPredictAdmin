@@ -1,28 +1,28 @@
 // import { Heading } from '@chakra-ui/react';
-import React, { useEffect } from 'react';
-import Layout from '../../components/layout/layout';
-import NavHeader from '../../components/nav/header.component';
+import React, { useEffect } from "react";
+import Layout from "../../components/layout/layout";
+import NavHeader from "../../components/nav/header.component";
 // import NoUserEmptyComponent from '../../components/emptypages/nouser.empty';
-import { useRouter } from 'next/router';
-import { useUser } from '../../utils/context/userContext';
-import ProfilePageComponent from '../../components/profile/users.component';
+import { useRouter } from "next/router";
+import { useUser } from "../../utils/context/userContext";
+import ProfilePageComponent from "../../components/profile/users.component";
 const ProfilePage = () => {
   const router = useRouter();
   const { userDoc } = useUser();
   // console.log(user);
   useEffect(() => {
-    if (!userDoc || userDoc.role !== 'admin') {
+    if (!userDoc || userDoc.role !== "admin") {
       // router.back();
-      router.push('/login');
+      router.push("/login");
       // console.log("no admin");
     }
   }, [userDoc]);
 
   return (
-    <Layout name='profile' desc='I-Predict User Profile'>
+    <Layout name="profile" desc="I-Predict User Profile">
       <NavHeader />
-      <div className='mx-4'>
-        <div className='text text-center my-5'>
+      <div className="mx-4">
+        <div className="text my-5 text-center">
           {/* <Heading>My Profile</Heading> */}
         </div>
         <ProfilePageComponent userDoc={userDoc} />

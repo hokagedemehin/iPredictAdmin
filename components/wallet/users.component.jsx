@@ -1,13 +1,13 @@
-import { useDisclosure } from '@chakra-ui/react';
-import MaterialTable from 'material-table';
-import moment from 'moment';
+import { useDisclosure } from "@chakra-ui/react";
+import MaterialTable from "material-table";
+import moment from "moment";
 // import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
-import { useQuery } from 'react-query';
+import React, { useEffect, useState } from "react";
+import { useQuery } from "react-query";
 
-import GetAllUsers from '../../utils/wallet/getAllUsers';
+import GetAllUsers from "../../utils/wallet/getAllUsers";
 
-import UsersDescription from './users.description.component';
+import UsersDescription from "./users.description.component";
 
 const AllUsers = () => {
   // const router = useRouter();
@@ -24,7 +24,7 @@ const AllUsers = () => {
   };
 
   const { data, isSuccess, dataUpdatedAt } = useQuery(
-    'users',
+    "users",
     async () => await GetAllUsers()
   );
 
@@ -38,8 +38,8 @@ const AllUsers = () => {
 
       data.forEach((doc) => {
         const firestoreData = doc.data();
-        firestoreData['date'] = moment(doc.data().createdAt.toDate()).format(
-          'MMM Do YY'
+        firestoreData["date"] = moment(doc.data().createdAt.toDate()).format(
+          "MMM Do YY"
         );
 
         return newArr.push(firestoreData);
@@ -50,27 +50,27 @@ const AllUsers = () => {
   }, [isSuccess, dataUpdatedAt]);
 
   return (
-    <div className='mb-10 mx-auto w-full '>
+    <div className="mx-auto mb-10 w-full ">
       <MaterialTable
-        title='Users'
+        title="Users"
         columns={[
           // { title: 'user id', field: 'attemptID', hidden: true },
 
-          { title: 'First Name', field: 'firstName' },
-          { title: 'Last Name', field: 'lastName' },
+          { title: "First Name", field: "firstName" },
+          { title: "Last Name", field: "lastName" },
 
-          { title: 'Email', field: 'email' },
-          { title: 'Joined', field: 'date' },
-          { title: 'Phone No', field: 'phoneNo' },
+          { title: "Email", field: "email" },
+          { title: "Joined", field: "date" },
+          { title: "Phone No", field: "phoneNo" },
           {
-            title: 'Coins',
-            field: 'coins',
-            type: 'numeric',
+            title: "Coins",
+            field: "coins",
+            type: "numeric",
           },
           {
-            title: 'Money',
-            field: 'money',
-            type: 'numeric',
+            title: "Money",
+            field: "money",
+            type: "numeric",
           },
         ]}
         data={allData}
@@ -79,10 +79,10 @@ const AllUsers = () => {
           sorting: true,
           // filtering: true,
           headerStyle: {
-            backgroundColor: '#591d87',
-            color: '#FFF',
+            backgroundColor: "#591d87",
+            color: "#FFF",
             zIndex: 0,
-            textAlign: 'center',
+            textAlign: "center",
           },
         }}
       />

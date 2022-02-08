@@ -1,11 +1,11 @@
-import { useDisclosure } from '@chakra-ui/react';
-import MaterialTable from 'material-table';
-import moment from 'moment';
+import { useDisclosure } from "@chakra-ui/react";
+import MaterialTable from "material-table";
+import moment from "moment";
 // import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
-import { useQuery } from 'react-query';
-import GetAllHistories from '../../utils/wallet/getAllHistories';
-import HistoryDescription from './history.details.component';
+import React, { useEffect, useState } from "react";
+import { useQuery } from "react-query";
+import GetAllHistories from "../../utils/wallet/getAllHistories";
+import HistoryDescription from "./history.details.component";
 
 const AllHistories = () => {
   // const router = useRouter();
@@ -22,7 +22,7 @@ const AllHistories = () => {
   };
 
   const { data, isSuccess, dataUpdatedAt } = useQuery(
-    'triviaattempts',
+    "triviaattempts",
     async () => await GetAllHistories()
   );
 
@@ -36,8 +36,8 @@ const AllHistories = () => {
 
       data.forEach((doc) => {
         const firestoreData = doc.data();
-        firestoreData['date'] = moment(doc.data().createdAt.toDate()).format(
-          'MMM Do YY'
+        firestoreData["date"] = moment(doc.data().createdAt.toDate()).format(
+          "MMM Do YY"
         );
 
         return newArr.push(firestoreData);
@@ -48,24 +48,24 @@ const AllHistories = () => {
   }, [isSuccess, dataUpdatedAt]);
 
   return (
-    <div className='mb-10 mx-auto w-full '>
+    <div className="mx-auto mb-10 w-full ">
       <MaterialTable
-        title='Transactions'
+        title="Transactions"
         columns={[
-          { title: 'transact id', field: 'attemptID', hidden: true },
-          { title: 'Date', field: 'date' },
-          { title: 'Full Name', field: 'fullName' },
-          { title: 'Email', field: 'email' },
-          { title: 'Activity', field: 'type' },
+          { title: "transact id", field: "attemptID", hidden: true },
+          { title: "Date", field: "date" },
+          { title: "Full Name", field: "fullName" },
+          { title: "Email", field: "email" },
+          { title: "Activity", field: "type" },
           {
-            title: 'Coins',
-            field: 'coins',
-            type: 'numeric',
+            title: "Coins",
+            field: "coins",
+            type: "numeric",
           },
           {
-            title: 'Money',
-            field: 'money',
-            type: 'numeric',
+            title: "Money",
+            field: "money",
+            type: "numeric",
           },
 
           // {
@@ -81,10 +81,10 @@ const AllHistories = () => {
           sorting: true,
           // filtering: true,
           headerStyle: {
-            backgroundColor: '#591d87',
-            color: '#FFF',
+            backgroundColor: "#591d87",
+            color: "#FFF",
             zIndex: 0,
-            textAlign: 'center',
+            textAlign: "center",
           },
         }}
       />

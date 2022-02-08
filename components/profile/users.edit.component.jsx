@@ -1,10 +1,10 @@
-import { Button, useToast } from '@chakra-ui/react';
-import { useRouter } from 'next/router';
-import React, { useState } from 'react';
-import { MdOutlineArrowBack, MdSend } from 'react-icons/md';
-import EditUserProfile from '../../utils/profile/edituserprofile';
-import UsersImageComponent from './users.image.component';
-import { motion } from 'framer-motion';
+import { Button, useToast } from "@chakra-ui/react";
+import { useRouter } from "next/router";
+import React, { useState } from "react";
+import { MdOutlineArrowBack, MdSend } from "react-icons/md";
+import EditUserProfile from "../../utils/profile/edituserprofile";
+import UsersImageComponent from "./users.image.component";
+import { motion } from "framer-motion";
 
 const UsersProfileEditComponent = ({ userDoc, user }) => {
   const MotionButton = motion(Button);
@@ -32,9 +32,9 @@ const UsersProfileEditComponent = ({ userDoc, user }) => {
     ) {
       // console.log("stop send");
       toast({
-        title: 'Attention!',
-        description: 'Please fill all required fields',
-        status: 'error',
+        title: "Attention!",
+        description: "Please fill all required fields",
+        status: "error",
         // duration: 9000,
         isClosable: true,
       });
@@ -46,125 +46,125 @@ const UsersProfileEditComponent = ({ userDoc, user }) => {
       formValue?.birthDay
     ) {
       await EditUserProfile(formValue, user, setIsLoading);
-      router.push('/profile');
+      router.push("/profile");
     }
   };
   return (
-    <div className=''>
-      <div className='my-5 p-5'>
-        <div className='m-5 text-center'>
-          <span className='text-4xl font-black text-gray-400'>Edit </span>{' '}
-          <span className='text-4xl font-black text-indigo-500 '> Profile</span>
+    <div className="">
+      <div className="my-5 p-5">
+        <div className="m-5 text-center">
+          <span className="text-4xl font-black text-gray-400">Edit </span>{" "}
+          <span className="text-4xl font-black text-indigo-500 "> Profile</span>
         </div>
-        <div className='md:flex no-wrap md:-mx-2 '>
+        <div className="no-wrap md:-mx-2 md:flex ">
           {/* <!-- Left Side --> */}
-          <div className='w-full md:w-3/12 md:mx-2'>
+          <div className="w-full md:mx-2 md:w-3/12">
             {/* <!-- Profile Card --> */}
             <UsersImageComponent userDoc={userDoc} />
             {/* <!-- End of profile card --> */}
-            <div className='my-4'></div>
+            <div className="my-4"></div>
           </div>
           {/* <!-- Right Side --> */}
-          <div className='w-full md:w-9/12 md:mx-2 h-full'>
+          <div className="h-full w-full md:mx-2 md:w-9/12">
             {/* <!-- Profile tab --> */}
             {/* <!-- About Section --> */}
-            <div className='bg-white p-3 border-t-4 border-indigo-400 rounded-lg shadow-md'>
-              <div className='flex items-center space-x-2 font-semibold text-gray-900 leading-8'>
-                <span className='text-gray-500'>
+            <div className="rounded-lg border-t-4 border-indigo-400 bg-white p-3 shadow-md">
+              <div className="flex items-center space-x-2 font-semibold leading-8 text-gray-900">
+                <span className="text-gray-500">
                   <svg
-                    className='h-5'
-                    xmlns='http://www.w3.org/2000/svg'
-                    fill='none'
-                    viewBox='0 0 24 24'
-                    stroke='currentColor'
+                    className="h-5"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
                   >
                     <path
-                      strokeLinecap='round'
-                      strokeLinejoin='round'
-                      strokeWidth='2'
-                      d='M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z'
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
                     />
                   </svg>
                 </span>
-                <span className='tracking-wide'>About</span>
+                <span className="tracking-wide">About</span>
               </div>
-              <div className='text-gray-700'>
-                <div className='grid md:grid-cols-2 gap-4 text-sm'>
-                  <div className=''>
+              <div className="text-gray-700">
+                <div className="grid gap-4 text-sm md:grid-cols-2">
+                  <div className="">
                     <label
-                      htmlFor='firstName'
-                      className='inline-block text-gray-800 text-sm sm:text-base mb-2'
+                      htmlFor="firstName"
+                      className="mb-2 inline-block text-sm text-gray-800 sm:text-base"
                     >
                       First Name*
                     </label>
                     <input
-                      type='text'
-                      name='firstName'
+                      type="text"
+                      name="firstName"
                       // required="required"
-                      value={!formValue ? '' : formValue?.firstName}
+                      value={!formValue ? "" : formValue?.firstName}
                       onChange={(e) => handleChange(e)}
-                      className='w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2'
+                      className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring"
                     />
                   </div>
-                  <div className=''>
+                  <div className="">
                     <label
-                      htmlFor='lastName'
-                      className='inline-block text-gray-800 text-sm sm:text-base mb-2'
+                      htmlFor="lastName"
+                      className="mb-2 inline-block text-sm text-gray-800 sm:text-base"
                     >
                       Last Name*
                     </label>
                     <input
-                      type='text'
-                      name='lastName'
+                      type="text"
+                      name="lastName"
                       // required="required"
-                      value={!formValue ? '' : formValue?.lastName}
+                      value={!formValue ? "" : formValue?.lastName}
                       onChange={(e) => handleChange(e)}
-                      className='w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2'
+                      className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring"
                     />
                   </div>
 
                   <div>
                     <label
-                      htmlFor='phoneNo'
-                      className='inline-block text-gray-800 text-sm sm:text-base mb-2'
+                      htmlFor="phoneNo"
+                      className="mb-2 inline-block text-sm text-gray-800 sm:text-base"
                     >
                       Phone Number*
                     </label>
                     <input
-                      type='tel'
-                      name='phoneNo'
+                      type="tel"
+                      name="phoneNo"
                       onChange={(e) => handleChange(e)}
-                      value={!formValue ? '' : formValue?.phoneNo}
-                      className='w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2'
+                      value={!formValue ? "" : formValue?.phoneNo}
+                      className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring"
                     />
                   </div>
 
-                  <div className=''>
+                  <div className="">
                     <label
-                      htmlFor='birthDay'
-                      className='inline-block text-gray-800 text-sm sm:text-base mb-2'
+                      htmlFor="birthDay"
+                      className="mb-2 inline-block text-sm text-gray-800 sm:text-base"
                     >
                       Birthday*
                     </label>
                     <input
-                      name='birthDay'
-                      type='text'
+                      name="birthDay"
+                      type="text"
                       onChange={(e) => handleChange(e)}
-                      value={!formValue ? '' : formValue.birthDay}
-                      className='w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2'
+                      value={!formValue ? "" : formValue.birthDay}
+                      className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring"
                     />
                   </div>
                 </div>
               </div>
 
-              <div className='flex space-x-4 my-4 max-w-md mx-auto'>
+              <div className="my-4 mx-auto flex max-w-md space-x-4">
                 <MotionButton
                   isFullWidth
-                  variant='outline'
-                  colorScheme='red'
+                  variant="outline"
+                  colorScheme="red"
                   leftIcon={<MdOutlineArrowBack />}
-                  fontSize='lg'
-                  onClick={(e) => handleClick(e, '/profile')}
+                  fontSize="lg"
+                  onClick={(e) => handleClick(e, "/profile")}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.9 }}
                 >
@@ -172,12 +172,12 @@ const UsersProfileEditComponent = ({ userDoc, user }) => {
                 </MotionButton>
                 <MotionButton
                   isFullWidth
-                  variant='solid'
-                  colorScheme='teal'
+                  variant="solid"
+                  colorScheme="teal"
                   rightIcon={<MdSend />}
-                  fontSize='xl'
+                  fontSize="xl"
                   isLoading={isLoading}
-                  loadingText='Saving'
+                  loadingText="Saving"
                   onClick={(e) => handleSubmit(e)}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.9 }}
@@ -188,7 +188,7 @@ const UsersProfileEditComponent = ({ userDoc, user }) => {
             </div>
             {/* <!-- End of about section --> */}
 
-            <div className='my-4'></div>
+            <div className="my-4"></div>
           </div>
         </div>
       </div>

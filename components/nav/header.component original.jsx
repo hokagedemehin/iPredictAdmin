@@ -82,7 +82,7 @@ const NavHeader = () => {
           <DrawerCloseButton />
           <DrawerHeader>
             <div
-              className="text-2xl font-bold cursor-pointer"
+              className="cursor-pointer text-2xl font-bold"
               onClick={() => router.push("/")}
             >
               I-Predict

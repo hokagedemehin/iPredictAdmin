@@ -1,28 +1,28 @@
-import { Heading } from '@chakra-ui/react';
-import { useRouter } from 'next/router';
-import React, { useEffect } from 'react';
-import Layout from '../../../components/layout/layout';
-import NavHeader from '../../../components/nav/header.component';
-import OneQuestionComponent from '../../../components/triviagames/onequestion.component';
-import { useUser } from '../../../utils/context/userContext';
+import { Heading } from "@chakra-ui/react";
+import { useRouter } from "next/router";
+import React, { useEffect } from "react";
+import Layout from "../../../components/layout/layout";
+import NavHeader from "../../../components/nav/header.component";
+import OneQuestionComponent from "../../../components/triviagames/onequestion.component";
+import { useUser } from "../../../utils/context/userContext";
 
 const ViewQuestionsPage = () => {
   const router = useRouter();
   const { userDoc } = useUser();
   // console.log(user);
   useEffect(() => {
-    if (!userDoc || userDoc.role !== 'admin') {
+    if (!userDoc || userDoc.role !== "admin") {
       // router.back();
-      router.push('/login');
+      router.push("/login");
       // console.log("no admin");
     }
   }, [userDoc]);
 
   return (
-    <Layout name='trivas' desc='I-Predict Trivas Game'>
+    <Layout name="trivas" desc="I-Predict Trivas Game">
       <NavHeader />
-      <div className='max-w-xl mx-auto'>
-        <div className='text text-center my-5'>
+      <div className="mx-auto max-w-xl">
+        <div className="text my-5 text-center">
           <Heading>Question</Heading>
         </div>
         <div>

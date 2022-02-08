@@ -1,8 +1,8 @@
-import React from 'react';
-import { Box, IconButton, Image, Text } from '@chakra-ui/react';
+import React from "react";
+import { Box, IconButton, Image, Text } from "@chakra-ui/react";
 // import { CheckCircleIcon, SmallCloseIcon } from "react-icons/md";
-import { BiCheck } from 'react-icons/bi';
-import { MdClose } from 'react-icons/md';
+import { BiCheck } from "react-icons/bi";
+import { MdClose } from "react-icons/md";
 // import addMatchToFirestore from "../../utils/matches/addMatchToFIrestore";
 
 const MatchListComponent = ({ matches, setMatchSelect, matchSelect }) => {
@@ -43,56 +43,56 @@ const MatchListComponent = ({ matches, setMatchSelect, matchSelect }) => {
   };
 
   return (
-    <div className='flex ring-1 p-2 rounded-md shadow-md space-x-4 justify-between items-center '>
-      <div className='flex justify-center items-center space-x-1 w-fit'>
+    <div className="flex items-center justify-between space-x-4 rounded-md p-2 shadow-md ring-1 ">
+      <div className="flex w-fit items-center justify-center space-x-1">
         <Image
-          boxSize={['20px', '30px', '40px']}
+          boxSize={["20px", "30px", "40px"]}
           // src="/predictandwin/manu.png"
           src={match?.teams?.home?.logo}
           alt={match?.teams?.home?.name}
-          borderRadius='full'
+          borderRadius="full"
         />
         <Box>
           {/* <Text fontSize="sm">Manchester United</Text> */}
-          <Text fontSize={['xs', 'sm']}>{match?.teams?.home?.name}</Text>
+          <Text fontSize={["xs", "sm"]}>{match?.teams?.home?.name}</Text>
         </Box>
       </div>
       <div>
-        <Text fontSize={['md', 'lg']} fontWeight='black'>
+        <Text fontSize={["md", "lg"]} fontWeight="black">
           VS
         </Text>
       </div>
-      <div className='flex justify-center items-center space-x-1 w-fit'>
+      <div className="flex w-fit items-center justify-center space-x-1">
         <Image
-          boxSize={['20px', '30px', '40px']}
+          boxSize={["20px", "30px", "40px"]}
           // src="/predictandwin/mancity.png"
           src={match?.teams?.away?.logo}
           alt={match?.teams?.away?.name}
-          borderRadius='full'
+          borderRadius="full"
         />
         <Box>
           {/* <Text fontSize="sm">Manchester City</Text> */}
-          <Text fontSize={['xs', 'sm']}>{match?.teams?.away?.name}</Text>
+          <Text fontSize={["xs", "sm"]}>{match?.teams?.away?.name}</Text>
         </Box>
       </div>
-      <div className='flex space-x-2'>
+      <div className="flex space-x-2">
         <IconButton
           // variant="outline"
-          colorScheme='green'
-          aria-label='Select Match'
-          fontSize='20px'
+          colorScheme="green"
+          aria-label="Select Match"
+          fontSize="20px"
           isRound
-          size='xs'
+          size="xs"
           icon={<BiCheck />}
           onClick={addSelection}
         />
         <IconButton
           // variant="outline"
-          colorScheme='red'
-          aria-label='Select Match'
-          fontSize='20px'
+          colorScheme="red"
+          aria-label="Select Match"
+          fontSize="20px"
           isRound
-          size='xs'
+          size="xs"
           icon={<MdClose />}
           onClick={removeSelection}
         />

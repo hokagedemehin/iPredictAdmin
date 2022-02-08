@@ -28,7 +28,7 @@ export default function Home() {
         <HeroComponent />
       </div>
       <div className="">
-        <div className="text text-center my-5">
+        <div className="text my-5 text-center">
           <Heading>Admin Page</Heading>
         </div>
         <ContentComponent />

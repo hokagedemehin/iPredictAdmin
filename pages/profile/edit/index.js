@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 
-import { useRouter } from 'next/router';
-import Layout from '../../../components/layout/layout';
-import NavHeader from '../../../components/nav/header.component';
+import { useRouter } from "next/router";
+import Layout from "../../../components/layout/layout";
+import NavHeader from "../../../components/nav/header.component";
 // import { useUser } from '../../utils/context/userContext';
-import UsersProfileEditComponent from '../../../components/profile/users.edit.component';
-import { useUser } from '../../../utils/context/userContext';
+import UsersProfileEditComponent from "../../../components/profile/users.edit.component";
+import { useUser } from "../../../utils/context/userContext";
 
 const ProfileEditPage = () => {
   const router = useRouter();
@@ -13,14 +13,14 @@ const ProfileEditPage = () => {
   // console.log(user);
   useEffect(() => {
     if (!user) {
-      router.push('/login');
+      router.push("/login");
     }
   }, [user]);
   return (
-    <Layout name='profile' desc='I-Predict User Profile'>
+    <Layout name="profile" desc="I-Predict User Profile">
       <NavHeader />
-      <div className='mx-4'>
-        <div className='text text-center my-5'></div>
+      <div className="mx-4">
+        <div className="text my-5 text-center"></div>
         <UsersProfileEditComponent user={user} userDoc={userDoc} />
       </div>
     </Layout>

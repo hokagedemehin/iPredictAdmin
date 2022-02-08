@@ -1,16 +1,16 @@
-import React from 'react';
+import React from "react";
 // import { FaSearch } from "react-icons/fa";
 
 const QuestionSearch = ({ setSearchTerm }) => {
   return (
     <div>
-      <div className=' flex'>
-        <div className='bg-white flex items-center rounded-full shadow-md max-w-sm mx-auto w-full'>
+      <div className=" flex">
+        <div className="mx-auto flex w-full max-w-sm items-center rounded-full bg-white shadow-md">
           <input
-            className='rounded-full w-full py-4 px-6 text-gray-700 leading-tight focus:outline-none '
-            id='search'
-            type='text'
-            placeholder='Search'
+            className="w-full rounded-full py-4 px-6 leading-tight text-gray-700 focus:outline-none "
+            id="search"
+            type="text"
+            placeholder="Search"
             onChange={(event) => {
               setSearchTerm(event.target.value);
             }}

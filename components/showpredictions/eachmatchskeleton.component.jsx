@@ -5,7 +5,7 @@ import React from "react";
 const EachMatchSkeletonSelected = () => {
   return (
     <Skeleton>
-      <div className="shadow-md rounded-md p-4 w-full cursor-pointer ">
+      <div className="w-full cursor-pointer rounded-md p-4 shadow-md ">
         <p>Match for a specific</p>
       </div>
     </Skeleton>

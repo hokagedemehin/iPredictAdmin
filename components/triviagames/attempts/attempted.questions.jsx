@@ -1,8 +1,8 @@
-import { CheckIcon } from '@chakra-ui/icons';
-import { Icon, Radio, RadioGroup, Stack, Text } from '@chakra-ui/react';
-import React from 'react';
+import { CheckIcon } from "@chakra-ui/icons";
+import { Icon, Radio, RadioGroup, Stack, Text } from "@chakra-ui/react";
+import React from "react";
 // import { BsFillPatchCheckFill } from 'react-icons/bs';
-import { MdOutlineClose } from 'react-icons/md';
+import { MdOutlineClose } from "react-icons/md";
 import {
   Button,
   // Heading,
@@ -15,48 +15,48 @@ import {
   ModalBody,
   ModalCloseButton,
   useDisclosure,
-} from '@chakra-ui/react';
+} from "@chakra-ui/react";
 const AttemptedQuestionsPageComponent = ({ ques, index }) => {
   // console.log(question);
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <div>
       <div
-        className='flex p-3 shadow-md rounded-lg cursor-pointer ring-1 ring-gray-200 justify-center items-center max-w-xl mx-auto space-x-2'
+        className="mx-auto flex max-w-xl cursor-pointer items-center justify-center space-x-2 rounded-lg p-3 shadow-md ring-1 ring-gray-200"
         onClick={onOpen}
       >
-        <Text isTruncated fontSize='lg'>
+        <Text isTruncated fontSize="lg">
           {ques?.question}
         </Text>
         {ques?.response.toLowerCase().trim() ==
         ques?.rightAnswer.toLowerCase().trim() ? (
-          <CheckIcon color='green.500' boxSize={5} />
+          <CheckIcon color="green.500" boxSize={5} />
         ) : (
-          <Icon as={MdOutlineClose} color='red.500' boxSize={7} />
+          <Icon as={MdOutlineClose} color="red.500" boxSize={7} />
         )}
       </div>
-      <Modal size={'xs'} isOpen={isOpen} onClose={onClose}>
+      <Modal size={"xs"} isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Question {index + 1}</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <div className='space-y-4'>
+            <div className="space-y-4">
               {/* QUestion */}
-              <div className='flex'>
-                <p className='text-xl'>{ques?.question}</p>
+              <div className="flex">
+                <p className="text-xl">{ques?.question}</p>
               </div>
               {/* OPtions */}
-              <div className='flex flex-col space-y-1'>
+              <div className="flex flex-col space-y-1">
                 <RadioGroup
                   name={ques?.ID}
                   // onChange={updateQuestion}
-                  value={ques?.response || ''}
+                  value={ques?.response || ""}
                 >
                   <Stack>
                     <Radio
                       // onClick={() => setChange(ques?.optionA)}
-                      size='lg'
+                      size="lg"
                       value={`${ques?.optionA}`}
                       isDisabled
                     >
@@ -64,7 +64,7 @@ const AttemptedQuestionsPageComponent = ({ ques, index }) => {
                     </Radio>
                     <Radio
                       // onClick={() => setChange(ques?.optionB)}
-                      size='lg'
+                      size="lg"
                       value={`${ques?.optionB}`}
                       isDisabled
                     >
@@ -72,7 +72,7 @@ const AttemptedQuestionsPageComponent = ({ ques, index }) => {
                     </Radio>
                     <Radio
                       // onClick={() => setChange(ques?.optionC)}
-                      size='lg'
+                      size="lg"
                       value={`${ques?.optionC}`}
                       isDisabled
                     >
@@ -101,7 +101,7 @@ const AttemptedQuestionsPageComponent = ({ ques, index }) => {
             </div>
           </ModalBody>
           <ModalFooter>
-            <Button colorScheme='blue' onClick={onClose}>
+            <Button colorScheme="blue" onClick={onClose}>
               Close
             </Button>
           </ModalFooter>
