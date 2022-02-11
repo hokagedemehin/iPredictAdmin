@@ -109,19 +109,6 @@ const NewsHomeComponents = () => {
     }
   }, [isSuccess, dataUpdatedAt, databaseData]);
 
-  // useEffect(() => {
-  //   // let newArr = [];
-  //   // if (data?.data) {
-  //   // data?.forEach((doc) => newArr.push(doc.data()));
-  //   // newArr = data?.data;
-  //   // setNews(data?.data[2]);
-  //   // }
-  // }, [data]);
-
-  // const danger = {
-  //   __html: `<p>It's officially a World Cup year, that means footballers all over the globe will be hoping to get themselves into contention for their own shot at glory in Qatar.</p>`,
-  // };
-
   return (
     <div className='mx-4 flex flex-col space-y-4'>
       <div className='header mx-4 w-full'>
