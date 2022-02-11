@@ -3,9 +3,9 @@ import { db } from '../firebase/firebase';
 const GetNewsFirestore = async () => {
   // console.log('uid', user?.uid);
   // const = doc(db, 'Users', user?.uid);/
-  const footballNews = collection(db, 'News&Transfers', 'allNews', 'Football');
-  const transferNews = collection(db, 'News&Transfers', 'allNews', 'Transfers');
-  const uefaNews = collection(db, 'News&Transfers', 'allNews', 'UEFA');
+  const footballNews = collection(db, 'News&Transfers', 'allNews', 'football');
+  const transferNews = collection(db, 'News&Transfers', 'allNews', 'transfers');
+  const uefaNews = collection(db, 'News&Transfers', 'allNews', 'uefa');
 
   const footballSort = query(footballNews, orderBy('id', 'desc'));
   const transferSort = query(transferNews, orderBy('id', 'desc'));

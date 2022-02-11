@@ -1,5 +1,5 @@
 import {
-  addDoc,
+  // addDoc,
   doc,
   setDoc,
   collection,
@@ -17,15 +17,29 @@ const UploadNewsToFirestore = async (news, section, setIsLoadings) => {
     const allIDs = await getDoc(newsCollectionRef);
     // const idsArray = allIDs.data()[`${section}`];
     const idsArray = allIDs.data();
+
+    // const newsSetRef = doc(newsRef);
+    // console.log(newsSetRef.id);
     news.forEach(async (newss) => {
       if (!allIDs.exists() || !idsArray[`${section}`]) {
-        await addDoc(newsRef, {
+        // await addDoc(newsRef, {
+        //   id: newss?.id,
+        //   title: newss?.title,
+        //   body: newss?.body,
+        //   publishedAt: newss?.published_at,
+        //   image: newss?.image,
+        //   createdBy: newss?.created_by,
+        // });
+        const newsSetRef = doc(newsRef);
+        await setDoc(newsSetRef, {
+          docID: newsSetRef.id,
           id: newss?.id,
           title: newss?.title,
           body: newss?.body,
           publishedAt: newss?.published_at,
           image: newss?.image,
           createdBy: newss?.created_by,
+          section: section,
         });
 
         await setDoc(
@@ -36,13 +50,24 @@ const UploadNewsToFirestore = async (news, section, setIsLoadings) => {
           { merge: true }
         );
       } else if (!idsArray[`${section}`].includes(newss?.id)) {
-        await addDoc(newsRef, {
+        // await addDoc(newsRef, {
+        //   id: newss?.id,
+        //   title: newss?.title,
+        //   body: newss?.body,
+        //   publishedAt: newss?.published_at,
+        //   image: newss?.image,
+        //   createdBy: newss?.created_by,
+        // });
+        const newsSetRef = doc(newsRef);
+        await setDoc(newsSetRef, {
+          docID: newsSetRef.id,
           id: newss?.id,
           title: newss?.title,
           body: newss?.body,
           publishedAt: newss?.published_at,
           image: newss?.image,
           createdBy: newss?.created_by,
+          section: section,
         });
 
         await setDoc(

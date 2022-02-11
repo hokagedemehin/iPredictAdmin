@@ -40,10 +40,10 @@ const NewsHomeComponents = () => {
     const value = e.target.value;
     const subCollection =
       value == '2021020913320920836'
-        ? 'Football'
+        ? 'football'
         : value == '2022010516022274132'
-        ? 'Transfers'
-        : 'UEFA';
+        ? 'transfers'
+        : 'uefa';
     setFormValue({ ...formValue, [name]: value, section: subCollection });
   };
 
@@ -86,7 +86,7 @@ const NewsHomeComponents = () => {
     dataUpdatedAt,
   } = useQuery('getNewsFromFirestore', async () => await GetNewsFirestore());
 
-  // console.log('dataUpdatedAt :>> ', dataUpdatedAt);
+  console.log('databaseData :>> ', databaseData);
 
   useEffect(() => {
     let newArr1 = [];
@@ -98,6 +98,7 @@ const NewsHomeComponents = () => {
       typeof (databaseData !== null) &&
       Object?.keys(databaseData).length !== 0
     ) {
+      // console.log('data succesfull');
       // databaseData.forEach((doc) => newArr.push(doc.data()));
       databaseData.football.forEach((doc) => newArr1.push(doc.data()));
       setFootballNews(newArr1);
