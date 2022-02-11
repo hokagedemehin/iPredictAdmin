@@ -28,9 +28,9 @@ const DatabaseFeedComponent = ({
   console.log('Transfer :>> ', transferNews);
   console.log('UEFA :>> ', uefaNews);
 
-  const handleClick = (e, id) => {
+  const handleClick = (e, section, id) => {
     e.preventDefault();
-    router.push(`/news/${id}`);
+    router.push(`/news/${section}/${id}`);
   };
 
   // const timeofNews = moment(elem?.created_at).fromNow();
@@ -60,7 +60,9 @@ const DatabaseFeedComponent = ({
                     whileTap={{ scale: 0.9 }}
                     transition={{ duration: 0.4 }}
                     className='w-full cursor-pointer space-y-1 rounded-md p-3 shadow-md ring-1 ring-gray-200'
-                    onClick={(e) => handleClick(e, football?.id)}
+                    onClick={(e) =>
+                      handleClick(e, football?.section, football?.docID)
+                    }
                   >
                     <div className='flex space-x-3'>
                       <div className='flex '>
@@ -118,7 +120,9 @@ const DatabaseFeedComponent = ({
                     whileTap={{ scale: 0.9 }}
                     transition={{ duration: 0.4 }}
                     className='w-full cursor-pointer space-y-1 rounded-md p-3 shadow-md ring-1 ring-gray-200'
-                    onClick={(e) => handleClick(e, transfer?.id)}
+                    onClick={(e) =>
+                      handleClick(e, transfer?.section, transfer?.docID)
+                    }
                   >
                     <div className='flex space-x-3'>
                       <div className='flex '>
@@ -176,7 +180,7 @@ const DatabaseFeedComponent = ({
                     whileTap={{ scale: 0.9 }}
                     transition={{ duration: 0.4 }}
                     className='w-fit cursor-pointer space-y-1 rounded-md p-3 shadow-md ring-1 ring-gray-200'
-                    onClick={(e) => handleClick(e, uefa?.id)}
+                    onClick={(e) => handleClick(e, uefa?.section, uefa?.docID)}
                   >
                     <div className='flex w-full space-x-3'>
                       <div className='flex '>

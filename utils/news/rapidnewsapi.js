@@ -24,7 +24,7 @@ const RapidNewsApi = async (formValue, setLoading) => {
     const { data } = await axios.request(options);
     // const response = await axios.request(options);
     // const data = await response.data;
-    console.log('Update API: ', data);
+    // console.log('Update API: ', data);
     await SetApiCount('news');
     return data;
   } catch (error) {
