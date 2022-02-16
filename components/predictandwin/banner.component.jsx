@@ -52,7 +52,7 @@ const BannerPredictAndWin = () => {
           )}
           {isSuccess && (
             <Input
-              defaultValue={data.prize}
+              defaultValue={data?.prize ?? '20,000'}
               name='prize'
               onChange={(e) => handleChange(e)}
             />
@@ -69,7 +69,7 @@ const BannerPredictAndWin = () => {
           )}
           {isSuccess && (
             <Input
-              defaultValue={data.people}
+              defaultValue={data?.people ?? '10'}
               name='people'
               onChange={(e) => handleChange(e)}
             />
