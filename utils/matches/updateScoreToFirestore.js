@@ -20,7 +20,9 @@ const UpdateScoreToFirestore = async (match) => {
    */
   // console.log("update match: ", match);
   try {
-    // get the current match selected subcollection
+    // ******************************************************
+    // *get the current match selected subcollection
+    // ******************************************************
     const allRef = collection(db, 'MatchesSelected');
     const collectionQuery = query(allRef, where('confirmed', '==', true));
 
@@ -28,7 +30,9 @@ const UpdateScoreToFirestore = async (match) => {
     // console.log(collectionSnapshot);
     // let docInfo = "";
 
-    // get the ID of that match so as to filer out the right subcollection later
+    // ***************************************************************
+    // *get the ID of that match so as to filter out the right subcollection later
+    // ****************************************************************
     let collectionID = '';
     collectionSnapshot.forEach((oneDoc) => {
       // docInfo = oneDoc.data().predictInfo;
@@ -41,6 +45,7 @@ const UpdateScoreToFirestore = async (match) => {
 
     // const matchDate = moment(dateID.toDate()).format("MMM Do, YY, h:mm:ss a");
     // console.log(matchDate);
+
     const predictRef = collection(
       db,
       'MatchesSelected',
@@ -55,7 +60,9 @@ const UpdateScoreToFirestore = async (match) => {
     const subCollectionSnapshot = await getDocs(subCollectionQuery);
     // let subCollectionRef = ""
 
-    // get the matches in the matchselected collection and update the scores so that it will reflect in the match selected
+    // ********************************************************************
+    // *get the matches in the matchselected collection and update the scores so that it will reflect in the match selected
+    // ********************************************************************
     subCollectionSnapshot.forEach(async (oneDoc) => {
       const subCollectionRef = doc(
         db,
@@ -74,20 +81,76 @@ const UpdateScoreToFirestore = async (match) => {
       // console.log("update result: ", result.data());
     });
 
+    // *******************************************************************
     // * get all emails and check if that email has made a prediction with this match
-
+    // ********************************************************************
     const predictedMatchRef = doc(db, 'PredictedMatches', collectionID);
 
     const predictMatchDoc = await getDoc(predictedMatchRef);
     // console.log("predict match: ", predictMatchDoc.data());
 
     if (predictMatchDoc.exists()) {
+      const docRef = predictMatchDoc.data().predictInfo1;
+
+      // console.log('docref: ', docRef);
+      // * New Update, Key is ID, value is email
+      for (const [key, value] of Object.entries(docRef)) {
+        console.log('Key: ', key, 'value: ', value);
+        // console.log('key: ', key);
+        // console.log(key);
+        const matchRef = collection(db, `${value}-matches`, collectionID, key);
+        const specificMatch = query(
+          matchRef,
+          where('homeName', '==', match.homeName)
+        );
+        const matchSnapshot = await getDocs(specificMatch);
+        matchSnapshot.forEach(async (updateMatch) => {
+          // console.log('updateMatch: ', updateMatch.id);
+          const matchSubCollectionRef = doc(
+            db,
+            `${value}-matches`,
+            collectionID,
+            key,
+            updateMatch.id
+          );
+          // console.log("matchSUb: ", matchSubCollectionRef);
+          try {
+            await updateDoc(
+              matchSubCollectionRef,
+              {
+                actualHomeGoal: match?.homeGoal,
+                actualAwayGoal: match?.awayGoal,
+                status: match?.status,
+              }
+              // { merge: true }
+            );
+          } catch (error) {
+            console.error('update err: ', error);
+          }
+        });
+      }
+    }
+
+    // toast.success("⚽ Updated successfully");
+  } catch (error) {
+    console.error('update firestore', error);
+  }
+};
+
+export default UpdateScoreToFirestore;
+
+/**
+ * if (predictMatchDoc.exists()) {
       const docRef = predictMatchDoc.data().predictInfo;
 
       // console.log("docref: ", docRef);
       for (const [key, value] of Object.entries(docRef)) {
-        // console.log("Key: ", key, "value: ", value);
+        // console.log('Key: ', key, 'value: ', value);
+        // console.log('key: ', key);
+        console.log(key);
         value.forEach(async (eachDoc) => {
+          // console.log('key: ', key, 'value: ', eachDoc);
+          // console.log('value: ', value);
           const matchRef = collection(
             db,
             `${key}-matches`,
@@ -100,17 +163,15 @@ const UpdateScoreToFirestore = async (match) => {
           );
           const matchSnapshot = await getDocs(specificMatch);
           matchSnapshot.forEach(async (updateMatch) => {
-            // console.log(updateMatch.id);
-            // console.log("selected key: ", key);
-            // console.log("selected value: ", eachDoc);
-            // console.log(
-            //   "selected Key: ",
-            //   key,
-            //   "selected Value: ",
-            //   eachDoc,
-            //   "match ID: ",
-            //   updateMatch.id
-            // );
+            console.log(
+              'key: ',
+              key,
+              'eachDoc: ',
+              eachDoc,
+              'matchID ',
+              updateMatch.id
+            );
+            // console.log('updateMatch: ', updateMatch.id);
             const matchSubCollectionRef = doc(
               db,
               `${key}-matches`,
@@ -120,26 +181,20 @@ const UpdateScoreToFirestore = async (match) => {
             );
             // console.log("matchSUb: ", matchSubCollectionRef);
             try {
-              await updateDoc(
-                matchSubCollectionRef,
-                {
-                  actualHomeGoal: match?.homeGoal,
-                  actualAwayGoal: match?.awayGoal,
-                  status: match?.status,
-                }
-                // { merge: true }
-              );
+              // await updateDoc(
+              //   matchSubCollectionRef,
+              //   {
+              //     actualHomeGoal: match?.homeGoal,
+              //     actualAwayGoal: match?.awayGoal,
+              //     status: match?.status,
+              //   }
+              //   // { merge: true }
+              // );
             } catch (error) {
               console.error('update err: ', error);
             }
           });
         });
+        // value.forEach((elem) => console.log('key: ', key, 'value: ', elem));
       }
-    }
-    // toast.success("⚽ Updated successfully");
-  } catch (error) {
-    console.error('update firestore', error);
-  }
-};
-
-export default UpdateScoreToFirestore;
+    } */
