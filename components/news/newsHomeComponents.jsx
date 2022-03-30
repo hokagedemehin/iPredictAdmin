@@ -86,7 +86,7 @@ const NewsHomeComponents = () => {
     dataUpdatedAt,
   } = useQuery('getNewsFromFirestore', async () => await GetNewsFirestore());
 
-  console.log('databaseData :>> ', databaseData);
+  // console.log('databaseData :>> ', databaseData);
 
   useEffect(() => {
     let newArr1 = [];

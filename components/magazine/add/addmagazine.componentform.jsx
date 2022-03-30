@@ -32,8 +32,8 @@ const AddMagazineHomeComponentForm = () => {
   const [pdfValue, setPdfValue] = useState(null);
   // const formData = new FormData();
   // console.log('imgValue: ', imgValue);
-  console.log('formValue: ', formValue);
-  console.log('pdfValue :>> ', pdfValue.magazinepdf.name);
+  // console.log('formValue: ', formValue);
+  // console.log('pdfValue :>> ', pdfValue.magazinepdf.name);
 
   const handleForm = (e) => {
     // e.preventDefault();

@@ -1,4 +1,4 @@
-import { db } from "../firebase/firebase";
+import { db } from '../firebase/firebase';
 
 import {
   collection,
@@ -10,11 +10,11 @@ import {
   // serverTimestamp,
   query,
   where,
-} from "firebase/firestore";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+} from 'firebase/firestore';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-const SubmitQuestions = async (values, setIsLoading) => {
+const SubmitQuestions = async (values, setIsLoading, value) => {
   try {
     setIsLoading(true);
     const nowDate = new Date();
@@ -22,14 +22,14 @@ const SubmitQuestions = async (values, setIsLoading) => {
 
     // check if the question already exist in the collection
     let ques = null;
-    const triviaRef = collection(db, "TriviaQuestions");
+    const triviaRef = collection(db, 'TriviaQuestions');
     const q = query(
       triviaRef,
-      where("question", "==", values?.question.trim())
+      where('question', '==', values?.question.trim())
     );
     const triviaSnapshot = await getDocs(q);
     triviaSnapshot.forEach((oneDoc) => {
-      toast.info("This question already exists");
+      toast.info('This question already exists');
       console.log(oneDoc.data());
       ques = oneDoc.data();
       return;
@@ -37,7 +37,7 @@ const SubmitQuestions = async (values, setIsLoading) => {
 
     // create the new document
     if (!ques) {
-      const questionRef = doc(db, "TriviaQuestions", docID);
+      const questionRef = doc(db, 'TriviaQuestions', docID);
       await setDoc(questionRef, {
         question: values?.question.trim(),
         optionA: values?.optionA.trim(),
@@ -48,11 +48,12 @@ const SubmitQuestions = async (values, setIsLoading) => {
         createdAt: nowDate,
         updateAt: null,
         userIDs: [],
+        visible: value,
       });
-      toast.success("Added to Database Successfully");
+      toast.success('Added to Database Successfully');
     }
   } catch (error) {
-    toast.error("Something went wrong 🤒");
+    toast.error('Something went wrong 🤒');
     console.error(error);
   } finally {
     setIsLoading(false);

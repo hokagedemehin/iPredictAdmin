@@ -31,7 +31,7 @@ const AddMagazineHomeComponentSlider = () => {
   const [loaded, setLoaded] = useState(false);
   const [slides, setSlides] = useState([{ pageNumber: 1 }]);
   // const [imageSrc, setImageSrc] = useState();
-  console.log('slides :>> ', slides);
+  // console.log('slides :>> ', slides);
 
   useEffect(() => {}, [slides]);
 
