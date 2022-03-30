@@ -34,13 +34,13 @@ const NewsAndTransfersDetailsPage = () => {
   // console.log('details', details);
   useEffect(() => {
     if (
-      isSuccess
-      // typeof (data !== null) &&
+      isSuccess &&
+      typeof (data !== null)
       // Object?.keys(data).length !== 0
     ) {
       // databaseData.forEach((doc) => newArr.push(doc.data()));
 
-      setDetails(data.data());
+      setDetails(data?.data());
     }
   }, [isSuccess, data]);
 

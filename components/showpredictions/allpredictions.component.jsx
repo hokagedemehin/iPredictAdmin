@@ -14,7 +14,7 @@ const AllUsersPredictions = ({ pred, email, Id }) => {
   const [usersPredictions, setUsersPredictions] = useState([]);
   const [userInfo, setUserInfo] = useState([]);
   // console.log('userInfo', userInfo);
-  console.log('usersPredictions', usersPredictions);
+  // console.log('usersPredictions', usersPredictions);
   // const dateConvert = new Date(Number(pred));
   // const predDate = moment(dateConvert).format('MMMM Do YYYY, h:mm:ss a');
 

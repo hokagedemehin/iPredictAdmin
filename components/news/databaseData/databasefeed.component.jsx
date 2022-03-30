@@ -24,9 +24,9 @@ const DatabaseFeedComponent = ({
   uefaNews,
 }) => {
   const router = useRouter();
-  console.log('Football :>> ', footballNews);
-  console.log('Transfer :>> ', transferNews);
-  console.log('UEFA :>> ', uefaNews);
+  // console.log('Football :>> ', footballNews);
+  // console.log('Transfer :>> ', transferNews);
+  // console.log('UEFA :>> ', uefaNews);
 
   const handleClick = (e, section, id) => {
     e.preventDefault();

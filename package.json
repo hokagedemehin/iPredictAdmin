@@ -6,6 +6,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@ant-design/icons": "^4.7.0",
     "@badrap/bar-of-progress": "^0.1.2",
     "@chakra-ui/icons": "^1.1.1",
     "@chakra-ui/react": "^1.7.2",
@@ -15,11 +16,13 @@
     "@material-ui/icons": "^4.11.2",
     "@mui/icons-material": "^5.2.4",
     "@mui/material": "^5.2.4",
+    "antd": "^4.18.8",
     "axios": "^0.24.0",
     "firebase": "^9.6.0",
     "firebase-admin": "^10.0.0",
     "formik": "^2.2.9",
     "framer-motion": "^4",
+    "keen-slider": "^6.6.3",
     "material-table": "^1.69.3",
     "moment": "^2.29.1",
     "next": "latest",
@@ -40,7 +43,10 @@
     "prettier": "^2.5.1",
     "prettier-plugin-tailwindcss": "^0.1.6",
     "react-paginate": "^8.1.0",
+    "react-slick": "^0.28.1",
     "react-spinners": "^0.11.0",
+    "slick-carousel": "^1.8.1",
+    "swiper": "^8.0.6",
     "tailwindcss": "^3.0.0"
   }
 }
