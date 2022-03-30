@@ -1,10 +1,10 @@
 // Import the functions you need from the SDKs you need
-import { initializeApp, getApp, getApps } from "firebase/app";
-import { getAuth } from "firebase/auth";
+import { initializeApp, getApp, getApps } from 'firebase/app';
+import { getAuth } from 'firebase/auth';
 // import firebase from 'firebase/app'
-import { getFirestore } from "firebase/firestore";
+import { getFirestore } from 'firebase/firestore';
 // import { getAuth } from "firebase/auth";
-// import { getStorage } from "firebase/storage";
+import { getStorage } from 'firebase/storage';
 // import * as admin from 'firebase-admin'
 // import { getAnalytics } from "firebase/analytics";
 // TODO: Add SDKs for Firebase products that you want to use
@@ -39,5 +39,5 @@ const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 // const analytics = getAnalytics(app);
 const db = getFirestore(app);
 const auth = getAuth(app);
-
-export { app, db, auth };
+const storage = getStorage(app);
+export { app, db, auth, storage };
