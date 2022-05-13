@@ -22,7 +22,7 @@ const TrivisGamesPage = () => {
   return (
     <Layout name='trivas' desc='I-Predict Trivas Game'>
       <NavHeader />
-      <div className='mx-auto max-w-lg'>
+      <div className='mx-auto max-w-lg pb-4'>
         <div className='mx-4 flex w-full'>
           <Button
             leftIcon={<BiArrowBack />}

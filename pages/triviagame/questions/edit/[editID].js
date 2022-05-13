@@ -24,7 +24,7 @@ const ViewQuestionsPage = ({ data }) => {
   return (
     <Layout name='trivas' desc='I-Predict Trivas Game'>
       <NavHeader />
-      <div className='mx-auto max-w-lg'>
+      <div className='mx-auto max-w-lg pb-4'>
         <div className='text my-5 text-center'>
           <Heading>Edit Question</Heading>
         </div>
