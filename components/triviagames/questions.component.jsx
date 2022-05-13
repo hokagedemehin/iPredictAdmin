@@ -12,8 +12,10 @@ import {
 import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import { AiOutlineSend } from 'react-icons/ai';
-import SubmitQuestions from '../../utils/trivia/submitQuestions';
+// import SubmitQuestions from '../../utils/trivia/submitQuestions';
+// import SubmitQuestions1 from '../../utils/trivia/submitQuestions1';
 import { ToastContainer } from 'react-toastify';
+import SubmitQuestions1 from '../../utils/trivia/submitQuestions1';
 
 const validate = (values) => {
   const errors = {};
@@ -41,7 +43,8 @@ const OneQuestion = () => {
 
   const submitQuestion = async (values, resetForm) => {
     // console.log(values);
-    await SubmitQuestions(values, setIsLoading, value);
+    await SubmitQuestions1(values, setIsLoading, value);
+    // await SubmitQuestions(values, setIsLoading, value);
     resetForm();
   };
 

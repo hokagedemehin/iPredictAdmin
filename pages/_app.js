@@ -4,7 +4,11 @@ import { ChakraProvider } from '@chakra-ui/react';
 import ProgressBar from '@badrap/bar-of-progress';
 import Router from 'next/router';
 import UserProvider from '../utils/context/userContext';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import {
+  QueryClient,
+  QueryClientProvider,
+  // ReactQueryDevtools,
+} from 'react-query';
 // import 'slick-carousel/slick/slick.css';
 // import 'slick-carousel/slick/slick-theme.css';
 import 'antd/dist/antd.css';
@@ -29,6 +33,7 @@ function MyApp({ Component, pageProps }) {
     <QueryClientProvider client={queryClient}>
       <UserProvider>
         <ChakraProvider>
+          {/* <ReactQueryDevtools initialIsOpen={false} /> */}
           <Component {...pageProps} />
         </ChakraProvider>
       </UserProvider>

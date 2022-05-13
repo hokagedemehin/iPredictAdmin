@@ -1,17 +1,17 @@
-import MaterialTable from "material-table";
-import moment from "moment";
-import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
-import { useQuery } from "react-query";
-import GetAllTriviaAttempts from "../../../utils/trivia/attempts/getAllAttempts";
+import MaterialTable from 'material-table';
+import moment from 'moment';
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
+// import { useQuery } from "react-query";
+// import GetAllTriviaAttempts from "../../../utils/trivia/attempts/getAllAttempts";
 
-const TriviaAttemptsPageComponent = () => {
+const TriviaAttemptsPageComponent = ({ triviaData }) => {
   // const [rowInfo, setRowInfo] = useState([]);
   const router = useRouter();
   const [allData, setAllData] = useState([]);
   const handleClick = (e, data) => {
     e.preventDefault();
-    router.push(`/triviaattempts/${data.email}/${data.attemptID}`);
+    router.push(`/triviaattempts/${data.email}/${data.triviaId}`);
   };
 
   // console.log('allData', allData);
@@ -20,27 +20,24 @@ const TriviaAttemptsPageComponent = () => {
   // const bb = moment(aa).format('MMMM Do YYYY, h:mm:ss a');
   // console.log('aa :>> ', bb);
 
-  const { data, isSuccess, dataUpdatedAt } = useQuery(
-    "triviaattempts",
-    async () => await GetAllTriviaAttempts()
-  );
+  // const { data, isSuccess, dataUpdatedAt } = useQuery(
+  //   "triviaattempts",
+  //   async () => await GetAllTriviaAttempts()
+  // );
 
   useEffect(() => {
-    if (isSuccess) {
-      let newArr = [];
+    let newArr = [];
 
-      data.forEach((doc) => {
-        const firestoreData = doc.data();
-        firestoreData["date"] = moment(doc.data().createdAt.toDate()).format(
-          "MMM Do YY"
-        );
+    triviaData.forEach((doc) => {
+      const newData = doc?.attributes;
+      newData['date'] = moment(doc?.attributes?.createdAt).format('MMM Do YY');
+      newData['triviaId'] = doc?.id;
 
-        return newArr.push(firestoreData);
-      });
+      return newArr.push(newData);
+    });
 
-      setAllData(newArr);
-    }
-  }, [isSuccess, dataUpdatedAt]);
+    setAllData(newArr);
+  }, []);
 
   // console.log('data', data);
 
@@ -95,42 +92,49 @@ const TriviaAttemptsPageComponent = () => {
   //   },
   // ];
 
+  const sortedAllData = allData.sort(
+    (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+  );
   return (
-    <div className="flex">
-      <div className="mx-auto mb-10 w-full ">
+    <div className='flex'>
+      <div className='mx-auto mb-10 w-full '>
         <MaterialTable
-          title="Trivia Attempts"
+          title='Trivia Attempts'
           columns={[
-            { title: "Attempt Id", field: "attemptID", hidden: true },
-            { title: "Date", field: "date" },
-            { title: "Full Name", field: "fullName" },
-            { title: "Email", field: "email" },
+            { title: 'Attempt Id', field: 'attemptID', hidden: true },
             {
-              title: "Type",
-              field: "type",
+              title: 'Date',
+              field: 'date',
+              customSort: (a, b) => b.date - a.date,
+            },
+            { title: 'Full Name', field: 'fullName' },
+            { title: 'Email', field: 'email' },
+            {
+              title: 'Type',
+              field: 'type',
               lookup: {
-                easyway: "Easyway",
-                confam: "Confam",
-                originality: "Originality",
-                excellent: "Excellent",
-                chairman: "Chairman",
-                presido: "Presido",
+                easyway: 'Easyway',
+                confam: 'Confam',
+                originality: 'Originality',
+                excellent: 'Excellent',
+                chairman: 'Chairman',
+                presido: 'Presido',
               },
             },
             {
-              title: "Correct Answers",
-              field: "correctAnswers",
-              type: "numeric",
+              title: 'Correct Answers',
+              field: 'correctAnswers',
+              type: 'numeric',
             },
-            { title: "Wrong Answers", field: "wrongAnswers", type: "numeric" },
+            { title: 'Wrong Answers', field: 'wrongAnswers', type: 'numeric' },
             {
-              title: "Winner",
-              field: "winner",
+              title: 'Winner',
+              field: 'winner',
               // type: 'boolean',
-              lookup: { yes: "Yes", no: "No" },
+              lookup: { yes: 'Yes', no: 'No' },
             },
           ]}
-          data={allData}
+          data={sortedAllData}
           // actions={[
           //   {
           //     icon: 'save',
@@ -143,10 +147,10 @@ const TriviaAttemptsPageComponent = () => {
             sorting: true,
             // filtering: true,
             headerStyle: {
-              backgroundColor: "#01579b",
-              color: "#FFF",
+              backgroundColor: '#01579b',
+              color: '#FFF',
               zIndex: 0,
-              textAlign: "center",
+              textAlign: 'center',
             },
             // rowStyle: {
             //   textAlign: 'center',

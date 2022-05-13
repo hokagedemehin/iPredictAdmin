@@ -19,6 +19,8 @@ import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import BannerUpdate from '../../utils/matches/banner/bannerUpdate';
 import GetBanner from '../../utils/matches/banner/getBanner';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const BannerPredictAndWin = () => {
   const [formValue, setFormValue] = useState({});
@@ -84,6 +86,7 @@ const BannerPredictAndWin = () => {
           </Button>
         </Box>
       </div>
+      <ToastContainer />
     </div>
   );
 };

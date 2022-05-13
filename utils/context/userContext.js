@@ -1,7 +1,10 @@
 import { useState, useEffect, createContext, useContext } from 'react';
-import { auth, db } from '../firebase/firebase';
+import { auth } from '../firebase/firebase';
 import { onAuthStateChanged } from 'firebase/auth';
-import { doc, onSnapshot } from 'firebase/firestore';
+// import { doc, onSnapshot } from 'firebase/firestore';
+import axios from 'axios';
+import { useQuery } from 'react-query';
+const qs = require('qs');
 // import {
 //   useDocument,
 //   useDocumentData,
@@ -17,6 +20,30 @@ export default function UserContextComp({ children }) {
   // const [allDocs, setAllDocs] = useState(null);
   // const [loadingUser, setLoadingUser] = useState(true);
 
+  const query = qs.stringify({
+    filters: {
+      email: {
+        $eq: user?.email,
+      },
+    },
+  });
+
+  const { data, isSuccess } = useQuery(
+    ['user-profiles', query],
+    async () => {
+      return await axios.get(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/user-profiles?${query}`
+      );
+    },
+    { enabled: !!user }
+  );
+
+  useEffect(() => {
+    if (data?.data.data.length > 0) {
+      setUserDoc(data?.data?.data[0].attributes);
+    }
+  }, [isSuccess, data, user]);
+
   useEffect(() => {
     const authSub = onAuthStateChanged(auth, async (user) => {
       try {
@@ -27,9 +54,9 @@ export default function UserContextComp({ children }) {
 
           setUser({ uid, email });
 
-          onSnapshot(doc(db, 'Users', uid), (docUser) => {
-            setUserDoc(docUser.data());
-          });
+          // onSnapshot(doc(db, 'Users', uid), (docUser) => {
+          //   setUserDoc(docUser.data());
+          // });
           // console.log(userDoc);
         } else {
           setUser(null);

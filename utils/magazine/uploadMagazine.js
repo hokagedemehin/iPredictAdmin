@@ -66,7 +66,7 @@ const UploadMagazine = async (formValue, setFirebaseLoading, pdfValue) => {
       () => {
         // Upload completed successfully, now we can get the download URL
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          console.log('File available at', downloadURL);
+          // console.log('File available at', downloadURL);
           pdfLink = downloadURL;
         });
       }
@@ -76,7 +76,7 @@ const UploadMagazine = async (formValue, setFirebaseLoading, pdfValue) => {
     // * create a reference for a new document and then add the magazine to firestore and store the ID
     // *****************************************************
 
-    console.log('formValue firebase :>> ', formValue);
+    // console.log('formValue firebase :>> ', formValue);
     const newMagazineRef = doc(collection(db, 'Magazine'));
     await setDoc(newMagazineRef, {
       ...formValue,

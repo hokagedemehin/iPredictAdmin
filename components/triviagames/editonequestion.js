@@ -18,9 +18,9 @@ import { ToastContainer } from 'react-toastify';
 import { BiArrowBack } from 'react-icons/bi';
 import { useRouter } from 'next/router';
 // import SubmitQuestions from "../../utils/trivia/submitQuestions";
-import GetOneQuestionFromFirebase from '../../utils/trivia/getOneQuestion';
+// import GetOneQuestionFromFirebase from '../../utils/trivia/getOneQuestion';
 import UpdateQuestion from '../../utils/trivia/updateQuestion';
-import { useQuery } from 'react-query';
+// import { useQuery } from 'react-query';
 // import GetOneQuestionFromFirebase from "../../utils/trivia/getOneQuestion";
 
 // const validate = (values) => {
@@ -43,7 +43,7 @@ import { useQuery } from 'react-query';
 //   return errors;
 // };
 
-const EditOneQuestion = () => {
+const EditOneQuestion = ({ data }) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -53,7 +53,13 @@ const EditOneQuestion = () => {
   const submitQuestion = async (values) => {
     // console.log(values);
     // await SubmitQuestions(values, setIsLoading);
-    await UpdateQuestion(values, setIsLoading, editID, value);
+    await UpdateQuestion(
+      values,
+      setIsLoading,
+      editID,
+      value,
+      data?.attributes?.quesId
+    );
     router.push(`/triviagame/questions/${editID}`);
   };
 
@@ -61,12 +67,12 @@ const EditOneQuestion = () => {
   //   await GetOneQuestionFromFirebase(setQuestion, editID);
   // };
 
-  const { data, isSuccess } = useQuery(
-    ['onequestion', editID],
-    async () => await GetOneQuestionFromFirebase(editID),
-    { enabled: !!editID }
-  );
-  const [value, setValue] = useState(data?.visible);
+  // const { data, isSuccess } = useQuery(
+  //   ['onequestion', editID],
+  //   async () => await GetOneQuestionFromFirebase(editID),
+  //   { enabled: !!editID }
+  // );
+  const [value, setValue] = useState(data?.attributes?.visible ? 'yes' : 'no');
 
   // useEffect(() => {
   //   if (isSuccess) {
@@ -92,11 +98,11 @@ const EditOneQuestion = () => {
     <div className='mx-3'>
       <Formik
         initialValues={{
-          question: `${isSuccess ? data?.question : ''}`,
-          optionA: `${isSuccess ? data?.optionA : ''}`,
-          optionB: `${isSuccess ? data?.optionB : ''}`,
-          optionC: `${isSuccess ? data?.optionC : ''}`,
-          rightAnswer: `${isSuccess ? data?.rightAnswer : ''}`,
+          question: `${data?.attributes?.question}`,
+          optionA: `${data?.attributes?.optionA}`,
+          optionB: `${data?.attributes?.optionB}`,
+          optionC: `${data?.attributes?.optionC}`,
+          rightAnswer: `${data?.attributes?.answer}`,
         }}
         enableReinitialize={true}
         onSubmit={(values) => {

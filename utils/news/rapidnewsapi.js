@@ -1,5 +1,5 @@
 import axios from 'axios';
-import SetApiCount from '../context/setApiCount';
+// import SetApiCount from '../context/setApiCount';
 
 // const categories = [
 //   { football: '2021020913320920836' },
@@ -25,7 +25,7 @@ const RapidNewsApi = async (formValue, setLoading) => {
     // const response = await axios.request(options);
     // const data = await response.data;
     // console.log('Update API: ', data);
-    await SetApiCount('news');
+    // await SetApiCount('news');
     return data;
   } catch (error) {
     console.error('🚀 news error', error);

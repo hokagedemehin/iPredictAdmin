@@ -77,8 +77,6 @@ const UploadNewsToFirestore = async (news, section, setIsLoadings) => {
           },
           { merge: true }
         );
-      } else {
-        console.log('data exist');
       }
     });
   } catch (error) {
