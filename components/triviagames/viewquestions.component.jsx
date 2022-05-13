@@ -70,7 +70,7 @@ const ViewQuestionsContent = ({ data }) => {
   // console.log('data1: ', data1);
 
   return (
-    <div className='mx-4 my-2'>
+    <div className='mx-4 py-2'>
       {/* Search bar here */}
       <QuestionSearch setSearchTerm={setSearchTerm} />
       <div className='mt-8 space-y-4'>
