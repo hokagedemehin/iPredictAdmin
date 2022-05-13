@@ -1,7 +1,7 @@
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react';
 import React from 'react';
 import DatabaseVideos from './DatabaseVideos';
-import YouTubeVideos from './YouTubeVIdeos';
+import YouTubeVideos from './YouTubeVideos';
 
 const TutorialsComponent = () => {
   return (
