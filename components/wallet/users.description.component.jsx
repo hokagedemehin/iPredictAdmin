@@ -12,7 +12,7 @@ import {
 import React from 'react';
 
 const UsersDescription = ({ isOpen, onClose, rowInfo }) => {
-  // console.log("rowInfo", rowInfo);
+  // console.log('rowInfo', rowInfo);
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
@@ -53,9 +53,22 @@ const UsersDescription = ({ isOpen, onClose, rowInfo }) => {
                 <div className=' py-2 font-semibold'>Coins</div>
                 <div className=' py-2'>{rowInfo?.coins}</div>
               </div>
+
               <div className='grid grid-cols-2'>
                 <div className=' py-2 font-semibold'>Money</div>
                 <div className=' py-2'>{rowInfo?.money}</div>
+              </div>
+              <div className='grid grid-cols-2'>
+                <div className=' py-2 font-semibold'>Cash Request</div>
+                <div className=' py-2'>{rowInfo?.request}</div>
+              </div>
+              <div className='grid grid-cols-2'>
+                <div className=' py-2 font-semibold'>Free Coins Claim</div>
+                <div className=' py-2'>{rowInfo?.freeClaim ? 'Yes' : 'No'}</div>
+              </div>
+              <div className='grid grid-cols-2'>
+                <div className=' py-2 font-semibold'>Role</div>
+                <div className=' py-2'>{rowInfo?.role}</div>
               </div>
             </div>
           </div>

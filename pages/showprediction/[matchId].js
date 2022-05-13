@@ -1,17 +1,19 @@
-import { Heading, Skeleton } from '@chakra-ui/react';
+import { Button, Heading } from '@chakra-ui/react';
+import axios from 'axios';
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
-import { useQuery } from 'react-query';
+// import { useQuery } from 'react-query';
 import MyPredictionsEmptyComponent from '../../components/emptypages/mypredictions.empty';
 import Layout from '../../components/layout/layout';
 import NavHeader from '../../components/nav/header.component';
 import AllUsersPredictions from '../../components/showpredictions/allpredictions.component';
 import { useUser } from '../../utils/context/userContext';
-import GetAllPredictions from '../../utils/matches/getallpredictions';
-
-const AllUsersPredictionComponent = () => {
+// import GetAllPredictions from '../../utils/matches/getallpredictions';
+import { BiArrowBack } from 'react-icons/bi';
+const AllUsersPredictionComponent = ({ data: allPredictions }) => {
   const router = useRouter();
   const { userDoc } = useUser();
+  // console.log('allPredictions :>> ', allPredictions);
   // console.log(user);
   useEffect(() => {
     if (!userDoc || userDoc.role !== 'admin') {
@@ -22,44 +24,43 @@ const AllUsersPredictionComponent = () => {
   }, [userDoc]);
 
   // const router = useRouter();
-  const Id = router.query.matchId;
+  // const Id = router.query.matchId;
 
-  // const [predictions, setPredictions] = useState([]);
+  // const { isLoading, data, isSuccess } = useQuery(
+  //   ['predicts', Id],
+  //   async () => await GetAllPredictions(Id),
+  //   { enabled: !!Id }
+  // );
 
-  // const getpredict = async () => {
-  //   await GetAllPredictions(setPredictions, Id);
-  // };
-  // useEffect(() => {
-  //   if (Id) {
-  //     getpredict();
-  //   }
-  // }, [Id]);
+  // const data1 = data?.predictInfo1 || {};
 
-  const { isLoading, data, isSuccess } = useQuery(
-    ['predicts', Id],
-    async () => await GetAllPredictions(Id),
-    { enabled: !!Id }
-  );
+  let set = new Set();
+  allPredictions?.forEach((elem) => {
+    set.add(elem?.attributes?.uniqueId);
+  });
 
-  // console.log("isLoading: ", isLoading);
-  // console.log("isError: ", isError);
-  // console.log('data: ', data);
-  // console.log("isSuccess: ", isSuccess);
+  let finalSet = [...set];
 
-  // const data1 = data?.predictInfo || {};
-  const data1 = data?.predictInfo1 || {};
-  // console.log('data1', data.predictInfo1);
-  // console.log(isSuccess, Object?.keys(data1).length === 0);
-  // console.log("prediction doc: ", predictions);
   return (
     <Layout name='predictions' desc='See all Users Predictions'>
       <NavHeader />
       <div className=''>
-        <div className='text my-5 text-center'>
-          <Heading>All Predictions</Heading>
+        <div className='mx-4 flex w-full'>
+          <Button
+            leftIcon={<BiArrowBack />}
+            variant='ghost'
+            onClick={() => router.push('/showprediction')}
+          >
+            Back
+          </Button>
+        </div>
+        <div className='flex w-full items-center justify-center '>
+          <div className='my-5 w-full text-center'>
+            <Heading>All Predictions</Heading>
+          </div>
         </div>
 
-        {isLoading && (
+        {/* {isLoading && (
           <div className='mx-4 flex flex-col items-center justify-center space-y-3'>
             {[0, 1, 2].map((val, index) => (
               <Skeleton className='h-40 w-1/2' key={index}>
@@ -67,10 +68,10 @@ const AllUsersPredictionComponent = () => {
               </Skeleton>
             ))}
           </div>
-        )}
+        )} */}
 
         <div className='mx-2 flex flex-wrap items-center justify-center gap-4'>
-          {data1 &&
+          {/* {data1 &&
             isSuccess &&
             Object.entries(data1).map(([key, value]) => {
               // value.sort(function (a, b) {
@@ -85,11 +86,22 @@ const AllUsersPredictionComponent = () => {
                   Id={Id}
                 />
               );
-            })}
+            })} */}
 
-          {isSuccess && Object?.keys(data1).length === 0 && (
+          {finalSet.length > 0 &&
+            finalSet.map((elem) => (
+              <AllUsersPredictions
+                key={elem}
+                uniqueId={elem}
+                data={allPredictions}
+                // Id={Id}
+              />
+            ))}
+
+          {/* {isSuccess && Object?.keys(data1).length === 0 && (
             <MyPredictionsEmptyComponent />
-          )}
+          )} */}
+          {finalSet.length === 0 && <MyPredictionsEmptyComponent />}
         </div>
       </div>
     </Layout>
@@ -98,20 +110,13 @@ const AllUsersPredictionComponent = () => {
 
 export default AllUsersPredictionComponent;
 
-/**
- * {data1 &&
-            isSuccess &&
-            Object.entries(data1).map(([key, value]) => {
-              value.sort(function (a, b) {
-                return b - a;
-              });
-              return value.map((pred, index) => (
-                <AllUsersPredictions
-                  key={index}
-                  pred={pred}
-                  email={key}
-                  Id={Id}
-                />
-              ));
-            })}
- */
+export async function getServerSideProps({ params }) {
+  const { data } = await axios.get(
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/selected-matches/${params.matchId}?populate=*`
+  );
+  return {
+    props: {
+      data: data?.data?.attributes?.user_matches?.data,
+    },
+  };
+}

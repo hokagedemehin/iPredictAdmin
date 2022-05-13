@@ -60,7 +60,7 @@ const WithdrawalDescription = ({ isOpen, onClose, rowInfo }) => {
                 <div className=' py-2'>{rowInfo?.email}</div>
               </div>
               <div className='flex'>
-                {rowInfo?.transferred == 'yes' ? (
+                {rowInfo?.transfer == 'yes' ? (
                   <Tag size='md' variant='subtle' colorScheme='green'>
                     <TagLeftIcon boxSize='15px' as={BsCheckAll} />
                     <TagLabel>successfull</TagLabel>
@@ -99,7 +99,7 @@ const WithdrawalDescription = ({ isOpen, onClose, rowInfo }) => {
             loadingText='Processing...'
             spinnerPlacement='start'
             onClick={async () => await paidUser()}
-            isDisabled={rowInfo?.transferred == 'yes'}
+            isDisabled={rowInfo?.transfer == 'yes'}
           >
             Mark as Paid
           </Button>

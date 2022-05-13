@@ -24,22 +24,21 @@ const WithdrawComponent = () => {
     async () => await GetWithdrawals()
   );
 
+  // console.log('data :>> ', data);
+
   useEffect(() => {
-    if (
-      isSuccess &&
-      typeof (data !== null) &&
-      Object?.keys(data).length !== 0
-    ) {
+    if (isSuccess) {
       let newArr = [];
 
       data.forEach((doc) => {
-        // console.log(doc.data());
-        const firestoreData = doc.data();
-        firestoreData['date'] = moment(doc.data().createdAt.toDate()).format(
+        const usersWithdraw = doc?.attributes;
+        usersWithdraw['id'] = doc?.id;
+        usersWithdraw['userid'] = doc?.attributes?.user_profile?.data?.id;
+        usersWithdraw['date'] = moment(doc?.attributes?.createdAt).format(
           'MMM Do YY'
         );
 
-        return newArr.push(firestoreData);
+        return newArr.push(usersWithdraw);
       });
 
       setAllData(newArr);
@@ -51,8 +50,8 @@ const WithdrawComponent = () => {
       <MaterialTable
         title='Withdraw'
         columns={[
-          { title: 'withdraw id', field: 'ID', hidden: true },
-          { title: 'user id', field: 'userID', hidden: true },
+          // { title: 'withdraw id', field: 'ID', hidden: true },
+          // { title: 'user id', field: 'userID', hidden: true },
           { title: 'Date', field: 'date' },
           { title: 'Full Name', field: 'fullName' },
           { title: 'Account No', field: 'accountNumber', align: 'center' },
@@ -73,7 +72,7 @@ const WithdrawComponent = () => {
 
           {
             title: 'Transferred',
-            field: 'transferred',
+            field: 'transfer',
             // type: 'boolean',
             align: 'center',
             lookup: { yes: 'yes', no: 'no' },

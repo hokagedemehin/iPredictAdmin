@@ -1,25 +1,26 @@
-import { Skeleton, Text } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
-import { useQuery } from "react-query";
-import GetQuestionsFromFirebase from "../../utils/trivia/getQuestions";
-import NoSearchResult from "./nosearchresult.component";
-import QuestionSearch from "./searchquestion.component";
-import ViewOneQuestionComponent from "./viewonequestion.component";
+import { Skeleton, Text } from '@chakra-ui/react';
+import React, { useEffect, useState } from 'react';
+// import { useQuery } from "react-query";
+// import GetQuestionsFromFirebase from "../../utils/trivia/getQuestions";
+import NoSearchResult from './nosearchresult.component';
+import QuestionSearch from './searchquestion.component';
+import ViewOneQuestionComponent from './viewonequestion.component';
 
-const ViewQuestionsContent = () => {
+const ViewQuestionsContent = ({ data }) => {
   // const router = useRouter();
   const [questions, setQuestions] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
-  // console.log("questions: ", questions);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [isLoading, setisLoading] = useState(false);
+  // console.log('questions: ', questions);
   // const getQues = async () => {
   //   GetQuestionsFromFirebase();
   // };
 
   // if (true) {
-  const { isLoading, data, isSuccess, dataUpdatedAt } = useQuery(
-    "viewquestions",
-    async () => await GetQuestionsFromFirebase()
-  );
+  // const { isLoading, data, isSuccess, dataUpdatedAt } = useQuery(
+  //   "viewquestions",
+  //   async () => await GetQuestionsFromFirebase()
+  // );
 
   // if (isSuccess) {
   //   data.forEach((doc) => newArr.push(doc.data()));
@@ -37,25 +38,25 @@ const ViewQuestionsContent = () => {
   // }
 
   useEffect(() => {
-    if (
-      isSuccess &&
-      typeof (data !== null) &&
-      Object?.keys(data).length !== 0
-    ) {
-      const newArr = [];
-
-      data.forEach((doc) => newArr.push(doc.data()));
-      // if (newArr.length !== 0) {
-      setQuestions(newArr);
-      // }
-    }
-  }, [isSuccess, dataUpdatedAt]);
+    setisLoading(true);
+    const newArr = [];
+    let temp = {};
+    data.forEach((doc) => {
+      temp = doc.attributes;
+      temp.ID = doc.id;
+      newArr.push(temp);
+    });
+    // if (newArr.length !== 0) {
+    setQuestions(newArr);
+    setisLoading(false);
+    // }
+  }, []);
 
   let data1 = [];
 
   if (questions.length !== 0) {
     data1 = questions.filter((val) => {
-      if (searchTerm == "" || searchTerm.length === 0) {
+      if (searchTerm == '' || searchTerm.length === 0) {
         return val;
       } else if (
         val.question &&
@@ -69,15 +70,15 @@ const ViewQuestionsContent = () => {
   // console.log(data1.length !== 0);
 
   return (
-    <div className="mx-4 my-2">
+    <div className='mx-4 my-2'>
       {/* Search bar here */}
       <QuestionSearch setSearchTerm={setSearchTerm} />
-      <div className="mt-8 space-y-4">
+      <div className='mt-8 space-y-4'>
         {isLoading ? (
           [1, 2, 3, 4, 5].map((ques, index) => (
             <Skeleton key={index}>
-              <div className="flex cursor-pointer rounded-lg p-3 shadow-md ">
-                <Text isTruncated fontSize="lg">
+              <div className='flex cursor-pointer rounded-lg p-3 shadow-md '>
+                <Text isTruncated fontSize='lg'>
                   {ques}
                 </Text>
               </div>

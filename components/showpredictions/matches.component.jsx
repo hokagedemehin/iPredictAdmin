@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
-import GetAllMatches from '../../utils/matches/getallmatches';
+import NewGetMyPrediction from '../../utils/matches/newgetallmatches';
 import MyPredictionsEmptyComponent from '../emptypages/mypredictions.empty';
 import EachMatchSelected from './eachmatch.component';
 import EachMatchSkeletonSelected from './eachmatchskeleton.component';
@@ -9,21 +9,25 @@ import EachMatchSkeletonSelected from './eachmatchskeleton.component';
 const AllMatchesSelected = () => {
   const [matches, setMatches] = useState([]);
 
+  // const [myPredictions, setMyPredictions] = useState([])
+
   const { isLoading, data, isSuccess } = useQuery(
     'allselectedMatches',
-    async () => await GetAllMatches()
+    async () => await NewGetMyPrediction()
   );
   // console.log(matches);
+  // console.log('data :>> ', data);
   useEffect(() => {
-    if (
-      isSuccess &&
-      typeof (data !== null) &&
-      Object?.keys(data).length !== 0
-    ) {
+    if (isSuccess) {
       const newArr = [];
-      data.forEach((doc) => newArr.push(doc.data()));
+      data.forEach((doc) => {
+        let newData = {
+          id: doc.id,
+          ...doc.attributes,
+        };
+        newArr.push(newData);
+      });
       setMatches(newArr);
-      // data.forEach((doc) => setMatches([...matches, doc.data()]));
     }
   }, [isSuccess]);
   // console.log("matches: ", matches);

@@ -1,5 +1,6 @@
 import { collection, getDocs, orderBy, query } from 'firebase/firestore';
 import { db } from '../firebase/firebase';
+
 const GetAllMatches = async () => {
   const matchRef = collection(db, 'PredictedMatches');
   const q = query(matchRef, orderBy('createdAt', 'desc'));

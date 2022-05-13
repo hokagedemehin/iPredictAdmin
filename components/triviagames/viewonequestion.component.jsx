@@ -18,7 +18,7 @@ const ViewOneQuestionComponent = ({ ques }) => {
         <Text isTruncated fontSize='lg'>
           {ques?.question}
         </Text>
-        {ques?.visible == 'yes' ? (
+        {ques?.visible ? (
           <div>
             <FaRegEye className='text-xl text-teal-600' />
           </div>

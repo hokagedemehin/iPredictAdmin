@@ -30,7 +30,7 @@ const SubmitQuestions = async (values, setIsLoading, value) => {
     const triviaSnapshot = await getDocs(q);
     triviaSnapshot.forEach((oneDoc) => {
       toast.info('This question already exists');
-      console.log(oneDoc.data());
+      // console.log(oneDoc.data());
       ques = oneDoc.data();
       return;
     });

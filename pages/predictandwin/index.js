@@ -3,9 +3,10 @@ import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import Layout from '../../components/layout/layout';
 import NavHeader from '../../components/nav/header.component';
-import PredictAndWinComponent from '../../components/predictandwin/predictandwin.component';
+// import PredictAndWinComponent from '../../components/predictandwin/predictandwin.component';
 import { useUser } from '../../utils/context/userContext';
 import BannerPredictAndWin from '../../components/predictandwin/banner.component';
+import NewPredictAndWinComponent from '../../components/predictandwin/new.predictandwin.component';
 const PredictAndWinPage = () => {
   const router = useRouter();
   const { userDoc } = useUser();
@@ -28,7 +29,8 @@ const PredictAndWinPage = () => {
         <div className='mx-2'>
           <BannerPredictAndWin />
         </div>
-        <PredictAndWinComponent />
+        {/* <PredictAndWinComponent /> */}
+        <NewPredictAndWinComponent />
       </div>
     </Layout>
   );

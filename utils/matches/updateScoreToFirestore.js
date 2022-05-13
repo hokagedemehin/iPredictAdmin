@@ -95,7 +95,7 @@ const UpdateScoreToFirestore = async (match) => {
       // console.log('docref: ', docRef);
       // * New Update, Key is ID, value is email
       for (const [key, value] of Object.entries(docRef)) {
-        console.log('Key: ', key, 'value: ', value);
+        // console.log('Key: ', key, 'value: ', value);
         // console.log('key: ', key);
         // console.log(key);
         const matchRef = collection(db, `${value}-matches`, collectionID, key);
