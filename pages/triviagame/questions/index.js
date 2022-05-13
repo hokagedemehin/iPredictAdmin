@@ -48,6 +48,7 @@ export async function getStaticProps() {
   const { data } = await axios.get(
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/trivias`
   );
+  // Added
   // console.log(data);
   return {
     props: {
