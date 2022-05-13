@@ -67,7 +67,7 @@ const ViewQuestionsContent = ({ data }) => {
     });
   }
 
-  // console.log(data1.length !== 0);
+  console.log('data1: ', data1);
 
   return (
     <div className='mx-4 my-2'>

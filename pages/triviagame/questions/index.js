@@ -11,7 +11,7 @@ import { BiArrowBack } from 'react-icons/bi';
 const ViewQuestionsPage = ({ data }) => {
   const router = useRouter();
   const { userDoc } = useUser();
-  // console.log(data);
+  console.log('data: ', data);
   useEffect(() => {
     if (!userDoc || userDoc.role !== 'admin') {
       // router.back();
