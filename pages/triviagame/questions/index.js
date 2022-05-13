@@ -35,7 +35,7 @@ const ViewQuestionsPage = ({ data }) => {
             </Button>
           </div>
           <Heading>View Questions</Heading>
-          {data && <ViewQuestionsContent data={data} />}
+          <ViewQuestionsContent data={data} />
         </div>
       </div>
     </Layout>
