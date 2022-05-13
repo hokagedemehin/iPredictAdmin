@@ -29,14 +29,16 @@ const SaveSelectionToDatabase = async (
 
     // console.log('recentSelectedMatches :>> ', recentSelectedMatches);
 
-    await axios.put(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/selected-matches/${recentSelectedMatches.data[0].id}`,
-      {
-        data: {
-          latest: false,
-        },
-      }
-    );
+    if (recentSelectedMatches.data.length > 0) {
+      await axios.put(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/selected-matches/${recentSelectedMatches.data[0].id}`,
+        {
+          data: {
+            latest: false,
+          },
+        }
+      );
+    }
 
     const time = new Date();
     const { data: newSelectedMatch } = await axios.post(
