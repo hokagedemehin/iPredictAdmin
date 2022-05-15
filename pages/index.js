@@ -10,11 +10,11 @@ import { useUser } from '../utils/context/userContext';
 // import NavHeader from "../components/nav/header.component original";
 import { disableReactDevTools } from '@fvilers/disable-react-devtools';
 
-if (process.env.NODE_ENV === 'production') {
-  disableReactDevTools();
-}
-
 export default function Home() {
+  if (process.env.NODE_ENV === 'production') {
+    disableReactDevTools();
+  }
+
   const router = useRouter();
   const { userDoc } = useUser();
 
