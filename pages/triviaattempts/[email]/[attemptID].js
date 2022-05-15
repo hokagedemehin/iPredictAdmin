@@ -13,7 +13,7 @@ import AttemptedQuestionsPageComponent from '../../../components/triviagames/att
 import axios from 'axios';
 
 const TriviaGamesPage = ({ data }) => {
-  // console.log('data :>> ', data);
+  console.log('data :>> ', data);
   const router = useRouter();
   const { userDoc } = useUser();
   // const { attemptID, email } = router.query;
@@ -25,7 +25,7 @@ const TriviaGamesPage = ({ data }) => {
   //   async () => await GetUserAttemptQuestions(attemptID, email),
   //   { enabled: !![attemptID, email] }
   // );
-  // console.log(router.query);
+  console.log(router.query);
   useEffect(() => {
     if (!userDoc || userDoc.role !== 'admin') {
       // router.back();
@@ -75,7 +75,7 @@ const TriviaGamesPage = ({ data }) => {
           {data.map((ques, index) => (
             <AttemptedQuestionsPageComponent
               ques={ques?.attributes}
-              key={ques?.ID}
+              key={ques?.Id}
               index={index}
             />
           ))}
@@ -87,10 +87,10 @@ const TriviaGamesPage = ({ data }) => {
 
 export default TriviaGamesPage;
 
-export async function getServerSideProps({ params }) {
-  // console.log(params);
+export async function getServerSideProps(context) {
+  console.log(context);
   const { data } = await axios.get(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/trivia-attempts/${params.attemptId}?populate=*`
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/trivia-attempts/${context.params.attemptId}?populate=*`
   );
   // console.log(data);
   return {
