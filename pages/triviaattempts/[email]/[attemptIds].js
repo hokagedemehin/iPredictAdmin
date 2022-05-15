@@ -1,8 +1,8 @@
-import { Button, Heading, Skeleton, Text } from '@chakra-ui/react';
+import { Button, Heading } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
-import { useQuery } from 'react-query';
+// import { useQuery } from 'react-query';
 // import GetOneAttemptQuestions from '../../utils/trivia/attempts/getOneAttempt';
 import { ArrowBackIcon } from '@chakra-ui/icons';
 // import GetUserAttemptQuestions from '../../../utils/trivia/attempts/getUserAttempt';
@@ -12,43 +12,43 @@ import NavHeader from '../../../components/nav/header.component';
 import AttemptedQuestionsPageComponent from '../../../components/triviagames/attempts/attempted.questions';
 import axios from 'axios';
 
-const TriviaGamesPage = () => {
+const TriviaGamesAttemptPage = ({ data }) => {
   // console.log('data :>> ', data);
   const router = useRouter();
   const { userDoc } = useUser();
-  const { attemptId } = router.query;
+  // const { attemptIds } = router.query;
   // const email = user?.email;
-  const [question, setQuestion] = useState([]);
+  // const [question, setQuestion] = useState([]);
 
-  const { data, isSuccess, isLoading } = useQuery(
-    ['attempted-questions', attemptId],
-    async () =>
-      await axios.get(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/trivia-attempts/${attemptId}?populate=*`
-      ),
-    { enabled: !![attemptId] }
-  );
-  console.log(router.query);
-  console.log('data :>> ', data);
-  console.log('question :>> ', question);
+  // const { data, isSuccess, isLoading } = useQuery(
+  //   ['attempted-questions', attemptIds],
+  //   async () =>
+  //     await axios.get(
+  //       `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/trivia-attempts/${attemptIds}?populate=*`
+  //     ),
+  //   { enabled: !![attemptIds] }
+  // );
+  // console.log(router.query);
+  // console.log('data :>> ', data);
+  // console.log('question :>> ', question);
 
   useEffect(() => {
     if (!userDoc || userDoc.role !== 'admin') {
       // router.back();
       router.push('/login');
-      // console.log("no admin");
+      // console.log('no admin');
     }
   }, [userDoc]);
 
-  useEffect(() => {
-    const newArr = [];
+  // useEffect(() => {
+  //   const newArr = [];
 
-    data?.data?.data?.attributes?.trivia_responses?.data?.forEach((doc) =>
-      newArr.push(doc)
-    );
+  //   data?.data?.data?.attributes?.trivia_responses?.data?.forEach((doc) =>
+  //     newArr.push(doc)
+  //   );
 
-    setQuestion(newArr);
-  }, [isSuccess, data]);
+  //   setQuestion(newArr);
+  // }, [isSuccess, data]);
 
   return (
     <Layout name='trivia-attempts' desc='I-Predict Trivia Attempts'>
@@ -68,7 +68,7 @@ const TriviaGamesPage = () => {
           <Heading size='md'>Attempted Questions</Heading>
         </div>
         <div className='mx-auto max-w-xl space-y-4'>
-          {isLoading &&
+          {/* {isLoading &&
             [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((ques, index) => (
               <Skeleton key={index} className='rounded-lg'>
                 <div className='flex p-3 shadow-md  '>
@@ -77,35 +77,34 @@ const TriviaGamesPage = () => {
                   </Text>
                 </div>
               </Skeleton>
-            ))}
+            ))} */}
         </div>
         <div className=' mx-auto max-w-xl space-y-2'>
-          {isSuccess &&
-            question.map((ques, index) => (
-              <AttemptedQuestionsPageComponent
-                ques={ques?.attributes}
-                key={ques?.Id}
-                index={index}
-              />
-            ))}
+          {data.map((ques, index) => (
+            <AttemptedQuestionsPageComponent
+              ques={ques?.attributes}
+              key={ques?.Id}
+              index={index}
+            />
+          ))}
         </div>
       </div>
     </Layout>
   );
 };
 
-export default TriviaGamesPage;
+export default TriviaGamesAttemptPage;
 
-// export async function getServerSideProps({ params }) {
-//   // console.log(params);
-//   const { data } = await axios.get(
-//     `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/trivia-attempts/${params.attemptId}?populate=*`
-//   );
-//   // console.log(data);
-//   return {
-//     props: {
-//       // quizType: quizType?.data,
-//       data: data?.data?.attributes?.trivia_responses?.data,
-//     },
-//   };
-// }
+export async function getServerSideProps({ params }) {
+  console.log(params);
+  const { data } = await axios.get(
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/trivia-attempts/${params.attemptIds}?populate=*`
+  );
+  // console.log(data);
+  return {
+    props: {
+      // quizType: quizType?.data,
+      data: data?.data?.attributes?.trivia_responses?.data,
+    },
+  };
+}
