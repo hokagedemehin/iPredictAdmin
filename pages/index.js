@@ -8,12 +8,12 @@ import Layout from '../components/layout/layout';
 import NavHeader from '../components/nav/header.component';
 import { useUser } from '../utils/context/userContext';
 // import NavHeader from "../components/nav/header.component original";
-import { disableReactDevTools } from '@fvilers/disable-react-devtools';
+// import { disableReactDevTools } from '@fvilers/disable-react-devtools';
 
 export default function Home() {
-  if (process.env.NODE_ENV === 'production') {
-    disableReactDevTools();
-  }
+  // if (process.env.NODE_ENV == 'production') {
+  //   disableReactDevTools();
+  // }
 
   const router = useRouter();
   const { userDoc } = useUser();
