@@ -12,6 +12,11 @@ import {
 // import 'slick-carousel/slick/slick.css';
 // import 'slick-carousel/slick/slick-theme.css';
 import 'antd/dist/antd.css';
+import { disableReactDevTools } from '@fvilers/disable-react-devtools';
+
+if (process.env.NODE_ENV === 'production') {
+  disableReactDevTools();
+}
 
 const progress = new ProgressBar({
   size: 4,
