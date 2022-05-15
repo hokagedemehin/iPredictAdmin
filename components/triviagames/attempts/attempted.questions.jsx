@@ -49,7 +49,7 @@ const AttemptedQuestionsPageComponent = ({ ques, index }) => {
               {/* OPtions */}
               <div className='flex flex-col space-y-1'>
                 <RadioGroup
-                  name={ques?.ID}
+                  name={ques?.quesId}
                   // onChange={updateQuestion}
                   value={ques?.response || ''}
                 >
