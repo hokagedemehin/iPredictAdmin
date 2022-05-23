@@ -127,6 +127,13 @@ const NavHeader = () => {
               >
                 News Magazine
               </MenuItem>
+              <MenuItem
+                data-name='Campaigns'
+                icon={<BsNewspaper />}
+                onClick={(e) => handleClick(e, '/campaigns')}
+              >
+                Campaigns
+              </MenuItem>
             </MenuList>
           </Menu>
         </div>
@@ -190,6 +197,13 @@ const NavHeader = () => {
                       onClick={(e) => handleClick(e, '/magazine')}
                     >
                       News Magazine
+                    </MenuItem>
+                    <MenuItem
+                      data-name='Campaigns'
+                      icon={<BsNewspaper />}
+                      onClick={(e) => handleClick(e, '/campaigns')}
+                    >
+                      Campaigns
                     </MenuItem>
                   </MenuList>
                 </>
