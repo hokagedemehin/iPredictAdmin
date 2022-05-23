@@ -77,10 +77,10 @@ const AddMagazineHomeComponentForm = () => {
       setLoadingState(true);
       let formData = new FormData();
       formData.append('file', value);
-      formData.append('upload_preset', 'iPredict');
+      formData.append('upload_preset', 'ipredict-signed');
       // console.log('formData', formData);
       let response = await axios.post(
-        'https://api.cloudinary.com/v1_1/demibk/image/upload',
+        'https://api.cloudinary.com/v1_1/ipredict/image/upload',
         formData
         // { headers: { 'Content-Type': 'multipart/form-data' } }
       );
