@@ -14,7 +14,7 @@ const AddCampaignPageComponent = () => {
     buttonName: '',
   });
   const [imgValue, setImgValue] = useState(null);
-  console.log('formValue :>> ', formValue);
+  // console.log('formValue :>> ', formValue);
 
   const handleForm = (e) => {
     // e.preventDefault();
@@ -67,7 +67,12 @@ const AddCampaignPageComponent = () => {
     } catch (error) {
       console.error(error);
     } finally {
-      setFormValue({ name: '', campaignImage: '', campaignLink: '' });
+      setFormValue({
+        name: '',
+        campaignImage: '',
+        campaignLink: '',
+        buttonName: '',
+      });
       setStrapiLoading(false);
     }
   };

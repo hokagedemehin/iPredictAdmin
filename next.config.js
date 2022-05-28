@@ -6,7 +6,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['media.api-sports.io'],
+    domains: ['media.api-sports.io', 'res.cloudinary.com'],
   },
 };
 // module.exports = withTM({ nextConfig });

@@ -1,12 +1,17 @@
-import { Heading } from '@chakra-ui/react';
+import { ArrowBackIcon } from '@chakra-ui/icons';
+import { Button, Heading } from '@chakra-ui/react';
+import axios from 'axios';
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
-import MagazineEmptyComponent from '../../../components/emptypages/magazine.empty';
+// import MagazineEmptyComponent from '../../../components/emptypages/magazine.empty';
 import Layout from '../../../components/layout/layout';
+import ViewMagazineComp from '../../../components/magazine/view/ViewMagazineComp';
 import NavHeader from '../../../components/nav/header.component';
 import { useUser } from '../../../utils/context/userContext';
+const qs = require('qs');
 
-const ViewMagazinePage = () => {
+const ViewMagazinePage = ({ data }) => {
+  // console.log('data :>> ', data);
   const router = useRouter();
   const { userDoc } = useUser();
   // console.log(user);
@@ -23,12 +28,42 @@ const ViewMagazinePage = () => {
       <NavHeader />
       <div className=''>
         <div className='text my-5 text-center'>
+          <div className='my-2 mx-auto flex max-w-xl'>
+            <Button
+              variant='link'
+              leftIcon={<ArrowBackIcon />}
+              onClick={() => router.push('/magazine')}
+              className='mx-4 sm:mx-0'
+            >
+              Back
+            </Button>
+          </div>
           <Heading>View News Magazine</Heading>
         </div>
-        <MagazineEmptyComponent />
+        <ViewMagazineComp data={data} />
       </div>
     </Layout>
   );
 };
 
 export default ViewMagazinePage;
+
+export async function getStaticProps() {
+  const query = qs.stringify(
+    {
+      sort: ['id:desc'],
+      populate: '*',
+    },
+    {
+      encodeValuesOnly: true,
+    }
+  );
+  const { data } = await axios.get(
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/magazines?${query}`
+  );
+  return {
+    props: {
+      data: data?.data,
+    },
+  };
+}

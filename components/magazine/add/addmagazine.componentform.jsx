@@ -20,19 +20,24 @@ import {
   AiOutlineCloudUpload,
 } from 'react-icons/ai';
 import axios from 'axios';
-import UploadMagazine from '../../../utils/magazine/uploadMagazine';
+// import UploadMagazine from '../../../utils/magazine/uploadMagazine';
 import PuffLoader from 'react-spinners/PuffLoader';
+import NewUploadMagazine from '../../../utils/magazine/newUploadMagazine';
+import { useRouter } from 'next/router';
 
 const AddMagazineHomeComponentForm = () => {
+  const router = useRouter();
   const [slides, setSlides] = useState([{ pageNumber: 1 }]);
   const [imgValue, setImgValue] = useState(null);
   const [formValue, setFormValue] = useState({});
   const [loadingState, setLoadingState] = useState(false);
   const [firebaseLoading, setFirebaseLoading] = useState(false);
-  const [pdfValue, setPdfValue] = useState(null);
+  // const [pdfValue, setPdfValue] = useState(null);
+  const [magazinePages, setMagazinePages] = useState({});
   // const formData = new FormData();
   // console.log('imgValue: ', imgValue);
   // console.log('formValue: ', formValue);
+  // console.log('magazinePages :>> ', magazinePages);
   // console.log('pdfValue :>> ', pdfValue.magazinepdf.name);
 
   const handleForm = (e) => {
@@ -51,11 +56,11 @@ const AddMagazineHomeComponentForm = () => {
     setImgValue({ ...imgValue, [name]: value });
   };
 
-  const handlePDFForm = (e) => {
-    const name = e.target.name;
-    const value = e.target.files[0];
-    setPdfValue({ [name]: value });
-  };
+  // const handlePDFForm = (e) => {
+  //   const name = e.target.name;
+  //   const value = e.target.files[0];
+  //   setPdfValue({ [name]: value });
+  // };
 
   const handleRemove = (slides) => {
     setSlides(slides.slice(0, -1));
@@ -77,7 +82,7 @@ const AddMagazineHomeComponentForm = () => {
       setLoadingState(true);
       let formData = new FormData();
       formData.append('file', value);
-      formData.append('upload_preset', 'ipredict-signed');
+      formData.append('upload_preset', 'ipredict-magazine');
       // console.log('formData', formData);
       let response = await axios.post(
         'https://api.cloudinary.com/v1_1/ipredict/image/upload',
@@ -86,7 +91,8 @@ const AddMagazineHomeComponentForm = () => {
       );
       newObj[key] = response?.data?.secure_url;
     }
-    setFormValue({ ...formValue, ...newObj });
+    setMagazinePages(newObj);
+    // setFormValue({ ...formValue, ...newObj });
     setLoadingState(false);
 
     // console.log('newObj', newObj);
@@ -94,7 +100,9 @@ const AddMagazineHomeComponentForm = () => {
   };
 
   const handleFirebaseUpload = async () => {
-    await UploadMagazine(formValue, setFirebaseLoading, pdfValue);
+    // await UploadMagazine(formValue, setFirebaseLoading, pdfValue);
+    await NewUploadMagazine(formValue, magazinePages, setFirebaseLoading);
+    router.push('/magazine/view');
   };
 
   return (
@@ -126,6 +134,18 @@ const AddMagazineHomeComponentForm = () => {
         </div>
         <div className='flex'>
           <FormControl>
+            <FormLabel htmlFor={`cover`}>Cover</FormLabel>
+            <input
+              name={`cover`}
+              id={`cover`}
+              type='file'
+              accept='image/*'
+              onChange={(e) => handleChange(e)}
+            />
+          </FormControl>
+        </div>
+        {/* <div className='flex'>
+          <FormControl>
             <FormLabel htmlFor='magazinepdf'>Magazine File (.pdf)</FormLabel>
             <input
               id='magazinepdf'
@@ -136,7 +156,7 @@ const AddMagazineHomeComponentForm = () => {
             />
           </FormControl>
           <label htmlFor='magazinepdf'></label>
-        </div>
+        </div> */}
         <div className='flex flex-col space-y-5'>
           {slides.map((slide) => (
             <div className='flex' key={slide.pageNumber}>
