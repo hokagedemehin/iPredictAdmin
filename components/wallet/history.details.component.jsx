@@ -95,6 +95,12 @@ const HistoryDescription = ({ isOpen, onClose, rowInfo }) => {
               {moment(rowInfo?.createdAt).format('MMMM Do YYYY, h:mm:ss a')}
             </Text>
           )}
+          {rowInfo.type == 'Magazine Subscription' && (
+            <Text className=' font-semibold'>
+              User subscribed for magazine with {history?.coins} coins on{' '}
+              {moment(history?.createdAt).format('MMMM Do YYYY, h:mm:ss a')}
+            </Text>
+          )}
         </ModalBody>
 
         <ModalFooter>
