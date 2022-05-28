@@ -16,9 +16,9 @@ const UploadMagazine = async (formValue, setFirebaseLoading, pdfValue) => {
     //  ?upload the PDF and get the download URL
     // ****************************************
     // Upload file and metadata to the object 'images/mountains.jpg'
-    let pdfLink = '';
+    // let pdfLink = '';
     const metadata = {
-      contentType: 'apllication/pdf',
+      contentType: 'application/pdf',
     };
     const storageRef = ref(storage, 'pdfs/' + pdfValue.magazinepdf.name);
     const uploadTask = uploadBytesResumable(storageRef, pdfValue, metadata);
@@ -63,12 +63,21 @@ const UploadMagazine = async (formValue, setFirebaseLoading, pdfValue) => {
             break;
         }
       },
-      () => {
+      async () => {
         // Upload completed successfully, now we can get the download URL
-        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          // console.log('File available at', downloadURL);
-          pdfLink = downloadURL;
-        });
+        await getDownloadURL(uploadTask.snapshot.ref).then(
+          async (downloadURL) => {
+            console.log('File available at', downloadURL);
+            // pdfLink = downloadURL;
+            const newMagazineRef = doc(collection(db, 'Magazine'));
+            await setDoc(newMagazineRef, {
+              ...formValue,
+              createdAt: serverTimestamp(),
+              docID: newMagazineRef.id,
+              magazinePDF: downloadURL,
+            });
+          }
+        );
       }
     );
 
@@ -77,13 +86,13 @@ const UploadMagazine = async (formValue, setFirebaseLoading, pdfValue) => {
     // *****************************************************
 
     // console.log('formValue firebase :>> ', formValue);
-    const newMagazineRef = doc(collection(db, 'Magazine'));
-    await setDoc(newMagazineRef, {
-      ...formValue,
-      createdAt: serverTimestamp(),
-      docID: newMagazineRef.id,
-      magazinePDF: pdfLink,
-    });
+    // const newMagazineRef = doc(collection(db, 'Magazine'));
+    // await setDoc(newMagazineRef, {
+    //   ...formValue,
+    //   createdAt: serverTimestamp(),
+    //   docID: newMagazineRef.id,
+    //   magazinePDF: pdfLink,
+    // });
   } catch (error) {
     console.error(error);
   } finally {
