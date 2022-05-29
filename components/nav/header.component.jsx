@@ -55,7 +55,7 @@ const NavHeader = () => {
   return (
     <div className='relative'>
       <Flex px='4' py='2' className=''>
-        <div className='sm:hidden'>
+        <div className='z-10 sm:hidden'>
           <Menu>
             <MenuButton
               as={IconButton}
