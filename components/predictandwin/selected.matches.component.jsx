@@ -6,7 +6,11 @@ import { MdOutlineClear, MdClose } from 'react-icons/md';
 import SaveSelectionToDatabase from '../../utils/predictandwinapi/saveSelectionToDatabase';
 import moment from 'moment';
 
-const SelectedMatches = ({ matchSelect, setSelectedMatches }) => {
+const SelectedMatches = ({
+  matchSelect,
+  setSelectedMatches,
+  setMatchOption,
+}) => {
   const [isLoadings, setIsLoadings] = useState(false);
 
   const removeSelection = (match) => {
@@ -24,7 +28,8 @@ const SelectedMatches = ({ matchSelect, setSelectedMatches }) => {
     await SaveSelectionToDatabase(
       setIsLoadings,
       matchSelect,
-      setSelectedMatches
+      setSelectedMatches,
+      setMatchOption
     );
   };
 
@@ -53,7 +58,7 @@ const SelectedMatches = ({ matchSelect, setSelectedMatches }) => {
                 <Image
                   boxSize={['20px', '30px', '40px']}
                   src={matt.homeLogo}
-                  alt={matt.homeTeam}
+                  alt={matt.homeTeam ?? matt?.homeCountry}
                   borderRadius='full'
                 />
                 <Text fontSize={['md', 'lg', 'xl']}>{matt?.homeTeam}</Text>
