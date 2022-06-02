@@ -6,7 +6,8 @@ const qs = require('qs');
 const SaveSelectionToDatabase = async (
   setIsLoadings,
   matchSelect,
-  setSelectedMatches
+  setSelectedMatches,
+  setMatchOption
 ) => {
   try {
     setIsLoadings(true);
@@ -69,6 +70,7 @@ const SaveSelectionToDatabase = async (
     });
     toast.success('Added to Database Successfully');
     setSelectedMatches([]);
+    setMatchOption('');
   } catch (error) {
     console.error(error);
   } finally {
