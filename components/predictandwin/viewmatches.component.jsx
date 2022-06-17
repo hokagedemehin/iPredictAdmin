@@ -78,7 +78,7 @@ const ViewSelectedMatches = ({ data }) => {
   };
 
   return (
-    <div className='mx-4'>
+    <div className='mx-4 pb-8'>
       <Button
         variant='ghost'
         leftIcon={<BiArrowBack />}

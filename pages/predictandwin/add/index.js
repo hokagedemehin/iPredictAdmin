@@ -43,10 +43,10 @@ const AddNewMatch = () => {
   const [awayTeamList, setAwayTeamList] = useState([]);
   const [homeTeamList, setHomeTeamList] = useState([]);
   const [selectedMatches, setSelectedMatches] = useState([]);
-  console.log('countryList :>> ', countryList);
-  console.log('matchOption :>>', matchOption);
+  // console.log('countryList :>> ', countryList);
+  // console.log('matchOption :>>', matchOption);
   // console.log('formValue', formValue);
-  console.log('selectedMatches', selectedMatches);
+  // console.log('selectedMatches', selectedMatches);
 
   const handleOptions = (e) => {
     setMatchOption(e.target.value);
