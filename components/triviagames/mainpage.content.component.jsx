@@ -36,7 +36,7 @@ const MainPageContent = () => {
           </Text>
         </div>
         <div
-          className='cursor-pointer rounded-lg px-10 py-4 text-center shadow-md '
+          className='hidden cursor-pointer rounded-lg px-10 py-4 text-center shadow-md'
           onClick={async () => await handleFirebase()}
         >
           <Text fontSize='xl' className='font-bold'>

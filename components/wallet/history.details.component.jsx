@@ -101,6 +101,37 @@ const HistoryDescription = ({ isOpen, onClose, rowInfo }) => {
               {moment(rowInfo?.createdAt).format('MMMM Do YYYY, h:mm:ss a')}
             </Text>
           )}
+          {rowInfo.type == 'Buy Card' && (
+            <Text className=' font-semibold'>
+              User bought {rowInfo?.activity} card with {rowInfo?.coins} coins
+              on {moment(rowInfo?.createdAt).format('MMMM Do YYYY, h:mm:ss a')}
+            </Text>
+          )}
+          {rowInfo.type == 'User Card Reward' && (
+            <Text className=' font-semibold'>
+              User sent his team card reward of {rowInfo?.money} to his wallet
+              on {moment(rowInfo?.createdAt).format('MMMM Do YYYY, h:mm:ss a')}
+            </Text>
+          )}
+          {rowInfo.type == 'User Match Reward' && (
+            <Text className=' font-semibold'>
+              User won {rowInfo?.money} for playing a match on thier{' '}
+              {rowInfo?.activity} card on
+              {moment(rowInfo?.createdAt).format('MMMM Do YYYY, h:mm:ss a')}
+            </Text>
+          )}
+          {rowInfo.type == 'Play Match User Card' && (
+            <Text className=' font-semibold'>
+              User Played the match on their {rowInfo?.activity} card on{' '}
+              {moment(rowInfo?.createdAt).format('MMMM Do YYYY, h:mm:ss a')}
+            </Text>
+          )}
+          {rowInfo.type == 'Fund User Card' && (
+            <Text className=' font-semibold'>
+              User funded their {rowInfo?.activity} card with {rowInfo?.coins}
+              on {moment(rowInfo?.createdAt).format('MMMM Do YYYY, h:mm:ss a')}
+            </Text>
+          )}
         </ModalBody>
 
         <ModalFooter>

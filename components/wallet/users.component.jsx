@@ -57,6 +57,7 @@ const AllUsers = () => {
         colorScheme='teal'
         isLoading={isLoadings}
         loadingText='Getting...'
+        disabled
         spinnerPlacement='end'
         variant='solid'
         onClick={() => getUsersFromFirestore()}
