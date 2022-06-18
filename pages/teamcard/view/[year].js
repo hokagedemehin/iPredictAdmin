@@ -137,7 +137,7 @@ const ViewCardYearComponent = ({ data }) => {
                     {card?.name}
                   </Text>
                 </div>
-                <div className='bg-gray-100 p-4  '>
+                <div className='bg-gray-100   '>
                   <div className='text-center text-lg font-medium'>
                     <Text>{`Season's`}</Text>
                     <Text className='-mt-1'>Cash out Worth</Text>
@@ -146,7 +146,7 @@ const ViewCardYearComponent = ({ data }) => {
                     </Text>
                   </div>
                   {/* value | win | loss | reward */}
-                  <div className='flex justify-between'>
+                  <div className='flex justify-between bg-blue-600 px-4 py-2 text-white'>
                     <div className='flex flex-col items-center justify-center'>
                       <Text>Value</Text>
                       <Text className='-mt-2 text-xs'>(coins)</Text>
@@ -156,10 +156,9 @@ const ViewCardYearComponent = ({ data }) => {
                     </div>
                     <div className='flex flex-col items-center justify-center'>
                       <Text>Win</Text>
-                      <Text className='-mt-2 text-xs'>(coins/cash)</Text>
+                      <Text className='-mt-2 text-xs'>(cash)</Text>
                       <Text className='font-bold'>
-                        +{thousands(card?.winCoins)}/+
-                        {thousands(card?.winCash)}
+                        +{thousands(card?.winCash)}
                       </Text>
                     </div>
                     <div className='flex flex-col items-center justify-center'>
@@ -179,7 +178,7 @@ const ViewCardYearComponent = ({ data }) => {
                     </div>
                   </div>
                   {/* matches button */}
-                  <div className='flex flex-col'>
+                  <div className='flex flex-col p-4'>
                     <div className='flex items-center justify-center space-x-5 py-3'>
                       <Button
                         colorScheme='telegram'
