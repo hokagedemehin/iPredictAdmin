@@ -200,9 +200,9 @@ const ViewCardMatchComponent = ({ data, card }) => {
                 currentCardMatch?.data?.attributes?.advantage &&
               result?.result !== 'draw'
             ) {
-              const newCurrentValue =
-                +userCard?.data?.attributes?.currentValue +
-                +userCard?.data?.attributes?.winCoins;
+              // const newCurrentValue =
+              //   +userCard?.data?.attributes?.currentValue +
+              //   +userCard?.data?.attributes?.winCoins;
               const newReward =
                 +userCard?.data?.attributes?.reward +
                 +userCard?.data?.attributes?.winCash;
@@ -210,7 +210,7 @@ const ViewCardMatchComponent = ({ data, card }) => {
                 `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/user-cards/${id}`,
                 {
                   data: {
-                    currentValue: +newCurrentValue,
+                    // currentValue: +newCurrentValue,
                     reward: +newReward,
                   },
                 }

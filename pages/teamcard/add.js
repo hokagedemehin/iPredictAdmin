@@ -35,7 +35,7 @@ const AddTeamCard = () => {
     cardWorth: '',
     cardPrice: '',
     cardValue: '',
-    cardWin: '',
+    cardWinCash: '',
     cardLoss: '',
   });
   const [countryList, setCountryList] = useState([]);
@@ -81,9 +81,9 @@ const AddTeamCard = () => {
   const handleCardValue = (value) => {
     setFormValue({ ...formValue, cardValue: +value });
   };
-  const handleCardWinCoins = (value) => {
-    setFormValue({ ...formValue, cardWinCoins: +value });
-  };
+  // const handleCardWinCoins = (value) => {
+  //   setFormValue({ ...formValue, cardWinCoins: +value });
+  // };
   const handleCardWinCash = (value) => {
     setFormValue({ ...formValue, cardWinCash: +value });
   };
@@ -136,7 +136,6 @@ const AddTeamCard = () => {
       cardWorth,
       cardPrice,
       cardValue,
-      cardWinCoins,
       cardWinCash,
       cardLoss,
     } = formValue;
@@ -145,7 +144,6 @@ const AddTeamCard = () => {
       country == '' ||
       team == '' ||
       cardValue == '' ||
-      cardWinCoins == '' ||
       cardWinCash == '' ||
       cardLoss == '' ||
       cardWorth == '' ||
@@ -199,8 +197,8 @@ const AddTeamCard = () => {
             type: formValue?.cardType,
             season: formValue?.cardYear,
             value: formValue?.cardValue,
-            winCoins: formValue?.cardWinCoins,
-            winCash: formValue?.cardWinCoins,
+
+            winCash: formValue?.cardWinCash,
             loss: formValue?.cardLoss,
             country: formValue?.country,
             worth: formValue?.cardWorth,
@@ -217,7 +215,7 @@ const AddTeamCard = () => {
         cardWorth: '',
         cardPrice: '',
         cardValue: '',
-        cardWinCoins: '',
+
         cardWinCash: '',
         cardLoss: '',
       });
@@ -358,7 +356,7 @@ const AddTeamCard = () => {
                 <NumberInputField placeholder='Enter Card Value' />
               </NumberInput>
             </FormControl>
-            <FormControl>
+            {/* <FormControl>
               <FormLabel htmlFor='cardWinCoins'>
                 Enter Card Win (coins)
               </FormLabel>
@@ -372,7 +370,7 @@ const AddTeamCard = () => {
               >
                 <NumberInputField placeholder='Enter Card Win Value' />
               </NumberInput>
-            </FormControl>
+            </FormControl> */}
             <FormControl>
               <FormLabel htmlFor='cardWin'>Enter Card Win (cash)</FormLabel>
 
