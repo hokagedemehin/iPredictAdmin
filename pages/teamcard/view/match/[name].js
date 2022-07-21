@@ -99,6 +99,8 @@ const ViewCardMatchComponent = ({ data, card }) => {
     id: '',
     result: '',
   });
+
+  console.log('result :>> ', result);
   const [usersMatches, setUsersMatches] = useState({});
 
   const handleusersMatches = (card) => {
@@ -143,13 +145,13 @@ const ViewCardMatchComponent = ({ data, card }) => {
       }
     );
 
-    // console.log('confirm team card data: ', data);
+    console.log('confirm team card data: ', data);
 
     // ************************************************************
     // set user matches result and get all the user cards that played this match
     data?.data?.attributes?.user_card_matches?.data.forEach(
       async (userMatch) => {
-        // console.log('userMatch :>> ', userMatch);
+        console.log('userMatch :>> ', userMatch);
         // ************************************************************
         //  get each user card matches and check if it has been calculated
 
@@ -171,74 +173,76 @@ const ViewCardMatchComponent = ({ data, card }) => {
             }
           );
           // * ######################################################### *
-          // console.log('currentCardMatch :>> ', currentCardMatch);
+          console.log('current user card match :>> ', currentCardMatch);
           // ************************************************************
           // get each user card and calculate the new currentValue and reward if they won
-          if (userMatch?.attributes?.user_card?.data?.id) {
-            const id = userMatch?.attributes?.user_card?.data?.id;
-            // console.log(id);
-            const { data: userCard } = await axios.get(
-              `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/user-cards/${id}`
+          // if (userMatch?.attributes?.user_card?.data?.id) {
+          const id = userMatch?.attributes?.user_card?.data?.id;
+          // console.log(id);
+          const { data: userCard } = await axios.get(
+            `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/user-cards/${id}`
+          );
+          console.log('user card => ', userCard);
+          if (result?.result == currentCardMatch?.data?.attributes?.advantage) {
+            const newCurrentValue =
+              userCard?.data?.attributes?.currentValue -
+              userCard?.data?.attributes?.loss;
+
+            await axios.put(
+              `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/user-cards/${id}`,
+              {
+                data: {
+                  currentValue: newCurrentValue,
+                },
+              }
             );
-            if (
-              result?.result == currentCardMatch?.data?.attributes?.advantage
-            ) {
-              const newCurrentValue =
-                +userCard?.data?.attributes?.currentValue -
-                +userCard?.data?.attributes?.loss;
+          } else if (
+            result?.result !== currentCardMatch?.data?.attributes?.advantage &&
+            result?.result !== 'draw'
+          ) {
+            // const newCurrentValue =
+            //   +userCard?.data?.attributes?.currentValue +
+            //   +userCard?.data?.attributes?.winCoins;
+            const newReward =
+              userCard?.data?.attributes?.reward +
+              userCard?.data?.attributes?.winCash;
+            await axios.put(
+              `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/user-cards/${id}`,
+              {
+                data: {
+                  // currentValue: +newCurrentValue,
+                  reward: newReward,
+                },
+              }
+            );
+            const newid = nanoid();
+            const historyData = {
+              coins: 0,
+              money: +userCard?.data?.attributes?.winCoins,
+              activity: userCard?.data?.attributes?.name,
+              type: 'User Match Reward',
+            };
 
-              await axios.put(
-                `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/user-cards/${id}`,
-                {
-                  data: {
-                    currentValue: +newCurrentValue,
-                  },
-                }
-              );
-            } else if (
-              result?.result !==
-                currentCardMatch?.data?.attributes?.advantage &&
-              result?.result !== 'draw'
-            ) {
-              // const newCurrentValue =
-              //   +userCard?.data?.attributes?.currentValue +
-              //   +userCard?.data?.attributes?.winCoins;
-              const newReward =
-                +userCard?.data?.attributes?.reward +
-                +userCard?.data?.attributes?.winCash;
-              await axios.put(
-                `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/user-cards/${id}`,
-                {
-                  data: {
-                    // currentValue: +newCurrentValue,
-                    reward: +newReward,
-                  },
-                }
-              );
-              const newid = nanoid();
-              const historyData = {
-                coins: 0,
-                money: +userCard?.data?.attributes?.winCoins,
-                activity: userCard?.data?.attributes?.name,
-                type: 'User Match Reward',
-              };
-
-              await axios.post(
-                `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/histories`,
-                {
-                  data: {
-                    historyId: newid,
-                    email: userDoc?.email,
-                    fullName: `${userDoc?.firstName} ${userDoc?.lastName}`,
-                    coins: historyData?.coins,
-                    money: historyData?.money,
-                    activity: historyData?.activity,
-                    type: historyData?.type,
-                  },
-                }
-              );
-            }
+            await axios.post(
+              `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/histories`,
+              {
+                data: {
+                  historyId: newid,
+                  email: userDoc?.email,
+                  fullName: `${userDoc?.firstName} ${userDoc?.lastName}`,
+                  coins: historyData?.coins,
+                  money: historyData?.money,
+                  activity: historyData?.activity,
+                  type: historyData?.type,
+                },
+              }
+            );
           }
+          const { data: updatedUserCard } = await axios.get(
+            `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/user-cards/${id}`
+          );
+          console.log('updatedUserCard :>> ', updatedUserCard);
+          // }
         }
       }
     );
@@ -253,7 +257,7 @@ const ViewCardMatchComponent = ({ data, card }) => {
       position: 'top-right',
       isClosable: true,
     });
-    router.reload();
+    // router.reload();
   };
   return (
     <Layout
