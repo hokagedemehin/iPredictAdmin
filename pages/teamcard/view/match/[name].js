@@ -73,6 +73,7 @@ const ViewCardMatchComponent = ({ data, card }) => {
   const toast = useToast();
   const router = useRouter();
   const { userDoc } = useUser();
+  // const [done, setDone] = useState(null);
   // console.log(router);
   useEffect(() => {
     if (!userDoc || userDoc.role !== 'admin') {
@@ -151,7 +152,7 @@ const ViewCardMatchComponent = ({ data, card }) => {
     // set user matches result and get all the user cards that played this match
     data?.data?.attributes?.user_card_matches?.data.forEach(
       async (userMatch) => {
-        console.log('userMatch :>> ', userMatch);
+        // console.log('userMatch :>> ', userMatch);
         // ************************************************************
         //  get each user card matches and check if it has been calculated
 
@@ -173,7 +174,7 @@ const ViewCardMatchComponent = ({ data, card }) => {
             }
           );
           // * ######################################################### *
-          console.log('current user card match :>> ', currentCardMatch);
+          // console.log('current user card match :>> ', currentCardMatch);
           // ************************************************************
           // get each user card and calculate the new currentValue and reward if they won
           // if (userMatch?.attributes?.user_card?.data?.id) {
@@ -182,7 +183,7 @@ const ViewCardMatchComponent = ({ data, card }) => {
           const { data: userCard } = await axios.get(
             `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/user-cards/${id}`
           );
-          console.log('user card => ', userCard);
+          // console.log('user card => ', userCard);
           if (result?.result == currentCardMatch?.data?.attributes?.advantage) {
             const newCurrentValue =
               userCard?.data?.attributes?.currentValue -
@@ -238,10 +239,11 @@ const ViewCardMatchComponent = ({ data, card }) => {
               }
             );
           }
-          const { data: updatedUserCard } = await axios.get(
-            `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/user-cards/${id}`
-          );
-          console.log('updatedUserCard :>> ', updatedUserCard);
+          // const { data: updatedUserCard } = await axios.get(
+          //   `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/user-cards/${id}`
+          // );
+
+          // console.log('updatedUserCard :>> ', updatedUserCard);
           // }
         }
       }
@@ -257,7 +259,11 @@ const ViewCardMatchComponent = ({ data, card }) => {
       position: 'top-right',
       isClosable: true,
     });
-    // router.reload();
+
+    // setDone(true);
+    // if (done) {
+    router.back();
+    // }
   };
   return (
     <Layout
