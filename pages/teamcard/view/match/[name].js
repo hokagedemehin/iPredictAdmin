@@ -101,7 +101,7 @@ const ViewCardMatchComponent = ({ data, card }) => {
     result: '',
   });
 
-  console.log('result :>> ', result);
+  // console.log('result :>> ', result);
   const [usersMatches, setUsersMatches] = useState({});
 
   const handleusersMatches = (card) => {
@@ -146,7 +146,7 @@ const ViewCardMatchComponent = ({ data, card }) => {
       }
     );
 
-    console.log('confirm team card data: ', data);
+    // console.log('confirm team card data: ', data);
 
     // ************************************************************
     // set user matches result and get all the user cards that played this match
